@@ -2,11 +2,121 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="EmployeeManagementSystem.Dashboard.Dashboard"
-             Title="Dashboard">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+             Title="Dashboard"
+             BackgroundColor="White"
+             Shell.NavBarIsVisible="False">
+    <Grid ColumnDefinitions="250,*, *" RowDefinitions=".2*, .1*,.1*,.1*,.1*,.3*">
+
+        <BoxView 
+            Grid.Column="0"
+            Grid.RowSpan="6"
+            Color="#735d99" />
+
+        <!-- Middle Column Background -->
+        <BoxView 
+            Grid.Column="1"
+            Grid.RowSpan="6"
+            Color="#16013b" />
+
+        <!-- Right Column Background -->
+        <BoxView 
+            Grid.Column="2"
+            Grid.RowSpan="6"
+            Color="#16013b" />
+
+
+        <!--Profile Picture Circle in right column-->
+       
+        <RoundRectangle 
+            Grid.Column="0"
+            Grid.Row="0"
+            Margin="0,20,50,0"
+            CornerRadius="360"
+            WidthRequest="80"
+            HeightRequest="80"
+            BackgroundColor="Gray"
+            VerticalOptions="Center"
+            HorizontalOptions="Center"
+            />
+        <!--The word DashBoard on left column-->
+        <Label
+            Grid.Column="1"
+            Margin="10,0,0,0"
+            HorizontalOptions="Start"
+            VerticalOptions="Center"
+            Text="Dashboard"
+            TextColor="white"
+            FontAttributes="Bold"
+            FontSize="Title"
+            />
+        <!-- The following is the line below text Dashboard-->
+        <Line 
+            Grid.ColumnSpan="3"
+            Stroke="White"
+                X1="250"
+                Y1="90"
+                X2="2000" 
+                Y2="90"/>
+        <Button
+            Margin="20,0,0,0"
+            HorizontalOptions="StartAndExpand"
+            FontSize="Caption"
+            Text="Dashboard            "
+            Background="#16013b"
+            HeightRequest="50"
+            WidthRequest="160"
+            TextColor="White"
+            Grid.Row="1"/>
+        <Button
+            Margin="20,0,0,0"
+            HorizontalOptions="StartAndExpand"
+            FontSize="Caption"
+            Text="Employee Management"
+            Background="#16013b"
+            HeightRequest="50"
+            WidthRequest="160"
+            TextColor="White"
+            Grid.Row="2"/>
+        <Button
+            Margin="20,0,0,0"
+            HorizontalOptions="StartAndExpand"
+            FontSize="Caption"
+            Text="Leave Requests"
+            Background="#16013b"
+            HeightRequest="50"
+            WidthRequest="160"
+            TextColor="White"
+            Grid.Row="3"/>
+        <Button
+            Margin="20,0,0,0"
+            HorizontalOptions="StartAndExpand"
+            FontSize="Caption"
+            Text="Admin Settings"
+            Background="#16013b"
+            HeightRequest="50"
+            WidthRequest="160"
+            TextColor="White"
+            Grid.Row="4"/>
+        <Button
+            
+            HorizontalOptions="Start"
+            VerticalOptions="End"
+            FontSize="Caption"
+            Text="admin_aelin"
+            Background="#16013b"
+            HeightRequest="50"
+            WidthRequest="260"
+            TextColor="White"
+            Grid.Row="5"/>
+        <Label
+            Margin="40,0,0,0"
+            Text="Hello, Aelin!"
+            Grid.Column="1"
+            Grid.Row="0"
+            VerticalOptions="End"
+            HorizontalOptions="Start"
+            FontSize="Medium"
+            TextColor="White"
+            />
+    </Grid>
 </ContentPage>
