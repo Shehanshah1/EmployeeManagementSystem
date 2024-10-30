@@ -4,128 +4,107 @@
              x:Class="EmployeeManagementSystem.LoginView.LoginView"
              Title=""
              Shell.NavBarIsVisible="False">
-    <Grid RowDefinitions=".3*, .7*" BackgroundColor="white">
-        <!--   <Image Aspect="AspectFill" Source="EMS.png"/> -->
-        <Grid BackgroundColor="CadetBlue">
-            <Label 
-                HorizontalOptions="Center"
-                VerticalOptions="Center"
-                    FontAttributes="Bold"
-                  FontSize ="Header"
-                  Text="EMPLOYEE MANAGEMENT SYSTEM"
-                  TextColor="White"/>
-        </Grid>
 
-        <Grid Grid.Row="1">
-            <RoundRectangle Margin="-5,-30,-5,-2"
-                            CornerRadius="30,30,0,0"
-                            Fill="White"/>
-            <VerticalStackLayout Margin="30,0,30,0">
-                <Label FontAttributes="Bold"
-                       FontFamily="bold"
-                       FontSize="Medium"
-                       Text="Welcome!"
-                       TextColor="CadetBlue">
-                    
-                </Label>
+    <ScrollView>
+        <VerticalStackLayout BackgroundColor="White">
+
+            <!-- Header Section -->
+            <Grid BackgroundColor="CadetBlue" HeightRequest="100">
                 <Label 
-                         FontFamily="medium"
-                        FontSize="Medium"
-                        Text="Login to continue!"
-                        TextColor="CadetBlue">
-                </Label>
-     <!--**********************************************************************************-->                
-                <!-- This is for email prompt-->
-     <!--**********************************************************************************-->
-                <Grid Margin="0,30,0,0" ColumnDefinitions=".2*,.8*">
-                    <RoundRectangle BackgroundColor="CadetBlue" 
-                                    HorizontalOptions="Center"
-                                    VerticalOptions="Center"
-                                    CornerRadius="10"
-                                    HeightRequest="45"
-                                    WidthRequest="120"/>
-                    <Label Text="Email:" 
-                           Grid.Column="0" 
-                           HorizontalOptions="Center"
-                           VerticalOptions="Center"
-                           TextColor="White"
-                           FontSize="Medium"/>
-                    <!--   <Image HorizontalOptions="Center">
-                      This is for the first logo
-                        <Image.Source>
-                            <FontImageSource
-                                FontFamily="AwesomeSolid"
-                                Glyph="&#xf0e0;"
-                                Size="44"
-                                Color="Blue"/>
-                        </Image.Source> 
-                    </Image> -->
-                    <Entry Grid.Column="1"
-                           Placeholder="EMAIL"
-                           BackgroundColor="AliceBlue"
-                           Text ="employee@company.com"
-                           VerticalOptions="Center"
-                           TextColor="Gray"
-                           Opacity=".5"/>
-                </Grid>
-    <!--**********************************************************************************-->
-    <!-- This is for email prompt-->
-    <!--**********************************************************************************-->
-
-                <Grid Margin="0,30,0,0" ColumnDefinitions=".2*,.8*">
-                    <RoundRectangle BackgroundColor="CadetBlue" 
                     HorizontalOptions="Center"
                     VerticalOptions="Center"
-                    CornerRadius="10"
-                    HeightRequest="45"
-                    WidthRequest="120"/>
-                    <Label Text="Password:" 
-           Grid.Column="0" 
-           HorizontalOptions="Center"
-           VerticalOptions="Center"
-           TextColor="White"
-           FontSize="Medium"/>
-                    <!--   <Image HorizontalOptions="Center">
-      This is for the first logo
-        <Image.Source>
-            <FontImageSource
-                FontFamily="AwesomeSolid"
-                Glyph="&#xf0e0;"
-                Size="44"
-                Color="Blue"/>
-        </Image.Source> 
-    </Image> -->
-        <Entry Grid.Column="1"
-             Placeholder="PASSWORD"
-           BackgroundColor="AliceBlue"
-           Text ="12345678"
-           IsPassword="True"
-           VerticalOptions="Center"
-           TextColor="Gray"
-           Opacity=".5"/>
-                </Grid>
-                <!--Submit Button-->
-                <Button               
-                 Margin="0,20,0,0"
-                BackgroundColor="CadetBlue"
-                Text="Login"
-                HeightRequest="60"
-                TextColor="white"
-                WidthRequest="100"
-                Clicked="OnLoginButtonClicked"/>
+                    FontAttributes="Bold"
+                    FontSize="Header"
+                    Text="EMPLOYEE MANAGEMENT SYSTEM"
+                    TextColor="White"/>
+            </Grid>
 
-                <!--Forgot Password-->
+            <!-- Content Section -->
+            <Grid BackgroundColor="White" Padding="30, 0, 30, 0">
+                <VerticalStackLayout>
 
-                <Button Margin="0,20,0,-10" HorizontalOptions="Center"
-                       Text="Forgot your password?" TextColor="Blue"
-                       BackgroundColor="White"/>
-                <Button Margin="0,30,0,0"
+                    <Label FontAttributes="Bold"
+                           FontSize="Medium"
+                           Text="Welcome!"
+                           TextColor="CadetBlue"/>
+                    <Label 
+                        FontSize="Medium"
+                        Text="Login to continue!"
+                        TextColor="CadetBlue"/>
+
+                    <!-- Email Entry -->
+                    <Grid Margin="0,30,0,0" ColumnDefinitions=".2*,.8*">
+                        <RoundRectangle BackgroundColor="CadetBlue" 
+                                        CornerRadius="10"
+                                        HeightRequest="45"
+                                        WidthRequest="130"/>
+                        <Label Text="Email:" 
+                               Grid.Column="0" 
+                               HorizontalOptions="Center"
+                               VerticalOptions="Center"
+                               TextColor="White"
+                               FontSize="Medium"/>
+                        <Entry 
+                            Grid.Column="1"
+                            Placeholder="Enter your email..."
+                            BackgroundColor="AliceBlue"
+                            VerticalOptions="Center"
+                            TextColor="Gray"
+                            Opacity=".5"/>
+                    </Grid>
+
+                    <!-- Password Entry -->
+                    <Grid Margin="0,30,0,0" ColumnDefinitions=".2*,.8*">
+                        <RoundRectangle BackgroundColor="CadetBlue" 
+                                        CornerRadius="10"
+                                        HeightRequest="45"
+                                        WidthRequest="130"/>
+                        <Label Text="Password:" 
+                               Grid.Column="0" 
+                               HorizontalOptions="Center"
+                               VerticalOptions="Center"
+                               TextColor="White"
+                               FontSize="Medium"/>
+                        <Entry 
+                            Grid.Column="1"
+                            Placeholder="Enter your password here..."
+                            BackgroundColor="AliceBlue"
+                            IsPassword="True"
+                            VerticalOptions="Center"
+                            TextColor="Gray"
+                            Opacity=".5"/>
+                    </Grid>
+
+                    <!-- Login Button -->
+                    <Button               
+                        BackgroundColor="CadetBlue"
+                        Text="Login"
+                        TextColor="White"
+                        HeightRequest="60"
+                        Margin="0,60,0,0"
+                        MaximumWidthRequest="150"
+                        Clicked="OnLoginButtonClicked"/>
+
+                    <!-- Forgot Password Link -->
+                    <Button Margin="0,20,0,0" 
+                            HorizontalOptions="Center"
+                            Text="Forgot your password?"
+                            HeightRequest="30"
+                            MaximumWidthRequest="200"
+                            TextColor="Blue"
+                            BackgroundColor="White"/>
+
+                    <!-- Create Account Button -->
+                    <Button    
                         BackgroundColor="CadetBlue"
                         HeightRequest="60"
-                        WidthRequest="200"
                         Text="Create a new account"
-                        TextColor="White"/>
-            </VerticalStackLayout>
-        </Grid>
-    </Grid>
+                        MaximumWidthRequest="200"
+                        TextColor="White"
+                        Margin="0,30,0,30"/>
+
+                </VerticalStackLayout>
+            </Grid>
+        </VerticalStackLayout>
+    </ScrollView>
 </ContentPage>
