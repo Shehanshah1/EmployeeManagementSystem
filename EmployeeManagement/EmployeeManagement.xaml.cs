@@ -1,11 +1,11 @@
-namespace EmployeeManagementSystem.Dashboard;
-using EmployeeManagementSystem.EmployeeManagement;
+namespace EmployeeManagementSystem.EmployeeManagement;
+using EmployeeManagementSystem.Dashboard;
 using EmployeeManagementSystem.LeaveRequests;
 using EmployeeManagementSystem.AdminSettings;
 using EmployeeManagementSystem.UserSettings;
-public partial class Dashboard : ContentPage
+public partial class EmployeeManagement : ContentPage
 {
-	public Dashboard()
+	public EmployeeManagement()
 	{
 		InitializeComponent();
 	}

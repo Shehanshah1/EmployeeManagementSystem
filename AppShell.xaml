@@ -5,6 +5,10 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:login="clr-namespace:EmployeeManagementSystem.LoginView"
     xmlns:dashboard="clr-namespace:EmployeeManagementSystem.Dashboard"
+    xmlns:employeemanagement="clr-namespace:EmployeeManagementSystem.EmployeeManagement"
+    xmlns:leaverequests="clr-namespace:EmployeeManagementSystem.LeaveRequests"
+    xmlns:adminsettings="clr-namespace:EmployeeManagementSystem.AdminSettings"
+    xmlns:usersettings="clr-namespace:EmployeeManagementSystem.UserSettings"
     Shell.FlyoutBehavior="Disabled"
     Title="EmployeeManagementSystem">
 
@@ -17,4 +21,24 @@
     <ShellContent Title="Dashboard" 
                   ContentTemplate="{DataTemplate dashboard:Dashboard}"
                   Route="Dashboard"/>
+
+
+    <!-- Employee Management as the target after dashboard -->
+    <ShellContent Title="EmployeeManagement" 
+                  ContentTemplate="{DataTemplate employeemanagement:EmployeeManagement}"
+                  Route="EmployeeManagement"/>
+    
+    <!-- Leave Requests as the target after dashboard -->
+    <ShellContent Title="LeaveRequests" 
+                  ContentTemplate="{DataTemplate leaverequests:LeaveRequests}"
+                  Route="LeaveRequests"/>
+
+    <!-- Admin Settings as the target after dashboard -->
+    <ShellContent Title="AdminSettings" 
+                  ContentTemplate="{DataTemplate adminsettings:AdminSettings}"
+                  Route="AdminSettings"/>
+    <!-- Admin Settings as the target after dashboard -->
+    <ShellContent Title="UserSettings" 
+                  ContentTemplate="{DataTemplate usersettings:UserSettings}"
+                  Route="UserSettings"/>
 </Shell>
