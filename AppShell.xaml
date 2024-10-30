@@ -3,13 +3,18 @@
     x:Class="EmployeeManagementSystem.AppShell"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:local="clr-namespace:EmployeeManagementSystem"
+    xmlns:login="clr-namespace:EmployeeManagementSystem.LoginView"
+    xmlns:dashboard="clr-namespace:EmployeeManagementSystem.Dashboard"
     Shell.FlyoutBehavior="Disabled"
     Title="EmployeeManagementSystem">
 
-    <ShellContent
-        Title="Home"
-        ContentTemplate="{DataTemplate local:MainPage}"
-        Route="MainPage" />
+    <!-- LoginView as the initial page -->
+    <ShellContent Title="Login"
+                  ContentTemplate="{DataTemplate login:LoginView}"
+                  Route="LoginView"/>
 
+    <!-- Dashboard as the target after login -->
+    <ShellContent Title="Dashboard" 
+                  ContentTemplate="{DataTemplate dashboard:Dashboard}"
+                  Route="Dashboard"/>
 </Shell>

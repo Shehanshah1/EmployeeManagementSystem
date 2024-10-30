@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="EmployeeManagementSystem.Vieww.LoginView"
-             Title="LoginView">
+             x:Class="EmployeeManagementSystem.LoginView.LoginView"
+             Title=""
+             Shell.NavBarIsVisible="False">
     <Grid RowDefinitions=".3*, .7*" BackgroundColor="white">
         <!--   <Image Aspect="AspectFill" Source="EMS.png"/> -->
         <Grid BackgroundColor="CadetBlue">
@@ -103,12 +104,18 @@
            TextColor="Gray"
            Opacity=".5"/>
                 </Grid>
-                <Button Margin="0,20,0,0"
+                <!--Submit Button-->
+                <Button               
+                 Margin="0,20,0,0"
                 BackgroundColor="CadetBlue"
                 Text="Login"
                 HeightRequest="60"
                 TextColor="white"
-                        WidthRequest="100"/>
+                WidthRequest="100"
+                Clicked="OnLoginButtonClicked"/>
+
+                <!--Forgot Password-->
+
                 <Button Margin="0,20,0,-10" HorizontalOptions="Center"
                        Text="Forgot your password?" TextColor="Blue"
                        BackgroundColor="White"/>

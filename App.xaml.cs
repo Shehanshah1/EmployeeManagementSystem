@@ -1,4 +1,4 @@
-﻿using EmployeeManagementSystem.Vieww;
+﻿using EmployeeManagementSystem.LoginView;
 
 namespace EmployeeManagementSystem
 {
@@ -7,7 +7,10 @@ namespace EmployeeManagementSystem
         public App()
         {
             InitializeComponent();
-            MainPage = new LoginView();
+            MainPage = new AppShell();
         }
+
+
+
     }
 }
