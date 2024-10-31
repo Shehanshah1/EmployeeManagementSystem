@@ -9,6 +9,8 @@
     xmlns:leaverequests="clr-namespace:EmployeeManagementSystem.LeaveRequests"
     xmlns:adminsettings="clr-namespace:EmployeeManagementSystem.AdminSettings"
     xmlns:usersettings="clr-namespace:EmployeeManagementSystem.UserSettings"
+    xmlns:forgotpassword="clr-namespace:EmployeeManagementSystem.ForgotPassword"
+    xmlns:createaccount="clr-namespace:EmployeeManagementSystem.CreateAccount"
     Shell.FlyoutBehavior="Disabled"
     Title="EmployeeManagementSystem">
 
@@ -22,6 +24,15 @@
                   ContentTemplate="{DataTemplate dashboard:Dashboard}"
                   Route="Dashboard"/>
 
+    <!-- ForgotPassword as a page -->
+    <ShellContent Title="ForgotPassword"
+                  ContentTemplate="{DataTemplate forgotpassword:ForgotPassword}"
+                  Route="ForgotPassword"/>
+
+    <!-- Create Account as a page -->
+    <ShellContent Title="CreateAccount"
+                  ContentTemplate="{DataTemplate createaccount:CreateAccount}"
+                  Route="CreateAccount"/>
 
     <!-- Employee Management as the target after dashboard -->
     <ShellContent Title="EmployeeManagement" 
@@ -37,7 +48,7 @@
     <ShellContent Title="AdminSettings" 
                   ContentTemplate="{DataTemplate adminsettings:AdminSettings}"
                   Route="AdminSettings"/>
-    <!-- Admin Settings as the target after dashboard -->
+    <!-- User Settings as the target after dashboard -->
     <ShellContent Title="UserSettings" 
                   ContentTemplate="{DataTemplate usersettings:UserSettings}"
                   Route="UserSettings"/>

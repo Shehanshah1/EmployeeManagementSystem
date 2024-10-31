@@ -92,7 +92,8 @@
                             HeightRequest="30"
                             MaximumWidthRequest="200"
                             TextColor="Blue"
-                            BackgroundColor="White"/>
+                            BackgroundColor="White"
+                             Clicked="OnForgotPasswordButtonClicked"/>
 
                     <!-- Create Account Button -->
                     <Button    
@@ -101,7 +102,8 @@
                         Text="Create a new account"
                         MaximumWidthRequest="200"
                         TextColor="White"
-                        Margin="0,30,0,30"/>
+                        Margin="0,30,0,30"
+                        Clicked="OnCreateAccountButtonClicked"/>
 
                 </VerticalStackLayout>
             </Grid>
