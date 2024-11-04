@@ -11,6 +11,7 @@
     xmlns:usersettings="clr-namespace:EmployeeManagementSystem.UserSettings"
     xmlns:forgotpassword="clr-namespace:EmployeeManagementSystem.ForgotPassword"
     xmlns:createaccount="clr-namespace:EmployeeManagementSystem.CreateAccount"
+    xmlns:resetpassword="clr-namespace:EmployeeManagementSystem.ResetPassword"
     Shell.FlyoutBehavior="Disabled"
     Title="EmployeeManagementSystem">
 
@@ -29,6 +30,11 @@
                   ContentTemplate="{DataTemplate forgotpassword:ForgotPassword}"
                   Route="ForgotPassword"/>
 
+    <!-- ResetPassword as a page -->
+    <ShellContent Title="ResetPassword"
+                  ContentTemplate="{DataTemplate resetpassword:ResetPassword}"
+                  Route="ResetPassword"/>
+    
     <!-- Create Account as a page -->
     <ShellContent Title="CreateAccount"
                   ContentTemplate="{DataTemplate createaccount:CreateAccount}"

@@ -90,6 +90,9 @@
 	  <MauiXaml Update="LoginView\LoginView.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="ResetPassword\ResetPassword.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="UserSettings\UserSettings.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>

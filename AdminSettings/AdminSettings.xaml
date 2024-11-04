@@ -40,7 +40,7 @@
                 <Button 
             Text="Dashboard" 
             FontSize="Small" 
-            BackgroundColor="#322f5c" 
+            BackgroundColor="SlateGray" 
             TextColor="White" 
             HorizontalOptions="FillAndExpand" 
             Grid.Row="1"/>
@@ -63,7 +63,7 @@
                 <Button 
             Text="Admin Settings" 
             FontSize="Small" 
-            BackgroundColor="SlateGray" 
+            BackgroundColor="#322f5c" 
             TextColor="White" 
             HorizontalOptions="FillAndExpand" 
             Grid.Row="4"
