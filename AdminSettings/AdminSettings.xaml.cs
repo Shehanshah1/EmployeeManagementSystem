@@ -1,32 +1,46 @@
-namespace EmployeeManagementSystem.AdminSettings;
+namespace EmployeeManagementSystem.AdminSettings
+{
     using EmployeeManagementSystem.EmployeeManagement;
     using EmployeeManagementSystem.LeaveRequests;
     using EmployeeManagementSystem.Dashboard;
     using EmployeeManagementSystem.UserSettings;
+    using System.Collections.ObjectModel;
+    using System.Linq;
+    using Microsoft.Maui.Controls;
 
     public class Employee
     {
-        public int Id { get; set; }                // Employee ID
-        public string Name { get; set; }           // Employee Name
-        public string Department { get; set; }     // Employee Department
-        // Add any additional properties as needed
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public string Department { get; set; }
+    }
+
+    public class Department
+    {
+        public string Title { get; set; }
+        public int CurrentEmployees { get; set; }
+        public ObservableCollection<Employee> Employees { get; set; } = new ObservableCollection<Employee>();
     }
 
     public partial class AdminSettings : ContentPage
     {
-    private async void OnLogOutButtonClicked(object sender, EventArgs e)
-    {
-        await Shell.Current.GoToAsync("//LoginView");
-    }
-    private async void OnDashboardButtonClicked(object sender, EventArgs e)
-    {
-        await Shell.Current.GoToAsync("//Dashboard");
-    }
-    private static List<Employee> employees = new List<Employee>();
+        public ObservableCollection<Employee> Employees { get; set; } = new ObservableCollection<Employee>();
+        public ObservableCollection<Department> Departments { get; set; } = new ObservableCollection<Department>();
 
         public AdminSettings()
         {
             InitializeComponent();
+            BindingContext = this;
+        }
+
+        private async void OnLogOutButtonClicked(object sender, EventArgs e)
+        {
+            await Shell.Current.GoToAsync("//LoginView");
+        }
+
+        private async void OnDashboardButtonClicked(object sender, EventArgs e)
+        {
+            await Shell.Current.GoToAsync("//Dashboard");
         }
 
         private async void OnEmployeeManagementButtonClicked(object sender, EventArgs e)
@@ -49,10 +63,8 @@ namespace EmployeeManagementSystem.AdminSettings;
             await Shell.Current.GoToAsync("//UserSettings");
         }
 
-        // Event handler for Add Employee button click
         private async void OnAddEmployeeButtonClicked(object sender, EventArgs e)
         {
-            // Prompt user for the employee's ID
             string idInput = await DisplayPromptAsync("New Employee", "Enter the employee's ID:");
             if (string.IsNullOrWhiteSpace(idInput) || !int.TryParse(idInput, out int id))
             {
@@ -60,7 +72,6 @@ namespace EmployeeManagementSystem.AdminSettings;
                 return;
             }
 
-            // Prompt user for the employee's name
             string name = await DisplayPromptAsync("New Employee", "Enter the employee's name:");
             if (string.IsNullOrWhiteSpace(name))
             {
@@ -68,7 +79,6 @@ namespace EmployeeManagementSystem.AdminSettings;
                 return;
             }
 
-            // Prompt user for the employee's department
             string department = await DisplayPromptAsync("New Employee", "Enter the employee's department:");
             if (string.IsNullOrWhiteSpace(department))
             {
@@ -76,59 +86,72 @@ namespace EmployeeManagementSystem.AdminSettings;
                 return;
             }
 
-            // Create a new Employee object with the provided information
-            Employee newEmployee = new Employee
-            {
-                Id = id,
-                Name = name,
-                Department = department
-            };
-
-            // Add the new employee to the list
-            employees.Add(newEmployee);
-
-            // Notify user of successful addition
+            var newEmployee = new Employee { Id = id, Name = name, Department = department };
+            Employees.Add(newEmployee);
             await DisplayAlert("Success", "Employee added successfully!", "OK");
-        }
 
-
-       
-
-        // Method to get all employees
-        private List<Employee> GetAllEmployees()
-        {
-            return employees;
-        }
-
-        // Method to get an employee by ID
-        private Employee GetEmployeeById(int id)
-        {
-            return employees.FirstOrDefault(e => e.Id == id);
-        }
-
-        // Method to update an employee
-        private void UpdateEmployee(Employee employee)
-        {
-            var existingEmployee = GetEmployeeById(employee.Id);
-            if (existingEmployee != null)
+            var existingDepartment = Departments.FirstOrDefault(d => d.Title == department);
+            if (existingDepartment != null)
             {
-                existingEmployee.Name = employee.Name;
-                existingEmployee.Department = employee.Department;
-                // Update other properties as needed
+                existingDepartment.Employees.Add(newEmployee);
+                existingDepartment.CurrentEmployees++;
+            }
+            else
+            {
+                Departments.Add(new Department { Title = department, CurrentEmployees = 1, Employees = new ObservableCollection<Employee> { newEmployee } });
             }
         }
 
-        // Method to delete an employee
-        private void DeleteEmployee(int id)
+        private async void OnEditEmployeeButtonClicked(object sender, EventArgs e)
         {
-            var employeeToRemove = GetEmployeeById(id);
-            if (employeeToRemove != null)
+            var button = sender as Button;
+            var employee = button?.BindingContext as Employee;
+            if (employee == null) return;
+
+            string name = await DisplayPromptAsync("Edit Employee", "Enter the employee's name:", initialValue: employee.Name);
+            if (!string.IsNullOrWhiteSpace(name)) employee.Name = name;
+
+            string department = await DisplayPromptAsync("Edit Employee", "Enter the employee's department:", initialValue: employee.Department);
+            if (!string.IsNullOrWhiteSpace(department) && department != employee.Department)
             {
-                employees.Remove(employeeToRemove);
+                var oldDepartment = Departments.FirstOrDefault(d => d.Title == employee.Department);
+                oldDepartment?.Employees.Remove(employee);
+                if (oldDepartment != null) oldDepartment.CurrentEmployees--;
+
+                employee.Department = department;
+                var newDepartment = Departments.FirstOrDefault(d => d.Title == department);
+                if (newDepartment != null)
+                {
+                    newDepartment.Employees.Add(employee);
+                    newDepartment.CurrentEmployees++;
+                }
+                else
+                {
+                    Departments.Add(new Department { Title = department, CurrentEmployees = 1, Employees = new ObservableCollection<Employee> { employee } });
+                }
             }
         }
 
+        private async void OnDeleteEmployeeButtonClicked(object sender, EventArgs e)
+        {
+            var button = sender as Button;
+            var employee = button?.BindingContext as Employee;
+            if (employee == null) return;
+
+            bool confirmed = await DisplayAlert("Delete Employee", "Are you sure you want to delete this employee?", "Yes", "No");
+            if (confirmed)
+            {
+                Employees.Remove(employee);
+
+                var department = Departments.FirstOrDefault(d => d.Title == employee.Department);
+                department?.Employees.Remove(employee);
+                if (department != null) department.CurrentEmployees--;
+
+                if (department != null && department.CurrentEmployees <= 0)
+                {
+                    Departments.Remove(department);
+                }
+            }
+        }
     }
-
-
-
+}
