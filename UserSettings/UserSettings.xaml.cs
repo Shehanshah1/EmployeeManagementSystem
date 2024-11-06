@@ -27,4 +27,12 @@ public partial class UserSettings : ContentPage
     {
         await Shell.Current.GoToAsync("//UserSettings");
     }
+    private async void OnLogOutButtonClicked(object sender, EventArgs e)
+    {
+        await Shell.Current.GoToAsync("//LoginView");
+    }
+    private async void OnDashboardButtonClicked(object sender, EventArgs e)
+    {
+        await Shell.Current.GoToAsync("//Dashboard");
+    }   
 }

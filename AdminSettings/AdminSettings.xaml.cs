@@ -13,6 +13,14 @@ public partial class AdminSettings : ContentPage
     {
         await Shell.Current.GoToAsync("//EmployeeManagement");
     }
+    private async void OnLogOutButtonClicked(object sender, EventArgs e)
+    {
+        await Shell.Current.GoToAsync("//LoginView");
+    }
+    private async void OnDashboardButtonClicked(object sender, EventArgs e)
+    {
+        await Shell.Current.GoToAsync("//Dashboard");
+    }
 
     private async void OnLeaveRequestsButtonClicked(object sender, EventArgs e)
     {

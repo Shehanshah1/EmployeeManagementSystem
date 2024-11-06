@@ -13,6 +13,10 @@ public partial class LeaveRequests : ContentPage
     {
         await Shell.Current.GoToAsync("//EmployeeManagement");
     }
+    private async void OnLogOutButtonClicked(object sender, EventArgs e)
+    {
+        await Shell.Current.GoToAsync("//LoginView");
+    }
 
     private async void OnDashboardButtonClicked(object sender, EventArgs e)
     {

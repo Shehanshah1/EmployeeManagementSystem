@@ -20,69 +20,77 @@
         Color="#1a1c3d" />
 
             <!-- Sidebar Buttons and Logo -->
-            <StackLayout Grid.Column="0" Padding="10" Spacing="20" Grid.RowSpan="6">
+            <StackLayout Grid.Column="0" Padding="10" Spacing="20" Grid.RowSpan="7">
                 <!-- Profile Picture or Logo Placeholder -->
                 <!--  <Image Source="your_logo_placeholder.png" WidthRequest="60" HeightRequest="60" HorizontalOptions="Center"/>  -->
                 <RoundRectangle 
-        Grid.Column="0"
-        Grid.Row="0"
-        Margin="0,20,0,0"
-        CornerRadius="360"
-        WidthRequest="80"
-        HeightRequest="80"
-        BackgroundColor="Gray"
-        VerticalOptions="Center"
-        HorizontalOptions="Center"
-    />
+         Grid.Column="0"
+         Grid.Row="0"
+         Margin="0,20,0,0"
+         CornerRadius="360"
+         WidthRequest="80"
+         HeightRequest="80"
+         BackgroundColor="Gray"
+         VerticalOptions="Center"
+         HorizontalOptions="Center"
+     />
                 <!-- Sidebar Buttons -->
                 <Button 
-            Text="Dashboard" 
-            FontSize="Small" 
-            BackgroundColor="SlateGray" 
-            TextColor="White" 
-            HorizontalOptions="FillAndExpand" 
-            Grid.Row="1"
-            Clicked="OnDashboardButtonClicked"/>
+             Text="Dashboard" 
+             FontSize="Small" 
+             BackgroundColor="SlateGray" 
+             TextColor="White" 
+             HorizontalOptions="FillAndExpand" 
+             Grid.Row="1"
+             Clicked="OnDashboardButtonClicked"/>
                 <Button 
-            Text="Employee Management"
-            FontSize="Small" 
-            BackgroundColor="SlateGray" 
-            TextColor="White" 
-            HorizontalOptions="FillAndExpand" 
-            Grid.Row="2"
-            Clicked="OnEmployeeManagementButtonClicked"/>
+             Text="Employee Management"
+             FontSize="Small" 
+             BackgroundColor="SlateGray" 
+             TextColor="White" 
+             HorizontalOptions="FillAndExpand" 
+             Grid.Row="2"
+             Clicked="OnEmployeeManagementButtonClicked"/>
                 <Button 
-            Text="Leave Requests" 
-            FontSize="Small" 
-            BackgroundColor="#322f5c" 
-            TextColor="White" 
-            HorizontalOptions="FillAndExpand"
-            Grid.Row="3"/>
+             Text="Leave Requests" 
+             FontSize="Small" 
+             BackgroundColor="#322f5c" 
+             TextColor="White" 
+             HorizontalOptions="FillAndExpand"
+             Grid.Row="3"
+            />
                 <Button 
-            Text="Admin Settings" 
-            FontSize="Small" 
-            BackgroundColor="SlateGray" 
-            TextColor="White" 
-            HorizontalOptions="FillAndExpand" 
-            Grid.Row="4"
-            Clicked="OnAdminSettingsButtonClicked"/>
-
-
+             Text="Admin Settings" 
+             FontSize="Small" 
+             BackgroundColor="SlateGray" 
+             TextColor="White" 
+             HorizontalOptions="FillAndExpand" 
+             Grid.Row="4"
+             Clicked="OnAdminSettingsButtonClicked"/>
+                <Button 
+Text="Log Out" 
+FontSize="Small" 
+BackgroundColor="SlateGray" 
+TextColor="White" 
+HorizontalOptions="FillAndExpand" 
+Grid.Row="5"
+Clicked="OnLogOutButtonClicked"/>
 
                 <!-- Admin Label -->
                 <StackLayout Orientation="Horizontal" VerticalOptions="End" HorizontalOptions="FillAndExpand" Grid.Column="0" Grid.Row="6">
                     <!--  <Image Source="admin_icon.png" WidthRequest="30" HeightRequest="30" Margin="0,0,10,0"/> -->
                     <Button 
-                Text="admin_aelin" 
-                TextColor="White" 
-                Margin="0,175"
-                FontSize="Small" 
-                VerticalOptions="EndAndExpand" 
-                BackgroundColor="#1a1c3d"
-                HorizontalOptions="FillAndExpand"
-                Clicked="OnUserSettingsButtonClicked"/>
+                 Text="admin_aelin" 
+                 TextColor="White" 
+                 Margin="0,0"
+                 FontSize="Small" 
+                 VerticalOptions="CenterAndExpand" 
+                 BackgroundColor="#1a1c3d"
+                 HorizontalOptions="FillAndExpand"
+                 Clicked="OnUserSettingsButtonClicked"/>
                 </StackLayout>
             </StackLayout>
+
 
             <Grid Grid.Column="2" Grid.RowSpan="6"
       ColumnDefinitions="*,*,*" RowDefinitions=".2*,.2*, .2*, .2*, .2*, .2*">

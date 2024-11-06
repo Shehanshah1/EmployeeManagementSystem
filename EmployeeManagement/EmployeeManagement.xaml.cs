@@ -18,6 +18,10 @@ public partial class EmployeeManagement : ContentPage
     {
         await Shell.Current.GoToAsync("//Dashboard");
     }
+    private async void OnLogOutButtonClicked(object sender, EventArgs e)
+    {
+        await Shell.Current.GoToAsync("//LoginView");
+    }
     private async void OnLeaveRequestsButtonClicked(object sender, EventArgs e)
     {
         await Shell.Current.GoToAsync("//LeaveRequests");

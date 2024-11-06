@@ -7,12 +7,12 @@
              Shell.NavBarIsVisible="False">
 
     <ScrollView>
-        <Grid ColumnDefinitions="253,*" RowDefinitions=".2*, .1*,.1*,.1*,.1*,.3*">
+        <Grid ColumnDefinitions="253,*" RowDefinitions=".2*, .1*,.1*,.1*,.1*,.1*,1*">
 
             <!-- Left Sidebar Background -->
             <BoxView 
                 Grid.Column="0"
-                Grid.RowSpan="6"
+                Grid.RowSpan="7"
                 Color="#7664a9" />
 
 
@@ -20,11 +20,11 @@
             <!-- Right Column Background -->
             <BoxView 
                 Grid.Column="1"
-                Grid.RowSpan="6"
+                Grid.RowSpan="7"
                 Color="#1a1c3d" />
 
             <!-- Sidebar Buttons and Logo -->
-            <StackLayout Grid.Column="0" Padding="10" Spacing="20" Grid.RowSpan="6">
+            <StackLayout Grid.Column="0" Padding="10" Spacing="20" Grid.RowSpan="7">
                 <!-- Profile Picture or Logo Placeholder -->
               <!--  <Image Source="your_logo_placeholder.png" WidthRequest="60" HeightRequest="60" HorizontalOptions="Center"/>  -->
                 <RoundRectangle 
@@ -70,8 +70,14 @@
                     HorizontalOptions="FillAndExpand" 
                     Grid.Row="4"
                     Clicked="OnAdminSettingsButtonClicked"/>
-
- 
+                <Button 
+       Text="Log Out" 
+       FontSize="Small" 
+       BackgroundColor="SlateGray" 
+       TextColor="White" 
+       HorizontalOptions="FillAndExpand" 
+       Grid.Row="5"
+       Clicked="OnLogOutButtonClicked"/>
 
                 <!-- Admin Label -->
                 <StackLayout Orientation="Horizontal" VerticalOptions="End" HorizontalOptions="FillAndExpand" Grid.Column="0" Grid.Row="6">
@@ -79,16 +85,16 @@
                     <Button 
                         Text="admin_aelin" 
                         TextColor="White" 
-                        Margin="0,175"
+                        Margin="0,0"
                         FontSize="Small" 
-                        VerticalOptions="EndAndExpand" 
+                        VerticalOptions="CenterAndExpand" 
                         BackgroundColor="#1a1c3d"
                         HorizontalOptions="FillAndExpand"
                         Clicked="OnUserSettingsButtonClicked"/>
                 </StackLayout>
             </StackLayout>
 
-            <Grid Grid.Column="2" Grid.RowSpan="6"
+            <Grid Grid.Column="2" Grid.RowSpan="7"
               ColumnDefinitions="*,*" RowDefinitions=".2*,.2*, .8*">
                 <!-- Dashboard Greeting -->
 
