@@ -9,130 +9,140 @@
 
             <!-- Left Sidebar Background -->
             <BoxView 
-        Grid.Column="0"
-        Grid.RowSpan="6"
-        Color="#7664a9" />
-
-
+                Grid.Column="0"
+                Grid.RowSpan="6"
+                Color="#7664a9" />
 
             <!-- Right Column Background -->
             <BoxView 
-        Grid.Column="1"
-        Grid.RowSpan="6"
-        Color="#1a1c3d" />
+                Grid.Column="1"
+                Grid.RowSpan="6"
+                Color="#1a1c3d" />
 
             <!-- Sidebar Buttons and Logo -->
-            <StackLayout Grid.Column="0" Padding="10" Spacing="20" Grid.RowSpan="7">
-                <!-- Profile Picture or Logo Placeholder -->
-                <!--  <Image Source="your_logo_placeholder.png" WidthRequest="60" HeightRequest="60" HorizontalOptions="Center"/>  -->
-                <RoundRectangle 
-         Grid.Column="0"
-         Grid.Row="0"
-         Margin="0,20,0,0"
-         CornerRadius="360"
-         WidthRequest="80"
-         HeightRequest="80"
-         BackgroundColor="Gray"
-         VerticalOptions="Center"
-         HorizontalOptions="Center"
-     />
+            <StackLayout Grid.Column="0" Padding="10" Spacing="20" Grid.RowSpan="6">
+                <!-- Profile Picture Placeholder -->
+                <Frame 
+                    WidthRequest="80"
+                    HeightRequest="80"
+                    CornerRadius="40"
+                    BackgroundColor="Gray"
+                    VerticalOptions="Center"
+                    HorizontalOptions="Center"
+                    Margin="0,20,0,0" />
+
                 <!-- Sidebar Buttons -->
                 <Button 
-             Text="Dashboard" 
-             FontSize="Small" 
-             BackgroundColor="SlateGray" 
-             TextColor="White" 
-             HorizontalOptions="FillAndExpand" 
-             Grid.Row="1"
-             Clicked="OnDashboardButtonClicked"/>
+                    Text="Dashboard" 
+                    FontSize="Small" 
+                    BackgroundColor="SlateGray" 
+                    TextColor="White" 
+                    HorizontalOptions="FillAndExpand" 
+                    Clicked="OnDashboardButtonClicked"/>
                 <Button 
-             Text="Employee Management"
-             FontSize="Small" 
-             BackgroundColor="SlateGray" 
-             TextColor="White" 
-             HorizontalOptions="FillAndExpand" 
-             Grid.Row="2"
-             Clicked="OnEmployeeManagementButtonClicked"/>
+                    Text="Employee Management"
+                    FontSize="Small" 
+                    BackgroundColor="SlateGray" 
+                    TextColor="White" 
+                    HorizontalOptions="FillAndExpand" 
+                    Clicked="OnEmployeeManagementButtonClicked"/>
                 <Button 
-             Text="Leave Requests" 
-             FontSize="Small" 
-             BackgroundColor="SlateGray" 
-             TextColor="White" 
-             HorizontalOptions="FillAndExpand"
-             Grid.Row="3"
-            />
+                    Text="Leave Requests" 
+                    FontSize="Small" 
+                    BackgroundColor="SlateGray" 
+                    TextColor="White" 
+                    HorizontalOptions="FillAndExpand"/>
                 <Button 
-             Text="Admin Settings" 
-             FontSize="Small" 
-             BackgroundColor="#322f5c" 
-             TextColor="White" 
-             HorizontalOptions="FillAndExpand" 
-             Grid.Row="4"
-             Clicked="OnAdminSettingsButtonClicked"/>
+                    Text="Admin Settings" 
+                    FontSize="Small" 
+                    BackgroundColor="#322f5c" 
+                    TextColor="White" 
+                    HorizontalOptions="FillAndExpand" 
+                    Clicked="OnAdminSettingsButtonClicked"/>
                 <Button 
-Text="Log Out" 
-FontSize="Small" 
-BackgroundColor="SlateGray" 
-TextColor="White" 
-HorizontalOptions="FillAndExpand" 
-Grid.Row="5"
-Clicked="OnLogOutButtonClicked"/>
+                    Text="Log Out" 
+                    FontSize="Small" 
+                    BackgroundColor="SlateGray" 
+                    TextColor="White" 
+                    HorizontalOptions="FillAndExpand" 
+                    Clicked="OnLogOutButtonClicked"/>
 
                 <!-- Admin Label -->
-                <StackLayout Orientation="Horizontal" VerticalOptions="End" HorizontalOptions="FillAndExpand" Grid.Column="0" Grid.Row="6">
-                    <!--  <Image Source="admin_icon.png" WidthRequest="30" HeightRequest="30" Margin="0,0,10,0"/> -->
+                <StackLayout Orientation="Horizontal" VerticalOptions="End" HorizontalOptions="FillAndExpand">
                     <Button 
-                 Text="admin_aelin" 
-                 TextColor="White" 
-                 Margin="0,0"
-                 FontSize="Small" 
-                 VerticalOptions="CenterAndExpand" 
-                 BackgroundColor="#1a1c3d"
-                 HorizontalOptions="FillAndExpand"
-                 Clicked="OnUserSettingsButtonClicked"/>
+                        Text="admin_aelin" 
+                        TextColor="White" 
+                        FontSize="Small" 
+                        BackgroundColor="#1a1c3d"
+                        HorizontalOptions="FillAndExpand"
+                        Clicked="OnUserSettingsButtonClicked"/>
                 </StackLayout>
             </StackLayout>
 
-            <Grid Grid.Column="2" Grid.RowSpan="6"
-      ColumnDefinitions="*,*,*" RowDefinitions=".2*,.5*, .5*">
+            <Grid Grid.Column="1" Grid.RowSpan="6"
+                  ColumnDefinitions="*,*,*" 
+                  RowDefinitions=".2*,.5*, .5*">
                 <!-- Admin Settings Greeting -->
-
-                <Label Grid.Column="0" Grid.Row="0" Text="Admin Settings" Margin="20,0,0,20" HorizontalOptions="Start" VerticalOptions="End" FontSize="Large" FontAttributes="Bold" TextColor="White" />
+                <Label 
+                    Grid.Column="0" 
+                    Grid.Row="0" 
+                    Text="Admin Settings" 
+                    Margin="20,0,0,20" 
+                    HorizontalOptions="Start" 
+                    VerticalOptions="End" 
+                    FontSize="Large" 
+                    FontAttributes="Bold" 
+                    TextColor="White" />
 
                 <!-- Divider Line -->
-                <Line 
-        Grid.ColumnSpan="3"
-        Stroke="White"
-        X1="0"
-        Y1="90"
-        X2="2000" 
-        Y2="90"/>
+                <BoxView 
+                    Grid.ColumnSpan="3" 
+                    HeightRequest="1" 
+                    Color="White" 
+                    Margin="0,0,0,20"/>
 
                 <!-- Employee Overview Card -->
+                <Frame 
+                    Grid.Column="0"
+                    Grid.ColumnSpan="3"
+                    Grid.Row="1"
+                    Padding="10" 
+                    Margin="50"
+                    WidthRequest="900"
+                    VerticalOptions="CenterAndExpand"
+                    HorizontalOptions="CenterAndExpand"
+                    BackgroundColor="#6e5f9e" 
+                    CornerRadius="20" 
+                    HasShadow="False">
 
-                <Frame Grid.Column="0"
-                        Grid.ColumnSpan="3"
-                        Grid.Row="1"
-                        Padding="10" 
-                        Margin="50"
-                         WidthRequest="900"
-                        VerticalOptions="CenterAndExpand"
-                        HorizontalOptions="CenterAndExpand"
-                        BackgroundColor="#6e5f9e" 
-                        CornerRadius="20" 
-                        HasShadow="False">
-                    
-                    <StackLayout Grid.ColumnSpan="3">
+                    <StackLayout>
                         <Grid ColumnDefinitions="500,180,180">
-                            <Label Text="Employee Management" FontSize="Medium" FontAttributes="Bold" TextColor="White" HorizontalOptions="Start" />
-                            <Button Text="New Employee" FontSize="Micro" TextColor="White" Grid.Column="1" MaximumWidthRequest="160" Clicked="OnAddEmployeeButtonClicked"/>
-                            <Button Text="Edit Employee" FontSize="Micro" TextColor="White" Grid.Column="2" MaximumWidthRequest="160" Clicked=""/>
+                            <Label Text="Employee Management" 
+                                   FontSize="Medium" 
+                                   FontAttributes="Bold" 
+                                   TextColor="White" 
+                                   HorizontalOptions="Start" />
+                            <Button Text="New Employee" 
+                                    FontSize="Micro" 
+                                    TextColor="White" 
+                                    Grid.Column="1" 
+                                    MaximumWidthRequest="160" 
+                                    Clicked="OnAddEmployeeButtonClicked"/>
+                            <Button Text="Edit Employee" 
+                                    FontSize="Micro" 
+                                    TextColor="White" 
+                                    Grid.Column="2" 
+                                    MaximumWidthRequest="160"/>
                         </Grid>
-                        
-                        <BoxView HeightRequest="1" BackgroundColor="White" Margin="0,10,0,10" />
-                        
-                            <!-- Column Headings for Employee Management -->
-                        <Grid ColumnDefinitions="*,*,*,*,*,*" Padding="5" Margin="0,10,0,10">
+
+                        <BoxView HeightRequest="1" 
+                                 BackgroundColor="White" 
+                                 Margin="0,10,0,10" />
+
+                        <!-- Column Headings for Employee Management -->
+                        <Grid ColumnDefinitions="*,*,*,*,*,*" 
+                              Padding="5" 
+                              Margin="0,10,0,10">
                             <Label Text="Employee ID" TextColor="White" FontAttributes="Bold" Grid.Column="0"/>
                             <Label Text="Name" TextColor="White" FontAttributes="Bold" Grid.Column="1"/>
                             <Label Text="Department" TextColor="White" FontAttributes="Bold" Grid.Column="2"/>
@@ -140,6 +150,7 @@ Clicked="OnLogOutButtonClicked"/>
                             <Label Text="Title" TextColor="White" FontAttributes="Bold" Grid.Column="4"/>
                             <Label Text="Actions" TextColor="White" FontAttributes="Bold" Grid.Column="5"/>
                         </Grid>
+
                         <!-- Employee List -->
                         <CollectionView ItemsSource="{Binding Employees}">
                             <CollectionView.ItemTemplate>
@@ -152,9 +163,9 @@ Clicked="OnLogOutButtonClicked"/>
                                         <Label Text="{Binding Title}" TextColor="White" Grid.Column="4"/>
 
                                         <!-- Edit and Delete Buttons -->
-                                        <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
-                                            <Button Text="Edit" BackgroundColor="Gray" TextColor="White" Clicked="OnEditEmployeeButtonClicked" Grid.Column="5" />
-                                            <Button Text="Delete" BackgroundColor="Red" TextColor="White" Clicked="OnDeleteEmployeeButtonClicked" Grid.Column="5"/>
+                                        <StackLayout Orientation="Horizontal" HorizontalOptions="Center" Grid.Column="5">
+                                            <Button Text="Edit" BackgroundColor="Gray" TextColor="White" Clicked="OnEditEmployeeButtonClicked"/>
+                                            <Button Text="Delete" BackgroundColor="Red" TextColor="White" Clicked="OnDeleteEmployeeButtonClicked"/>
                                         </StackLayout>
                                     </Grid>
                                 </DataTemplate>
@@ -163,13 +174,14 @@ Clicked="OnLogOutButtonClicked"/>
                     </StackLayout>
                 </Frame>
 
+                <!-- Department Management Card -->
                 <Frame 
                     Grid.Column="0"
                     Grid.ColumnSpan="3"
                     Grid.Row="2"
                     Padding="10" 
                     Margin="50"
-                     WidthRequest="900"
+                    WidthRequest="900"
                     VerticalOptions="CenterAndExpand"
                     HorizontalOptions="CenterAndExpand"
                     BackgroundColor="#6e5f9e" 
@@ -177,16 +189,44 @@ Clicked="OnLogOutButtonClicked"/>
                     HasShadow="False">
                     <StackLayout>
                         <Grid ColumnDefinitions="500,180,180">
-                            <Label Text="Department Management" FontSize="Medium" FontAttributes="Bold" TextColor="White" HorizontalOptions="Start" />
-                            <Button Text="New Department" FontSize="Micro" TextColor="White" Grid.Column="1" MaximumWidthRequest="160"/>
-                            <Button Text="Edit Department" FontSize="Micro" TextColor="White" Grid.Column="2" MaximumWidthRequest="160"/>
+                            <Label Text="Department Management" 
+                                   FontSize="Medium" 
+                                   FontAttributes="Bold" 
+                                   TextColor="White" 
+                                   HorizontalOptions="Start" />
+                            <Button Text="New Department" 
+                                    FontSize="Micro" 
+                                    TextColor="White" 
+                                    Grid.Column="1" 
+                                    MaximumWidthRequest="160"/>
+                            <Button Text="Edit Department" 
+                                    FontSize="Micro" 
+                                    TextColor="White" 
+                                    Grid.Column="2" 
+                                    MaximumWidthRequest="160"/>
                         </Grid>
-                        <BoxView HeightRequest="1" BackgroundColor="White" Margin="0,10,0,10" />
-                        <HorizontalStackLayout>
-                            <Label Text="Department" FontSize="Small" TextColor="White" Margin="10,0,0,0" />
-                            <Label Text="Title" FontSize="Small" TextColor="White" Margin="300,0,0,0" />
-                            <Label Text="Current Employees" FontSize="Small" TextColor="White" Margin="200,0,0,0" />
-                        </HorizontalStackLayout>
+
+                        <BoxView HeightRequest="1" 
+                                 BackgroundColor="White" 
+                                 Margin="0,10,0,10" />
+
+                        <!-- Column Headings for Department Management -->
+                        <Grid ColumnDefinitions="*,*" Padding="5" Margin="0,10,0,10">
+                            <Label Text="Department" TextColor="White" FontAttributes="Bold" Grid.Column="0"/>
+                            <Label Text="Current Employees" TextColor="White" FontAttributes="Bold" Grid.Column="1"/>
+                        </Grid>
+
+                        <!-- Department List -->
+                        <CollectionView ItemsSource="{Binding Departments}">
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid ColumnDefinitions="*,*" Padding="5" Margin="0,5,0,5">
+                                        <Label Text="{Binding Title}" TextColor="White" Grid.Column="0"/>
+                                        <Label Text="{Binding CurrentEmployees}" TextColor="White" Grid.Column="1"/>
+                                    </Grid>
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
                     </StackLayout>
                 </Frame>
             </Grid>
