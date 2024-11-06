@@ -1,5 +1,4 @@
-namespace EmployeeManagementSystem.AdminSettings
-{
+namespace EmployeeManagementSystem.AdminSettings;
     using EmployeeManagementSystem.EmployeeManagement;
     using EmployeeManagementSystem.LeaveRequests;
     using EmployeeManagementSystem.Dashboard;
@@ -12,6 +11,9 @@ namespace EmployeeManagementSystem.AdminSettings
         public string Department { get; set; }     // Employee Department
         // Add any additional properties as needed
     }
+
+    public partial class AdminSettings : ContentPage
+    {
     private async void OnLogOutButtonClicked(object sender, EventArgs e)
     {
         await Shell.Current.GoToAsync("//LoginView");
@@ -20,10 +22,7 @@ namespace EmployeeManagementSystem.AdminSettings
     {
         await Shell.Current.GoToAsync("//Dashboard");
     }
-
-    public partial class AdminSettings : ContentPage
-    {
-        private static List<Employee> employees = new List<Employee>();
+    private static List<Employee> employees = new List<Employee>();
 
         public AdminSettings()
         {
@@ -128,5 +127,8 @@ namespace EmployeeManagementSystem.AdminSettings
                 employees.Remove(employeeToRemove);
             }
         }
+
     }
-}
+
+
+
