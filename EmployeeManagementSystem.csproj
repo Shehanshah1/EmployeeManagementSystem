@@ -64,43 +64,39 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Compile Update="LoginView\LoginView.xaml.cs">
+	  <Compile Update="Views\LoginView.xaml.cs">
 	    <DependentUpon>LoginView.xaml</DependentUpon>
 	  </Compile>
 	</ItemGroup>
 
 	<ItemGroup>
-	  <MauiXaml Update="AdminSettings\AdminSettings.xaml">
+	  <MauiXaml Update="Views\AdminSettings.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="CreateAccount\CreateAccount.xaml">
+	  <MauiXaml Update="Views\CreateAccount.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Dashboard\Dashboard.xaml">
+	  <MauiXaml Update="Views\Dashboard.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="EmployeeManagement\EmployeeManagement.xaml">
+	  <MauiXaml Update="Views\EmployeeManagement.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="ForgotPassword\ForgotPassword.xaml">
+	  <MauiXaml Update="Views\ForgotPassword.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="LeaveRequests\LeaveRequests.xaml">
+	  <MauiXaml Update="Views\LeaveRequests.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="LoginView\LoginView.xaml">
+	  <MauiXaml Update="Views\LoginView.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="ResetPassword\ResetPassword.xaml">
+	  <MauiXaml Update="Views\ResetPassword.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="UserSettings\UserSettings.xaml">
+	  <MauiXaml Update="Views\UserSettings.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	</ItemGroup>
-
-	<ItemGroup>
-	  <Folder Include="Views\" />
 	</ItemGroup>
 
 </Project>
