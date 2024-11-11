@@ -1,7 +1,7 @@
 namespace EmployeeManagementSystem.EmployeeManagement;
 using EmployeeManagementSystem.Dashboard;
 using EmployeeManagementSystem.LeaveRequests;
-using EmployeeManagementSystem.AdminSettings;
+using EmployeeManagementSystem.Models;
 using EmployeeManagementSystem.UserSettings;
 public partial class EmployeeManagement : ContentPage
 {

@@ -18,8 +18,7 @@ namespace EmployeeManagementSystem.Models
         [NotNull]
         public DateTime EndDate { get; set; }
 
-        public string? Reason { get; set; } = "";
-
+        public string Reason { get; set; }
         public string ApprovalStatus { get; set; } = "Pending";
     }
 }

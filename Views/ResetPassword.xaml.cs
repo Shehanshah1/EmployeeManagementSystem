@@ -15,6 +15,6 @@ public partial class ResetPassword : ContentPage
     private async void OnSubmitButtonClicked(object sender, EventArgs e)
     {
         // Navigate to ResetPassword after clicking submit
-        await Shell.Current.GoToAsync("//Login");
+        await Shell.Current.GoToAsync("//LoginView");
     }
 }

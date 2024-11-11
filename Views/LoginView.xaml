@@ -44,7 +44,7 @@
                                VerticalOptions="Center"
                                TextColor="White"
                                FontSize="Medium"/>
-                        <Entry 
+                        <Entry x:Name="emailEntry"
                             Grid.Column="1"
                             Placeholder="Enter your email..."
                             BackgroundColor="AliceBlue"
@@ -66,6 +66,7 @@
                                TextColor="White"
                                FontSize="Medium"/>
                         <Entry 
+                            x:Name="passwordEntry"
                             Grid.Column="1"
                             Placeholder="Enter your password here..."
                             BackgroundColor="AliceBlue"

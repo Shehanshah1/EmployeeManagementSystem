@@ -9,15 +9,15 @@
 
             <!-- Left Sidebar Background -->
             <BoxView 
-        Grid.Column="0"
-        Grid.RowSpan="6"
-        Color="#7664a9" />
+                Grid.Column="0"
+                Grid.RowSpan="6"
+                Color="#7664a9" />
 
             <!-- Right Column Background -->
             <BoxView 
-        Grid.Column="1"
-        Grid.RowSpan="6"
-        Color="#1a1c3d" />
+                Grid.Column="1"
+                Grid.RowSpan="6"
+                Color="#1a1c3d" />
 
             <!-- Sidebar Buttons and Logo -->
             <StackLayout Grid.Column="0" Padding="10" Spacing="20" Grid.RowSpan="7">
@@ -57,8 +57,7 @@
              BackgroundColor="#322f5c" 
              TextColor="White" 
              HorizontalOptions="FillAndExpand"
-             Grid.Row="3"
-            />
+             Grid.Row="3"/>
                 <Button 
              Text="Admin Settings" 
              FontSize="Small" 
@@ -68,13 +67,13 @@
              Grid.Row="4"
              Clicked="OnAdminSettingsButtonClicked"/>
                 <Button 
-Text="Log Out" 
-FontSize="Small" 
-BackgroundColor="SlateGray" 
-TextColor="White" 
-HorizontalOptions="FillAndExpand" 
-Grid.Row="5"
-Clicked="OnLogOutButtonClicked"/>
+            Text="Log Out" 
+            FontSize="Small" 
+            BackgroundColor="SlateGray" 
+            TextColor="White" 
+            HorizontalOptions="FillAndExpand" 
+            Grid.Row="5"
+            Clicked="OnLogOutButtonClicked"/>
 
                 <!-- Admin Label -->
                 <StackLayout Orientation="Horizontal" VerticalOptions="End" HorizontalOptions="FillAndExpand" Grid.Column="0" Grid.Row="6">
@@ -92,97 +91,92 @@ Clicked="OnLogOutButtonClicked"/>
             </StackLayout>
 
 
-            <Grid Grid.Column="2" Grid.RowSpan="6"
-      ColumnDefinitions="*,*,*" RowDefinitions=".2*,.2*, .2*, .2*, .2*, .2*">
-                <!-- Leave Requests Greeting -->
-
-                <Label Grid.Column="0" Grid.Row="0" Text="Leave Requests" Margin="20,0,0,20" HorizontalOptions="Start" VerticalOptions="End" FontSize="Large" FontAttributes="Bold" TextColor="White" />
+            <!-- Right Content Area -->
+            <Grid Grid.Column="1" Grid.RowSpan="6" ColumnDefinitions="*,*,*" RowDefinitions=".2*,.1*, .1*, .2*, .6*">
+                <!-- Employee Management Greeting -->
+                <Label Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" Text="Leave Requests" Margin="20,0,0,20" HorizontalOptions="Start" VerticalOptions="End" FontSize="Large" FontAttributes="Bold" TextColor="White" />
 
                 <!-- Divider Line -->
                 <Line 
-        Grid.ColumnSpan="3"
-        Stroke="White"
-        X1="0"
-        Y1="90"
-        X2="2000" 
-        Y2="90"/>
+                      Grid.ColumnSpan="3"
+                      Stroke="White"
+                      X1="0"
+                      Y1="90"
+                      X2="2000" 
+                      Y2="90"/>
 
-                <Entry
-        Grid.Column="0"
-        Grid.ColumnSpan="2"
-        WidthRequest="600"
-        Grid.Row="1"
-        Placeholder="Search by Employee ID or Name"
-        BackgroundColor="White" 
-        Margin="20,0,0,0"
-        HorizontalOptions="StartAndExpand"
-        VerticalOptions="StartAndExpand"
-        FontSize="Small"
-        TextColor="White" />
+                <!-- Search Fields -->
+                <HorizontalStackLayout Spacing="10" Grid.Row="1" Grid.ColumnSpan="3" HorizontalOptions="CenterAndExpand">
+                    <Entry
+                        Placeholder="Search by Employee ID or Name"
+                        BackgroundColor="#FFFFFF"
+                        TextColor="Black"
+                        WidthRequest="400"
+                        HeightRequest="60"/>
+                    <Entry
+                        Placeholder="Search by Status"
+                        BackgroundColor="#FFFFFF"
+                        TextColor="Black"
+                        Margin="70,0,0,0"
+                        WidthRequest="200"
+                        HeightRequest="60"/>
+                </HorizontalStackLayout>
 
-                <Entry
-       Grid.Column="2"
-       WidthRequest="300"
-       Grid.Row="1"
-       Placeholder="Search by Status"
-       BackgroundColor="White" 
-       HorizontalOptions="StartAndExpand"
-       VerticalOptions="StartAndExpand"
-       FontSize="Small"
-       TextColor="White" />
+                <!-- Leave Requests Table -->
+                <Label 
+                    Text="Leave Requests" 
+                    FontSize="Medium" 
+                    FontAttributes="Bold" 
+                    TextColor="White" 
+                    Margin="10,20,10,5" 
+                    Grid.ColumnSpan="3"
+                    Grid.Row="2"/>
 
-
-            </Grid>
-
-            <VerticalStackLayout Padding="10" Grid.Column="2" Grid.Row="1" Grid.RowSpan="6">
-
-
-                <!-- Navigation Buttons -->
-                <StackLayout Orientation="Horizontal" HorizontalOptions="Center" VerticalOptions="Start">
-                    <Button Text="Employee Records" Command="{Binding NavigateToEmployeeRecordsCommand}" Margin="20" />
-                    <Button Text="Departments" Command="{Binding NavigateToDepartmentsCommand}" Margin="20"/>
-                    <Button Text="Leave Requests" Command="{Binding NavigateToLeaveRequestsCommand}" Margin="20"/>
-                </StackLayout>
-
-                <!-- Table for Leave Requests -->
-                <Label Text="Leave Requests" 
-               FontSize="Medium" 
-               FontAttributes="Bold" 
-               Margin="10,20,10,5" />
-
-                <Border Stroke="Gray" StrokeThickness="2">
+                <Border Stroke="Gray" StrokeThickness="2" Grid.Row="3" Grid.ColumnSpan="3" Margin="20,0,20,0">
                     <CollectionView ItemsSource="{Binding LeaveRequests}" Margin="10">
                         <CollectionView.ItemTemplate>
                             <DataTemplate>
                                 <Grid Padding="10" ColumnDefinitions="*, *, *, *">
-                                    <Label Text="{Binding EmployeeName}" Grid.Column="0" />
-                                    <Label Text="{Binding LeaveType}" Grid.Column="1" />
-                                    <Label Text="{Binding StartDate, StringFormat='{0:MM/dd/yyyy}'}" Grid.Column="2" />
-                                    <Label Text="{Binding EndDate, StringFormat='{0:MM/dd/yyyy}'}" Grid.Column="3" />
+                                    <Label Text="{Binding EmployeeName}" Grid.Column="0" TextColor="White" />
+                                    <Label Text="{Binding LeaveType}" Grid.Column="1" TextColor="White" />
+                                    <Label Text="{Binding StartDate, StringFormat='{0:MM/dd/yyyy}'}" Grid.Column="2" TextColor="White" />
+                                    <Label Text="{Binding EndDate, StringFormat='{0:MM/dd/yyyy}'}" Grid.Column="3" TextColor="White" />
                                 </Grid>
                             </DataTemplate>
                         </CollectionView.ItemTemplate>
                     </CollectionView>
                 </Border>
 
-                <!-- Summary Information (if needed) -->
-                <StackLayout Margin="10">
-                    <Label Text="Employee Count: 5" FontAttributes="Bold" />
-                    <Label Text="Pending Leave Requests: 0" FontAttributes="Bold" />
-                </StackLayout>
-
-                <!-- Additional Details (Add/Edit/Delete leave requests) -->
-                <VerticalStackLayout>
-                    <Label Text="Manage Leave Requests" 
-                   FontSize="Medium" 
-                           HorizontalOptions="CenterAndExpand"
-                   FontAttributes="Bold" 
-                   Margin="10,20,10,5" />
-                    <Button Text="Add New Leave Request" Command="{Binding AddLeaveRequestCommand}" Margin="2" MaximumWidthRequest="200"/>
-                    <Button Text="Edit Selected Request" Command="{Binding EditLeaveRequestCommand}" Margin="2" MaximumWidthRequest="200" />
-                    <Button Text="Delete Selected Request" Command="{Binding DeleteLeaveRequestCommand}" Margin="2" MaximumWidthRequest="200"/>
+                <!-- Manage Leave Requests Buttons -->
+                <VerticalStackLayout Margin="10" Grid.ColumnSpan="3" Grid.Row="4" Grid.RowSpan="6">
+                    <Label 
+                        Text="Manage Leave Requests" 
+                        FontSize="Medium" 
+                        FontAttributes="Bold" 
+                        TextColor="White" 
+                        HorizontalOptions="CenterAndExpand"
+                        Margin="5"/>
+                    <Button 
+                        Text="Add New Leave Request" 
+                        BackgroundColor="#4CAF50" 
+                        TextColor="White" 
+                        WidthRequest="200"
+                        Margin="2"/>
+                    <Button 
+                        Text="Edit Selected Request" 
+                       
+                        BackgroundColor="#FF9800" 
+                        TextColor="White" 
+                        WidthRequest="200"
+                        Margin="2"/>
+                    <Button 
+                        Text="Delete Selected Request"
+                        BackgroundColor="#F44336" 
+                        TextColor="White" 
+                        WidthRequest="200"
+                        Margin="2"/>
                 </VerticalStackLayout>
-            </VerticalStackLayout>
+            </Grid>
         </Grid>
     </ScrollView>
 </ContentPage>
