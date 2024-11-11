@@ -1,27 +1,11 @@
+using EmployeeManagementSystem.Models;
+using Microsoft.Maui.Controls;
+using System.Collections.ObjectModel;
+using System.Linq;
+using System.Threading.Tasks;
+
 namespace EmployeeManagementSystem.AdminSettings
 {
-    using EmployeeManagementSystem.EmployeeManagement;
-    using EmployeeManagementSystem.LeaveRequests;
-    using EmployeeManagementSystem.Dashboard;
-    using EmployeeManagementSystem.UserSettings;
-    using System.Collections.ObjectModel;
-    using System.Linq;
-    using Microsoft.Maui.Controls;
-
-    public class Employee
-    {
-        public int Id { get; set; }
-        public string Name { get; set; }
-        public string Department { get; set; }
-    }
-
-    public class Department
-    {
-        public string Title { get; set; }
-        public int CurrentEmployees { get; set; }
-        public ObservableCollection<Employee> Employees { get; set; } = new ObservableCollection<Employee>();
-    }
-
     public partial class AdminSettings : ContentPage
     {
         public ObservableCollection<Employee> Employees { get; set; } = new ObservableCollection<Employee>();
@@ -30,7 +14,31 @@ namespace EmployeeManagementSystem.AdminSettings
         public AdminSettings()
         {
             InitializeComponent();
+            LoadEmployees();
             BindingContext = this;
+        }
+
+        private async void LoadEmployees()
+        {
+            var employeesFromDb = await App.Database.GetAllEmployeesAsync();
+            foreach (var emp in employeesFromDb)
+            {
+                Employees.Add(emp);
+
+                var existingDepartment = Departments.FirstOrDefault(d => d.DepartmentName == emp.Department);
+                if (existingDepartment != null)
+                {
+                    existingDepartment.Employees.Add(emp);
+                }
+                else
+                {
+                    Departments.Add(new Department
+                    {
+                        DepartmentName = emp.Department,
+                        Employees = new ObservableCollection<Employee> { emp }
+                    });
+                }
+            }
         }
 
         private async void OnLogOutButtonClicked(object sender, EventArgs e)
@@ -86,19 +94,19 @@ namespace EmployeeManagementSystem.AdminSettings
                 return;
             }
 
-            var newEmployee = new Employee { Id = id, Name = name, Department = department };
+            var newEmployee = new Employee { EmployeeID = id, Name = name, Department = department };
+            await App.Database.AddEmployeeAsync(newEmployee);
             Employees.Add(newEmployee);
             await DisplayAlert("Success", "Employee added successfully!", "OK");
 
-            var existingDepartment = Departments.FirstOrDefault(d => d.Title == department);
+            var existingDepartment = Departments.FirstOrDefault(d => d.DepartmentName == department);
             if (existingDepartment != null)
             {
                 existingDepartment.Employees.Add(newEmployee);
-                existingDepartment.CurrentEmployees++;
             }
             else
             {
-                Departments.Add(new Department { Title = department, CurrentEmployees = 1, Employees = new ObservableCollection<Employee> { newEmployee } });
+                Departments.Add(new Department { DepartmentName = department, Employees = new ObservableCollection<Employee> { newEmployee } });
             }
         }
 
@@ -112,24 +120,10 @@ namespace EmployeeManagementSystem.AdminSettings
             if (!string.IsNullOrWhiteSpace(name)) employee.Name = name;
 
             string department = await DisplayPromptAsync("Edit Employee", "Enter the employee's department:", initialValue: employee.Department);
-            if (!string.IsNullOrWhiteSpace(department) && department != employee.Department)
-            {
-                var oldDepartment = Departments.FirstOrDefault(d => d.Title == employee.Department);
-                oldDepartment?.Employees.Remove(employee);
-                if (oldDepartment != null) oldDepartment.CurrentEmployees--;
+            if (!string.IsNullOrWhiteSpace(department)) employee.Department = department;
 
-                employee.Department = department;
-                var newDepartment = Departments.FirstOrDefault(d => d.Title == department);
-                if (newDepartment != null)
-                {
-                    newDepartment.Employees.Add(employee);
-                    newDepartment.CurrentEmployees++;
-                }
-                else
-                {
-                    Departments.Add(new Department { Title = department, CurrentEmployees = 1, Employees = new ObservableCollection<Employee> { employee } });
-                }
-            }
+            await App.Database.UpdateEmployeeAsync(employee);
+            await DisplayAlert("Success", "Employee updated successfully!", "OK");
         }
 
         private async void OnDeleteEmployeeButtonClicked(object sender, EventArgs e)
@@ -141,16 +135,17 @@ namespace EmployeeManagementSystem.AdminSettings
             bool confirmed = await DisplayAlert("Delete Employee", "Are you sure you want to delete this employee?", "Yes", "No");
             if (confirmed)
             {
+                await App.Database.DeleteEmployeeAsync(employee.EmployeeID);
                 Employees.Remove(employee);
 
-                var department = Departments.FirstOrDefault(d => d.Title == employee.Department);
-                department?.Employees.Remove(employee);
-                if (department != null) department.CurrentEmployees--;
-
-                if (department != null && department.CurrentEmployees <= 0)
+                var department = Departments.FirstOrDefault(d => d.DepartmentName == employee.Department);
+                if (department != null)
                 {
-                    Departments.Remove(department);
+                    department.Employees.Remove(employee);
+                    if (department.Employees.Count == 0) Departments.Remove(department);
                 }
+
+                await DisplayAlert("Success", "Employee deleted successfully!", "OK");
             }
         }
     }

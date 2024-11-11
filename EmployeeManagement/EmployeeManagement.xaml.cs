@@ -8,6 +8,7 @@ public partial class EmployeeManagement : ContentPage
 	public EmployeeManagement()
 	{
 		InitializeComponent();
+
 	}
     private async void OnEmployeeManagementButtonClicked(object sender, EventArgs e)
     {
@@ -34,4 +35,5 @@ public partial class EmployeeManagement : ContentPage
     {
         await Shell.Current.GoToAsync("//UserSettings");
     }
+
 }

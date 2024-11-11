@@ -2,6 +2,7 @@ namespace EmployeeManagementSystem.LoginView;
 using EmployeeManagementSystem.Dashboard;
 using EmployeeManagementSystem.ForgotPassword;
 using EmployeeManagementSystem.CreateAccount;
+
 public partial class LoginView : ContentPage
 {
 	public LoginView()
