@@ -50,6 +50,7 @@ namespace EmployeeManagementSystem.LoginView
             string correctEmail = "user@example.com";
             string correctPassword = "password123";
 
+
             if (enteredEmail == correctEmail && enteredPassword == correctPassword)
             {
                 if (rememberMeCheckBox.IsChecked)
