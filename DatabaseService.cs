@@ -33,7 +33,7 @@ namespace EmployeeManagementSystem.Services
             var command = connection.CreateCommand();
             command.CommandText = @"
                 CREATE TABLE IF NOT EXISTS Employees (
-                    EmployeeID INTEGER UNIQUE PRIMARY KEY AUTOINCREMENT,
+                    EmployeeID INTEGER PRIMARY KEY AUTOINCREMENT,
                     Name TEXT NOT NULL,
                     Department TEXT,
                     Position TEXT,
@@ -41,7 +41,7 @@ namespace EmployeeManagementSystem.Services
                 );
 
                 CREATE TABLE IF NOT EXISTS Departments (
-                    DepartmentID INTEGER UNIQUE PRIMARY KEY AUTOINCREMENT,
+                    DepartmentID INTEGER PRIMARY KEY AUTOINCREMENT,
                     DepartmentName TEXT NOT NULL
                 );
 

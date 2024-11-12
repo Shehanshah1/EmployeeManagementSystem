@@ -9,7 +9,7 @@
         <VerticalStackLayout BackgroundColor="#7664a9">
 
             <!-- Header Section -->
-            <Grid BackgroundColor="#7664a9" HeightRequest="100">
+            <Grid BackgroundColor="#322f5c" HeightRequest="100">
                 <Label 
                     HorizontalOptions="Center"
                     VerticalOptions="Center"
@@ -23,21 +23,21 @@
                IsVisible="False"
                HorizontalOptions="Center"/>
             <!-- Content Section -->
-            <Grid BackgroundColor="White" Padding="30, 0, 30, 0">
+            <Grid BackgroundColor="#7664a9" Padding="30, 0, 30, 0">
                 <VerticalStackLayout>
 
                     <Label FontAttributes="Bold"
                            FontSize="Medium"
                            Text="Welcome!"
-                           TextColor="CadetBlue"/>
+                           TextColor="White"/>
                     <Label 
                         FontSize="Medium"
                         Text="Login to continue!"
-                        TextColor="CadetBlue"/>
+                        TextColor="White"/>
 
                     <!-- Email Entry -->
                     <Grid Margin="0,30,0,0" ColumnDefinitions=".2*,.8*">
-                        <RoundRectangle BackgroundColor="CadetBlue" 
+                        <RoundRectangle BackgroundColor="#322f5c" 
                                         CornerRadius="10"
                                         HeightRequest="45"
                                         WidthRequest="130"/>
@@ -52,13 +52,13 @@
                             Placeholder="Enter your email..."
                             BackgroundColor="AliceBlue"
                             VerticalOptions="Center"
-                            TextColor="Gray"
-                            Opacity=".5"/>
+                            TextColor="Black"
+                            Opacity=".9"/>
                     </Grid>
 
                     <!-- Password Entry -->
                     <Grid Margin="0,30,0,0" ColumnDefinitions=".2*,.6*,.2*">
-                        <RoundRectangle BackgroundColor="CadetBlue" 
+                        <RoundRectangle BackgroundColor="#322f5c" 
                                         CornerRadius="10"
                                         HeightRequest="45"
                                         WidthRequest="130"/>
@@ -75,9 +75,8 @@
                             BackgroundColor="AliceBlue"
                             IsPassword="True"
                             VerticalOptions="Center"
-                            TextColor="Gray"
-                            Opacity=".5"/>
-
+                            TextColor="Black"
+                            Opacity=".9"/>
 
                         <Button x:Name="showHidePasswordButton"
                     Text="Show"
@@ -97,7 +96,7 @@
 
                     <!-- Login Button -->
                     <Button               
-                        BackgroundColor="CadetBlue"
+                        BackgroundColor="#322f5c"
                         Text="Login"
                         TextColor="White"
                         HeightRequest="60"
@@ -113,12 +112,12 @@
                             HeightRequest="30"
                             MaximumWidthRequest="200"
                             TextColor="Blue"
-                            BackgroundColor="White"
+                            BackgroundColor="#7664a9"
                              Clicked="OnForgotPasswordButtonClicked"/>
 
                     <!-- Create Account Button -->
                     <Button    
-                        BackgroundColor="CadetBlue"
+                        BackgroundColor="#322f5c"
                         HeightRequest="60"
                         Text="Create a new account"
                         MaximumWidthRequest="200"
