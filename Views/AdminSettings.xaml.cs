@@ -25,6 +25,7 @@ namespace EmployeeManagementSystem.AdminSettings
             {
                 Employees.Add(emp);
 
+                // Add employee to department list
                 var existingDepartment = Departments.FirstOrDefault(d => d.DepartmentName == emp.Department);
                 if (existingDepartment != null)
                 {
@@ -41,11 +42,13 @@ namespace EmployeeManagementSystem.AdminSettings
             }
         }
 
+        // Logout Button
         private async void OnLogOutButtonClicked(object sender, EventArgs e)
         {
             await Shell.Current.GoToAsync("//LoginView");
         }
 
+        // Navigation Buttons
         private async void OnDashboardButtonClicked(object sender, EventArgs e)
         {
             await Shell.Current.GoToAsync("//Dashboard");
@@ -71,6 +74,7 @@ namespace EmployeeManagementSystem.AdminSettings
             await Shell.Current.GoToAsync("//UserSettings");
         }
 
+        // Add Employee
         private async void OnAddEmployeeButtonClicked(object sender, EventArgs e)
         {
             string idInput = await DisplayPromptAsync("New Employee", "Enter the employee's ID:");
@@ -94,11 +98,25 @@ namespace EmployeeManagementSystem.AdminSettings
                 return;
             }
 
-            var newEmployee = new Employee { EmployeeID = id, Name = name, Department = department };
+            string email = await DisplayPromptAsync("New Employee", "Enter the employee's email:");
+            if (string.IsNullOrWhiteSpace(email))
+            {
+                await DisplayAlert("Error", "Email cannot be empty.", "OK");
+                return;
+            }
+
+            string position = await DisplayPromptAsync("New Employee", "Enter the employee's position:");
+            if (string.IsNullOrWhiteSpace(position))
+            {
+                await DisplayAlert("Error", "Position cannot be empty.", "OK");
+                return;
+            }
+
+            var newEmployee = new Employee { EmployeeID = id, Name = name, Department = department, Email = email, Position = position };
             await App.Database.AddEmployeeAsync(newEmployee);
             Employees.Add(newEmployee);
-            await DisplayAlert("Success", "Employee added successfully!", "OK");
 
+            // Update Department Collection
             var existingDepartment = Departments.FirstOrDefault(d => d.DepartmentName == department);
             if (existingDepartment != null)
             {
@@ -108,8 +126,11 @@ namespace EmployeeManagementSystem.AdminSettings
             {
                 Departments.Add(new Department { DepartmentName = department, Employees = new ObservableCollection<Employee> { newEmployee } });
             }
+
+            await DisplayAlert("Success", "Employee added successfully!", "OK");
         }
 
+        // Edit Employee
         private async void OnEditEmployeeButtonClicked(object sender, EventArgs e)
         {
             var button = sender as Button;
@@ -126,27 +147,30 @@ namespace EmployeeManagementSystem.AdminSettings
             await DisplayAlert("Success", "Employee updated successfully!", "OK");
         }
 
+        // Delete Employee
         private async void OnDeleteEmployeeButtonClicked(object sender, EventArgs e)
         {
             var button = sender as Button;
             var employee = button?.BindingContext as Employee;
             if (employee == null) return;
 
-            bool confirmed = await DisplayAlert("Delete Employee", "Are you sure you want to delete this employee?", "Yes", "No");
-            if (confirmed)
+            bool confirm = await DisplayAlert("Delete Employee", $"Are you sure you want to delete {employee.Name}?", "Yes", "No");
+            if (!confirm) return;
+
+            await App.Database.DeleteEmployeeAsync(employee.EmployeeID);
+            Employees.Remove(employee);
+
+            // Remove from Department Collection
+            var department = Departments.FirstOrDefault(d => d.DepartmentName == employee.Department);
+            department?.Employees.Remove(employee);
+
+            // Clean up department if no employees left
+            if (department != null && !department.Employees.Any())
             {
-                await App.Database.DeleteEmployeeAsync(employee.EmployeeID);
-                Employees.Remove(employee);
-
-                var department = Departments.FirstOrDefault(d => d.DepartmentName == employee.Department);
-                if (department != null)
-                {
-                    department.Employees.Remove(employee);
-                    if (department.Employees.Count == 0) Departments.Remove(department);
-                }
-
-                await DisplayAlert("Success", "Employee deleted successfully!", "OK");
+                Departments.Remove(department);
             }
+
+            await DisplayAlert("Success", "Employee deleted successfully!", "OK");
         }
     }
 }

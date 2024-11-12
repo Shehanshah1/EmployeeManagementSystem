@@ -161,10 +161,12 @@
                         BackgroundColor="#4CAF50" 
                         TextColor="White" 
                         WidthRequest="200"
+                        Clicked="OnAddNewLeaveRequestButtonClicked"
                         Margin="2"/>
+                    
                     <Button 
                         Text="Edit Selected Request" 
-                       
+                        Clicked="OnEditSelectedRequestButtonClicked"
                         BackgroundColor="#FF9800" 
                         TextColor="White" 
                         WidthRequest="200"
@@ -173,6 +175,7 @@
                         Text="Delete Selected Request"
                         BackgroundColor="#F44336" 
                         TextColor="White" 
+                        Clicked="OnDeleteSelectedRequestClicked"
                         WidthRequest="200"
                         Margin="2"/>
                 </VerticalStackLayout>

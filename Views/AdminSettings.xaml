@@ -125,14 +125,10 @@
                             <Button Text="New Employee" 
                                     FontSize="Micro" 
                                     TextColor="White" 
-                                    Grid.Column="1" 
+                                    Grid.Column="2" 
                                     MaximumWidthRequest="160" 
                                     Clicked="OnAddEmployeeButtonClicked"/>
-                            <Button Text="Edit Employee" 
-                                    FontSize="Micro" 
-                                    TextColor="White" 
-                                    Grid.Column="2" 
-                                    MaximumWidthRequest="160"/>
+
                         </Grid>
 
                         <BoxView HeightRequest="1" 
@@ -156,11 +152,11 @@
                             <CollectionView.ItemTemplate>
                                 <DataTemplate>
                                     <Grid ColumnDefinitions="*,*,*,*,*,*" Padding="5" Margin="0,5,0,5">
-                                        <Label Text="{Binding Id}" TextColor="White" Grid.Column="0"/>
+                                        <Label Text="{Binding EmployeeID}" TextColor="White" Grid.Column="0"/>
                                         <Label Text="{Binding Name}" TextColor="White" Grid.Column="1"/>
                                         <Label Text="{Binding Department}" TextColor="White" Grid.Column="2"/>
                                         <Label Text="{Binding Email}" TextColor="White" Grid.Column="3"/>
-                                        <Label Text="{Binding Title}" TextColor="White" Grid.Column="4"/>
+                                        <Label Text="{Binding Position}" TextColor="White" Grid.Column="4"/>
 
                                         <!-- Edit and Delete Buttons -->
                                         <StackLayout Orientation="Horizontal" HorizontalOptions="Center" Grid.Column="5">
@@ -197,11 +193,6 @@
                             <Button Text="New Department" 
                                     FontSize="Micro" 
                                     TextColor="White" 
-                                    Grid.Column="1" 
-                                    MaximumWidthRequest="160"/>
-                            <Button Text="Edit Department" 
-                                    FontSize="Micro" 
-                                    TextColor="White" 
                                     Grid.Column="2" 
                                     MaximumWidthRequest="160"/>
                         </Grid>
@@ -221,7 +212,7 @@
                             <CollectionView.ItemTemplate>
                                 <DataTemplate>
                                     <Grid ColumnDefinitions="*,*" Padding="5" Margin="0,5,0,5">
-                                        <Label Text="{Binding Title}" TextColor="White" Grid.Column="0"/>
+                                        <Label Text="{Binding DepartmentName}" TextColor="White" Grid.Column="0"/>
                                         <Label Text="{Binding CurrentEmployees}" TextColor="White" Grid.Column="1"/>
                                     </Grid>
                                 </DataTemplate>
