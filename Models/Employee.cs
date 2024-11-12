@@ -1,9 +1,11 @@
-﻿using System.ComponentModel;
+﻿using SQLite;
+using System.ComponentModel;
 
 namespace EmployeeManagementSystem.Models
 {
     public class Employee : INotifyPropertyChanged
     {
+        
         private int _employeeID;
         private string _name;
         private string _department;
@@ -12,6 +14,7 @@ namespace EmployeeManagementSystem.Models
 
         public int EmployeeID
         {
+           
             get => _employeeID;
             set
             {

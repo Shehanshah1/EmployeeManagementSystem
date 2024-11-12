@@ -19,7 +19,6 @@ namespace EmployeeManagementSystem.Services
             _database.CreateTableAsync<Employee>().Wait();
         }
 
-      
 
         // SQLite database connection string
         private readonly string _connectionString = "Data Source=EmployeeManagement.db";
@@ -34,7 +33,7 @@ namespace EmployeeManagementSystem.Services
             var command = connection.CreateCommand();
             command.CommandText = @"
                 CREATE TABLE IF NOT EXISTS Employees (
-                    EmployeeID INTEGER PRIMARY KEY AUTOINCREMENT,
+                    EmployeeID INTEGER UNIQUE PRIMARY KEY AUTOINCREMENT,
                     Name TEXT NOT NULL,
                     Department TEXT,
                     Position TEXT,
@@ -42,7 +41,7 @@ namespace EmployeeManagementSystem.Services
                 );
 
                 CREATE TABLE IF NOT EXISTS Departments (
-                    DepartmentID INTEGER PRIMARY KEY AUTOINCREMENT,
+                    DepartmentID INTEGER UNIQUE PRIMARY KEY AUTOINCREMENT,
                     DepartmentName TEXT NOT NULL
                 );
 
@@ -127,18 +126,27 @@ namespace EmployeeManagementSystem.Services
             await command.ExecuteNonQueryAsync();
         }
 
-        // Delete an employee by ID
         public async Task DeleteEmployeeAsync(int employeeId)
         {
-            using var connection = new SqliteConnection(_connectionString);
-            await connection.OpenAsync();
+            try
+            {
+                using var connection = new SqliteConnection(_connectionString);
+                await connection.OpenAsync();
 
-            var command = connection.CreateCommand();
-            command.CommandText = "DELETE FROM Employees WHERE EmployeeID = $id";
-            command.Parameters.AddWithValue("$id", employeeId);
+                var command = connection.CreateCommand();
+                command.CommandText = "DELETE FROM Employees WHERE EmployeeID = $id";
+                command.Parameters.AddWithValue("$id", employeeId);
 
-            await command.ExecuteNonQueryAsync();
+                // Execute the command to delete the employee
+                await command.ExecuteNonQueryAsync();
+            }
+            catch (Exception ex)
+            {
+                // Handle exceptions (log, display error message, etc.)
+                Console.WriteLine($"Error deleting employee: {ex.Message}");
+            }
         }
+
 
         // --------------- Department Methods ---------------
 
