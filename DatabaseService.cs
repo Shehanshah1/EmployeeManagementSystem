@@ -1,194 +1,288 @@
 ﻿using EmployeeManagementSystem.Models;
-using System;
+using Microsoft.Data.Sqlite;
+using SQLite;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace EmployeeManagementSystem.Services
 {
     public class DatabaseService
     {
-        // In-memory storage for employees and leave requests
-        private readonly List<Employee> employees = new();
-        private readonly List<LeaveRequest> leaveRequests = new();
+        // SQLite database connection string
+        private readonly string _connectionString = "Data Source=EmployeeManagement.db";
+
+        public DatabaseService()
+        {
+            InitializeDatabase(); // Ensure tables are created when the service is instantiated
+        }
+
+        // Initialize the SQLite database with tables for employees, departments, and leave requests
+        private void InitializeDatabase()
+        {
+            using var connection = new SqliteConnection(_connectionString);
+            connection.Open();
+
+            var command = connection.CreateCommand();
+            command.CommandText = @"
+                CREATE TABLE IF NOT EXISTS Employees (
+                    EmployeeID INTEGER PRIMARY KEY AUTOINCREMENT,
+                    Name TEXT NOT NULL,
+                    Department TEXT,
+                    Position TEXT,
+                    Email TEXT
+                );
+
+                CREATE TABLE IF NOT EXISTS Departments (
+                    DepartmentID INTEGER PRIMARY KEY AUTOINCREMENT,
+                    DepartmentName TEXT NOT NULL
+                );
+
+                CREATE TABLE IF NOT EXISTS LeaveRequests (
+                    LeaveRequestID INTEGER PRIMARY KEY AUTOINCREMENT,
+                    EmployeeID INTEGER,
+                    StartDate TEXT,
+                    EndDate TEXT,
+                    Reason TEXT,
+                    ApprovalStatus TEXT,
+                    FOREIGN KEY (EmployeeID) REFERENCES Employees (EmployeeID)
+                );
+            ";
+            command.ExecuteNonQuery();
+        }
 
         // --------------- Employee Methods ---------------
 
-        /// <summary>
-        /// Retrieves all employees.
-        /// </summary>
-        /// <returns>A list of all employees.</returns>
-        public Task<List<Employee>> GetAllEmployeesAsync()
+        // Retrieve all employees from the database
+        public async Task<List<Employee>> GetAllEmployeesAsync()
         {
-            return Task.FromResult(employees);
-        }
+            var employees = new List<Employee>();
+            using var connection = new SqliteConnection(_connectionString);
+            await connection.OpenAsync();
 
-        /// <summary>
-        /// Retrieves a specific employee by ID.
-        /// </summary>
-        /// <param name="employeeId">The ID of the employee to retrieve.</param>
-        /// <returns>The employee object if found; otherwise, null.</returns>
-        public Task<Employee> GetEmployeeByIdAsync(int employeeId)
-        {
-            var employee = employees.FirstOrDefault(e => e.EmployeeID == employeeId);
-            return Task.FromResult(employee);
-        }
+            var command = connection.CreateCommand();
+            command.CommandText = "SELECT * FROM Employees";
 
-        /// <summary>
-        /// Adds a new employee.
-        /// </summary>
-        /// <param name="employee">The employee object to add.</param>
-        public Task AddEmployeeAsync(Employee employee)
-        {
-            // Assign a new ID if it doesn't exist
-            if (employee.EmployeeID == 0)
+            using var reader = await command.ExecuteReaderAsync();
+            while (await reader.ReadAsync())
             {
-                employee.EmployeeID = employees.Count > 0 ? employees.Max(e => e.EmployeeID) + 1 : 1;
+                employees.Add(new Employee
+                {
+                    EmployeeID = reader.GetInt32(0),
+                    Name = reader.GetString(1),
+                    Department = reader.GetString(2),
+                    Position = reader.GetString(3),
+                    Email = reader.GetString(4)
+                });
             }
-            employees.Add(employee);
-            return Task.CompletedTask;
+            return employees;
         }
 
-        /// <summary>
-        /// Updates an existing employee.
-        /// </summary>
-        /// <param name="employee">The employee object with updated data.</param>
-        public Task UpdateEmployeeAsync(Employee employee)
+        // Add a new employee to the database
+        public async Task AddEmployeeAsync(Employee employee)
         {
-            var existingEmployee = employees.FirstOrDefault(e => e.EmployeeID == employee.EmployeeID);
-            if (existingEmployee != null)
+            using var connection = new SqliteConnection(_connectionString);
+            await connection.OpenAsync();
+
+            var command = connection.CreateCommand();
+            command.CommandText = @"
+                INSERT INTO Employees (Name, Department, Position, Email)
+                VALUES ($name, $department, $position, $email)";
+            command.Parameters.AddWithValue("$name", employee.Name);
+            command.Parameters.AddWithValue("$department", employee.Department);
+            command.Parameters.AddWithValue("$position", employee.Position);
+            command.Parameters.AddWithValue("$email", employee.Email);
+
+            await command.ExecuteNonQueryAsync();
+        }
+
+        // Update an existing employee's details
+        public async Task UpdateEmployeeAsync(Employee employee)
+        {
+            using var connection = new SqliteConnection(_connectionString);
+            await connection.OpenAsync();
+
+            var command = connection.CreateCommand();
+            command.CommandText = @"
+                UPDATE Employees SET
+                    Name = $name,
+                    Department = $department,
+                    Position = $position,
+                    Email = $email
+                WHERE EmployeeID = $id";
+            command.Parameters.AddWithValue("$id", employee.EmployeeID);
+            command.Parameters.AddWithValue("$name", employee.Name);
+            command.Parameters.AddWithValue("$department", employee.Department);
+            command.Parameters.AddWithValue("$position", employee.Position);
+            command.Parameters.AddWithValue("$email", employee.Email);
+
+            await command.ExecuteNonQueryAsync();
+        }
+
+        // Delete an employee by ID
+        public async Task DeleteEmployeeAsync(int employeeId)
+        {
+            using var connection = new SqliteConnection(_connectionString);
+            await connection.OpenAsync();
+
+            var command = connection.CreateCommand();
+            command.CommandText = "DELETE FROM Employees WHERE EmployeeID = $id";
+            command.Parameters.AddWithValue("$id", employeeId);
+
+            await command.ExecuteNonQueryAsync();
+        }
+
+        // --------------- Department Methods ---------------
+
+        // Retrieve all departments from the database
+        public async Task<List<Department>> GetAllDepartmentsAsync()
+        {
+            var departments = new List<Department>();
+            using var connection = new SqliteConnection(_connectionString);
+            await connection.OpenAsync();
+
+            var command = connection.CreateCommand();
+            command.CommandText = "SELECT * FROM Departments";
+
+            using var reader = await command.ExecuteReaderAsync();
+            while (await reader.ReadAsync())
             {
-                existingEmployee.Name = employee.Name;
-                existingEmployee.Department = employee.Department;
-                existingEmployee.Position = employee.Position;
+                departments.Add(new Department
+                {
+                    DepartmentID = reader.GetInt32(0),
+                    DepartmentName = reader.GetString(1)
+                });
             }
-            return Task.CompletedTask;
+            return departments;
         }
 
-        /// <summary>
-        /// Deletes an employee by ID.
-        /// </summary>
-        /// <param name="employeeId">The ID of the employee to delete.</param>
-        public Task DeleteEmployeeAsync(int employeeId)
+        // Add a new department to the database
+        public async Task AddDepartmentAsync(Department department)
         {
-            var employee = employees.FirstOrDefault(e => e.EmployeeID == employeeId);
-            if (employee != null)
-            {
-                employees.Remove(employee);
-            }
-            return Task.CompletedTask;
+            using var connection = new SqliteConnection(_connectionString);
+            await connection.OpenAsync();
+
+            var command = connection.CreateCommand();
+            command.CommandText = @"
+                INSERT INTO Departments (DepartmentName)
+                VALUES ($name)";
+            command.Parameters.AddWithValue("$name", department.DepartmentName);
+
+            await command.ExecuteNonQueryAsync();
         }
 
-        /// <summary>
-        /// Searches employees by name or department.
-        /// </summary>
-        /// <param name="query">Search query.</param>
-        /// <returns>A list of employees matching the query.</returns>
-        public Task<List<Employee>> SearchEmployeesAsync(string query)
+        // Update an existing department's name
+        public async Task UpdateDepartmentAsync(Department department)
         {
-            var result = employees
-                .Where(e => e.Name.Contains(query, StringComparison.OrdinalIgnoreCase) ||
-                            e.Department.Contains(query, StringComparison.OrdinalIgnoreCase))
-                .ToList();
-            return Task.FromResult(result);
+            using var connection = new SqliteConnection(_connectionString);
+            await connection.OpenAsync();
+
+            var command = connection.CreateCommand();
+            command.CommandText = @"
+                UPDATE Departments SET
+                    DepartmentName = $name
+                WHERE DepartmentID = $id";
+            command.Parameters.AddWithValue("$id", department.DepartmentID);
+            command.Parameters.AddWithValue("$name", department.DepartmentName);
+
+            await command.ExecuteNonQueryAsync();
+        }
+
+        // Delete a department by ID
+        public async Task DeleteDepartmentAsync(int departmentId)
+        {
+            using var connection = new SqliteConnection(_connectionString);
+            await connection.OpenAsync();
+
+            var command = connection.CreateCommand();
+            command.CommandText = "DELETE FROM Departments WHERE DepartmentID = $id";
+            command.Parameters.AddWithValue("$id", departmentId);
+
+            await command.ExecuteNonQueryAsync();
         }
 
         // --------------- Leave Request Methods ---------------
 
-        /// <summary>
-        /// Retrieves all leave requests.
-        /// </summary>
-        /// <returns>A list of all leave requests.</returns>
-        public Task<List<LeaveRequest>> GetAllLeaveRequestsAsync()
+        // Retrieve all leave requests from the database
+        public async Task<List<LeaveRequest>> GetAllLeaveRequestsAsync()
         {
-            return Task.FromResult(leaveRequests);
-        }
+            var leaveRequests = new List<LeaveRequest>();
+            using var connection = new SqliteConnection(_connectionString);
+            await connection.OpenAsync();
 
-        /// <summary>
-        /// Retrieves a specific leave request by ID.
-        /// </summary>
-        /// <param name="leaveRequestId">The ID of the leave request to retrieve.</param>
-        /// <returns>The leave request object if found; otherwise, null.</returns>
-        public Task<LeaveRequest> GetLeaveRequestByIdAsync(int leaveRequestId)
-        {
-            var leaveRequest = leaveRequests.FirstOrDefault(lr => lr.LeaveRequestID == leaveRequestId);
-            return Task.FromResult(leaveRequest);
-        }
+            var command = connection.CreateCommand();
+            command.CommandText = "SELECT * FROM LeaveRequests";
 
-        /// <summary>
-        /// Adds a new leave request.
-        /// </summary>
-        /// <param name="leaveRequest">The leave request object to add.</param>
-        public Task AddLeaveRequestAsync(LeaveRequest leaveRequest)
-        {
-            // Assign a new ID if it doesn't exist
-            if (leaveRequest.LeaveRequestID == 0)
+            using var reader = await command.ExecuteReaderAsync();
+            while (await reader.ReadAsync())
             {
-                leaveRequest.LeaveRequestID = leaveRequests.Count > 0 ? leaveRequests.Max(lr => lr.LeaveRequestID) + 1 : 1;
+                leaveRequests.Add(new LeaveRequest
+                {
+                    LeaveRequestID = reader.GetInt32(0),
+                    EmployeeID = reader.GetInt32(1),
+                    StartDate = reader.GetDateTime(2),
+                    EndDate = reader.GetDateTime(3),
+                    Reason = reader.GetString(4),
+                    ApprovalStatus = reader.GetString(5)
+                });
             }
-            leaveRequests.Add(leaveRequest);
-            return Task.CompletedTask;
+            return leaveRequests;
         }
 
-        /// <summary>
-        /// Updates an existing leave request.
-        /// </summary>
-        /// <param name="leaveRequest">The leave request object with updated data.</param>
-        public Task UpdateLeaveRequestAsync(LeaveRequest leaveRequest)
+        // Add a new leave request to the database
+        public async Task AddLeaveRequestAsync(LeaveRequest leaveRequest)
         {
-            var existingRequest = leaveRequests.FirstOrDefault(lr => lr.LeaveRequestID == leaveRequest.LeaveRequestID);
-            if (existingRequest != null)
-            {
-                existingRequest.EmployeeID = leaveRequest.EmployeeID;
-                existingRequest.StartDate = leaveRequest.StartDate;
-                existingRequest.EndDate = leaveRequest.EndDate;
-                existingRequest.Reason = leaveRequest.Reason;
-                existingRequest.ApprovalStatus = leaveRequest.ApprovalStatus;
-            }
-            return Task.CompletedTask;
+            using var connection = new SqliteConnection(_connectionString);
+            await connection.OpenAsync();
+
+            var command = connection.CreateCommand();
+            command.CommandText = @"
+                INSERT INTO LeaveRequests (EmployeeID, StartDate, EndDate, Reason, ApprovalStatus)
+                VALUES ($employeeId, $startDate, $endDate, $reason, $status)";
+            command.Parameters.AddWithValue("$employeeId", leaveRequest.EmployeeID);
+            command.Parameters.AddWithValue("$startDate", leaveRequest.StartDate);
+            command.Parameters.AddWithValue("$endDate", leaveRequest.EndDate);
+            command.Parameters.AddWithValue("$reason", leaveRequest.Reason);
+            command.Parameters.AddWithValue("$status", leaveRequest.ApprovalStatus);
+
+            await command.ExecuteNonQueryAsync();
         }
 
-        /// <summary>
-        /// Deletes a leave request by ID.
-        /// </summary>
-        /// <param name="leaveRequestId">The ID of the leave request to delete.</param>
-        public Task DeleteLeaveRequestAsync(int leaveRequestId)
+        // Update an existing leave request's details
+        public async Task UpdateLeaveRequestAsync(LeaveRequest leaveRequest)
         {
-            var leaveRequest = leaveRequests.FirstOrDefault(lr => lr.LeaveRequestID == leaveRequestId);
-            if (leaveRequest != null)
-            {
-                leaveRequests.Remove(leaveRequest);
-            }
-            return Task.CompletedTask;
+            using var connection = new SqliteConnection(_connectionString);
+            await connection.OpenAsync();
+
+            var command = connection.CreateCommand();
+            command.CommandText = @"
+                UPDATE LeaveRequests SET
+                    EmployeeID = $employeeId,
+                    StartDate = $startDate,
+                    EndDate = $endDate,
+                    Reason = $reason,
+                    ApprovalStatus = $status
+                WHERE LeaveRequestID = $id";
+            command.Parameters.AddWithValue("$id", leaveRequest.LeaveRequestID);
+            command.Parameters.AddWithValue("$employeeId", leaveRequest.EmployeeID);
+            command.Parameters.AddWithValue("$startDate", leaveRequest.StartDate);
+            command.Parameters.AddWithValue("$endDate", leaveRequest.EndDate);
+            command.Parameters.AddWithValue("$reason", leaveRequest.Reason);
+            command.Parameters.AddWithValue("$status", leaveRequest.ApprovalStatus);
+
+            await command.ExecuteNonQueryAsync();
         }
 
-        /// <summary>
-        /// Searches leave requests by employee name or status.
-        /// </summary>
-        /// <param name="query">Search query.</param>
-        /// <returns>A list of leave requests matching the query.</returns>
-        public Task<List<LeaveRequest>> SearchLeaveRequestsAsync(string query)
+        // Delete a leave request by ID
+        public async Task DeleteLeaveRequestAsync(int leaveRequestId)
         {
-            var result = leaveRequests
-                .Where(lr => lr.Reason.Contains(query, StringComparison.OrdinalIgnoreCase) ||
-                             lr.ApprovalStatus.Contains(query, StringComparison.OrdinalIgnoreCase))
-                .ToList();
-            return Task.FromResult(result);
-        }
+            using var connection = new SqliteConnection(_connectionString);
+            await connection.OpenAsync();
 
-        /// <summary>
-        /// Updates the approval status of a leave request.
-        /// </summary>
-        /// <param name="leaveRequestId">ID of the leave request.</param>
-        /// <param name="status">New status (e.g., "Approved", "Rejected").</param>
-        public Task UpdateLeaveRequestStatusAsync(int leaveRequestId, string status)
-        {
-            var leaveRequest = leaveRequests.FirstOrDefault(lr => lr.LeaveRequestID == leaveRequestId);
-            if (leaveRequest != null)
-            {
-                leaveRequest.ApprovalStatus = status;
-            }
-            return Task.CompletedTask;
+            var command = connection.CreateCommand();
+            command.CommandText = "DELETE FROM LeaveRequests WHERE LeaveRequestID = $id";
+            command.Parameters.AddWithValue("$id", leaveRequestId);
+
+            await command.ExecuteNonQueryAsync();
         }
     }
 }

@@ -5,8 +5,22 @@ namespace EmployeeManagementSystem.Models
 {
     public class Department : INotifyPropertyChanged
     {
+        private int _departmentId;
         private string _departmentName;
         private ObservableCollection<Employee> _employees;
+
+        public int DepartmentID
+        {
+            get => _departmentId;
+            set
+            {
+                if (_departmentId != value)
+                {
+                    _departmentId = value;
+                    OnPropertyChanged(nameof(DepartmentID));
+                }
+            }
+        }
 
         public string DepartmentName
         {
@@ -34,13 +48,20 @@ namespace EmployeeManagementSystem.Models
             }
         }
 
-        public string CurrentEmployees => Employees?.Count.ToString() ?? "0";
+        public string CurrentEmployees => Employees.Count.ToString();
 
         public event PropertyChangedEventHandler PropertyChanged;
 
         protected void OnPropertyChanged(string propertyName)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        // Constructor to initialize the department with an empty employee list
+        public Department()
+        {
+            _employees = new ObservableCollection<Employee>();
+            _employees.CollectionChanged += (s, e) => OnPropertyChanged(nameof(CurrentEmployees));
         }
     }
 }
