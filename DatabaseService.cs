@@ -1,4 +1,5 @@
-﻿using EmployeeManagementSystem.Models;
+﻿
+using EmployeeManagementSystem.Models;
 using Microsoft.Data.Sqlite;
 using SQLite;
 using System.Collections.Generic;
@@ -8,13 +9,21 @@ namespace EmployeeManagementSystem.Services
 {
     public class DatabaseService
     {
-        // SQLite database connection string
-        private readonly string _connectionString = "Data Source=EmployeeManagement.db";
+        private readonly SQLiteAsyncConnection _database;
+
 
         public DatabaseService()
         {
-            InitializeDatabase(); // Ensure tables are created when the service is instantiated
+            string dbPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "employees.db3");
+            _database = new SQLiteAsyncConnection(dbPath);
+            _database.CreateTableAsync<Employee>().Wait();
         }
+
+      
+
+        // SQLite database connection string
+        private readonly string _connectionString = "Data Source=EmployeeManagement.db";
+
 
         // Initialize the SQLite database with tables for employees, departments, and leave requests
         private void InitializeDatabase()
@@ -284,5 +293,6 @@ namespace EmployeeManagementSystem.Services
 
             await command.ExecuteNonQueryAsync();
         }
+
     }
 }

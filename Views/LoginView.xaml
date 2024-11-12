@@ -6,10 +6,10 @@
              Shell.NavBarIsVisible="False">
 
     <ScrollView>
-        <VerticalStackLayout BackgroundColor="White">
+        <VerticalStackLayout BackgroundColor="#7664a9">
 
             <!-- Header Section -->
-            <Grid BackgroundColor="CadetBlue" HeightRequest="100">
+            <Grid BackgroundColor="#7664a9" HeightRequest="100">
                 <Label 
                     HorizontalOptions="Center"
                     VerticalOptions="Center"
@@ -18,7 +18,10 @@
                     Text="EMPLOYEE MANAGEMENT SYSTEM"
                     TextColor="White"/>
             </Grid>
-
+            <Label x:Name="errorMessageLabel"
+               TextColor="Red"
+               IsVisible="False"
+               HorizontalOptions="Center"/>
             <!-- Content Section -->
             <Grid BackgroundColor="White" Padding="30, 0, 30, 0">
                 <VerticalStackLayout>
@@ -54,7 +57,7 @@
                     </Grid>
 
                     <!-- Password Entry -->
-                    <Grid Margin="0,30,0,0" ColumnDefinitions=".2*,.8*">
+                    <Grid Margin="0,30,0,0" ColumnDefinitions=".2*,.6*,.2*">
                         <RoundRectangle BackgroundColor="CadetBlue" 
                                         CornerRadius="10"
                                         HeightRequest="45"
@@ -74,7 +77,23 @@
                             VerticalOptions="Center"
                             TextColor="Gray"
                             Opacity=".5"/>
+
+
+                        <Button x:Name="showHidePasswordButton"
+                    Text="Show"
+                                WidthRequest="100"
+                    Clicked="OnShowHidePasswordButtonClicked"
+                                Grid.Column="2"/>
+                        
                     </Grid>
+                    <HorizontalStackLayout>
+                        <CheckBox x:Name="rememberMeCheckBox" IsChecked="False" HorizontalOptions="Center" Margin="525,20,0,0" Color="Gray"/>
+                        <Label Text="Remember Me" TextColor="Black" Margin="0,20,0,0"
+                           HorizontalOptions="Center"
+               VerticalTextAlignment="Center"
+                               VerticalOptions="Center"
+               FontSize="14"/>
+                    </HorizontalStackLayout>
 
                     <!-- Login Button -->
                     <Button               
@@ -82,8 +101,9 @@
                         Text="Login"
                         TextColor="White"
                         HeightRequest="60"
-                        Margin="0,60,0,0"
+                        Margin="0,20,0,0"
                         MaximumWidthRequest="150"
+                        x:Name="loginButton"
                         Clicked="OnLoginButtonClicked"/>
 
                     <!-- Forgot Password Link -->
@@ -103,7 +123,7 @@
                         Text="Create a new account"
                         MaximumWidthRequest="200"
                         TextColor="White"
-                        Margin="0,30,0,30"
+                        Margin="0,20,0,40"
                         Clicked="OnCreateAccountButtonClicked"/>
 
                 </VerticalStackLayout>

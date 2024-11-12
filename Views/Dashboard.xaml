@@ -119,38 +119,62 @@
                 FontSize="Medium"
                 TextColor="White" />
 
-                <!-- Employee Overview Card -->
-                <Frame Grid.Column="0" 
-                   Grid.Row="2"
-                   Padding="10" 
-                   Margin="100,80,20,20"
-                   VerticalOptions="StartAndExpand"
-                   HorizontalOptions="StartAndExpand"
-                   BackgroundColor="#6e5f9e" 
-                   CornerRadius="20" 
-                   HasShadow="False">
+                <!-- Employee Overview Section -->
+                <Frame Grid.Column="0" Grid.Row="2"
+                       Padding="10"
+                       Margin="20,20,20,20"
+                       BackgroundColor="#6e5f9e"
+                       CornerRadius="20">
                     <StackLayout>
-                        <Label Text="Employee Overview" FontSize="Medium" FontAttributes="Bold" TextColor="White" HorizontalOptions="Start" />
+                        <Label Text="Employee Overview" FontSize="Medium" FontAttributes="Bold" TextColor="White" />
                         <BoxView HeightRequest="1" BackgroundColor="White" Margin="0,10,0,10" />
-                        <Label Text="Total employees: 5" FontSize="Small" TextColor="White" Margin="10,0,0,0" />
-                        <Label Text="Total departments: 5" FontSize="Small" TextColor="White" Margin="10,0,0,0" />
+
+                        <!-- Dynamic List of Employees -->
+                        <CollectionView ItemsSource="{Binding Departments[0].Employees}">
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate>
+                                    <StackLayout Orientation="Vertical" Padding="5">
+                                        <Label Text="{Binding Name}" TextColor="White" FontSize="Small" />
+                                        <Label Text="{Binding Position}" TextColor="Gray" FontSize="Micro" />
+                                    </StackLayout>
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
                     </StackLayout>
                 </Frame>
 
-                <!-- Leave Requests Overview Card -->
-                <Frame Grid.Column="1" Grid.Row="2" Padding="10" BackgroundColor="#6e5f9e" CornerRadius="20" HasShadow="False"
-                       HorizontalOptions="StartAndExpand" VerticalOptions="StartAndExpand"
-                       Margin="100,80,20,20">
+                <!-- Department Overview Section -->
+                <Frame Grid.Column="1" Grid.Row="2"
+                       Padding="10"
+                       Margin="20,20,20,20"
+                       BackgroundColor="#6e5f9e"
+                       CornerRadius="20">
                     <StackLayout>
-                        <Label Text="Leave Requests Overview" FontSize="Medium" FontAttributes="Bold" TextColor="White" HorizontalOptions="Start" />
+                        <Label Text="Departments Overview" FontSize="Medium" FontAttributes="Bold" TextColor="White" />
                         <BoxView HeightRequest="1" BackgroundColor="White" Margin="0,10,0,10" />
 
-                        <!-- Leave Requests Buttons -->
+                        <!-- Dynamic List of Departments -->
+                        <CollectionView ItemsSource="{Binding Departments}">
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate>
+                                    <StackLayout Orientation="Vertical" Padding="5">
+                                        <Label Text="{Binding DepartmentName}" TextColor="White" FontSize="Small" />
+                                        <Label Text="Employees: {Binding CurrentEmployees}" TextColor="Gray" FontSize="Micro" />
+                                    </StackLayout>
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
+                    </StackLayout>
+                </Frame>
+
+                <!-- Leave Requests Buttons 
                         <Button Text="Leave request" BackgroundColor="#8574b8" TextColor="White" FontSize="Micro" HorizontalOptions="FillAndExpand" Margin="0,2,0,0" MaximumHeightRequest="60" />
                         <Button Text="Leave request" BackgroundColor="#8574b8" TextColor="White" FontSize="Micro" HorizontalOptions="FillAndExpand" Margin="0,2,0,0" MaximumHeightRequest="60" />
                         <Button Text="Leave request" BackgroundColor="#8574b8" TextColor="White" FontSize="Micro" HorizontalOptions="FillAndExpand" Margin="0,2,0,0" MaximumHeightRequest="60" />
                     </StackLayout>
                 </Frame>
+                -->
+                
             </Grid>
         </Grid>
     </ScrollView>

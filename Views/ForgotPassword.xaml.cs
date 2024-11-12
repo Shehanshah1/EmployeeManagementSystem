@@ -1,5 +1,6 @@
 using System.ComponentModel;
 using System.Text.RegularExpressions;
+using EmployeeManagementSystem.Services; // Assuming your DB Service is here
 using EmployeeManagementSystem.LoginView;
 
 namespace EmployeeManagementSystem.ForgotPassword;
@@ -40,6 +41,15 @@ public partial class ForgotPassword : ContentPage, INotifyPropertyChanged
             return;
         }
 
+        // Check if email exists in the database
+        var emailExists = await CheckIfEmailExists(Email);
+        if (!emailExists)
+        {
+            statusLabel.Text = "Email not found. Please enter a registered email.";
+            statusLabel.IsVisible = true;
+            return;
+        }
+
         statusLabel.IsVisible = false;
         await DisplayAlert("Success", $"An email has been sent to {Email} for password reset.", "OK");
         await Shell.Current.GoToAsync("//ResetPassword");
@@ -50,6 +60,21 @@ public partial class ForgotPassword : ContentPage, INotifyPropertyChanged
     {
         var emailPattern = @"^[^@\s]+@[^@\s]+\.[^@\s]+$";
         return Regex.IsMatch(email, emailPattern);
+    }
+
+    // Check if email exists in the database
+    private async Task<bool> CheckIfEmailExists(string email)
+    {
+        try
+        {
+            var user = await App.Database.GetAllEmployeesAsync();
+            return user != null;
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error checking email: {ex.Message}");
+            return false;
+        }
     }
 
     // Implement INotifyPropertyChanged

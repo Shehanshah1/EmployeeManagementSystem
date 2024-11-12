@@ -57,7 +57,6 @@ namespace EmployeeManagementSystem.Models
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        // Constructor to initialize the department with an empty employee list
         public Department()
         {
             _employees = new ObservableCollection<Employee>();
