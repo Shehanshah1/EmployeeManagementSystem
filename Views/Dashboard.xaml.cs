@@ -4,43 +4,40 @@ using EmployeeManagementSystem.Models;
 
 namespace EmployeeManagementSystem.Dashboard
 {
-    public partial class Dashboard : ContentPage, INotifyPropertyChanged
+    public partial class Dashboard : ContentPage
     {
-        private ObservableCollection<Department> _departments;
-
-        public ObservableCollection<Department> Departments
-        {
-            get => _departments;
-            set
-            {
-                if (_departments != value)
-                {
-                    _departments = value;
-                    OnPropertyChanged(nameof(Departments));
-                }
-            }
-        }
+        public ObservableCollection<Employee> Employees { get; set; } = new ObservableCollection<Employee>();
+        public ObservableCollection<Department> Departments { get; set; } = new ObservableCollection<Department>();
 
         public Dashboard()
         {
             InitializeComponent();
-            LoadData();
+            LoadDashboardData();
             BindingContext = this;
         }
 
-        private void LoadData()
+        private async void LoadDashboardData()
         {
-            // Sample data to simulate loading actual data
-            Departments = new ObservableCollection<Department>
+            var employeesFromDb = await App.Database.GetAllEmployeesAsync();
+            foreach (var emp in employeesFromDb)
             {
-                new Department { DepartmentID = 1, DepartmentName = "HR" },
-                new Department { DepartmentID = 2, DepartmentName = "Engineering" }
-            };
+                Employees.Add(emp);
 
-            // Add employees to the departments
-            Departments[0].Employees.Add(new Employee { EmployeeID = 1, Name = "Alice", Department = "HR", Position = "Manager" });
-            Departments[1].Employees.Add(new Employee { EmployeeID = 2, Name = "Bob", Department = "Engineering", Position = "Engineer" });
-            Departments[1].Employees.Add(new Employee { EmployeeID = 3, Name = "Charlie", Department = "Engineering", Position = "Senior Engineer" });
+                // Ensure department consistency
+                var existingDepartment = Departments.FirstOrDefault(d => d.DepartmentName == emp.Department);
+                if (existingDepartment != null)
+                {
+                    existingDepartment.Employees.Add(emp);
+                }
+                else
+                {
+                    Departments.Add(new Department
+                    {
+                        DepartmentName = emp.Department,
+                        Employees = new ObservableCollection<Employee> { emp }
+                    });
+                }
+            }
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
