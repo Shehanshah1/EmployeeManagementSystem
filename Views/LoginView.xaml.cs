@@ -1,12 +1,10 @@
-using EmployeeManagementSystem.Dashboard;
-using EmployeeManagementSystem.ForgotPassword;
-using EmployeeManagementSystem.CreateAccount;
+
 using System.Text.RegularExpressions;
 using Microsoft.Maui.Controls;
 using System;
 using System.Threading.Tasks;
 
-namespace EmployeeManagementSystem.LoginView
+namespace EmployeeManagementSystem.Views
 {
     public partial class LoginView : ContentPage
     {
@@ -62,7 +60,7 @@ namespace EmployeeManagementSystem.LoginView
                     ClearSavedEmail();
                 }
 
-                await Shell.Current.GoToAsync("//Dashboard");
+                await App.NavigateToPage(new Dashboard());
             }
             else
             {
@@ -74,16 +72,17 @@ namespace EmployeeManagementSystem.LoginView
             loginButton.IsEnabled = true;
         }
 
-        private async void OnForgotPasswordButtonClicked(object sender, EventArgs e)
-        {
-            await Shell.Current.GoToAsync("//ForgotPassword");
-        }
-
         private async void OnCreateAccountButtonClicked(object sender, EventArgs e)
         {
-            await Shell.Current.GoToAsync("//CreateAccount");
+            await App.NavigateToPage(new CreateAccount());
         }
 
+
+
+        private async void OnForgotPasswordButtonClicked(object sender, EventArgs e)
+        {
+            await App.NavigateToPage(new ForgotPassword());
+        }
         private void OnShowHidePasswordButtonClicked(object sender, EventArgs e)
         {
             _isPasswordVisible = !_isPasswordVisible;

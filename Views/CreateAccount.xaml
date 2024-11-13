@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="EmployeeManagementSystem.CreateAccount.CreateAccount"
+             x:Class="EmployeeManagementSystem.Views.CreateAccount"
              Title="CreateAccount"
-             Shell.NavBarIsVisible="False">
+             Shell.NavBarIsVisible="False"
+             MinimumHeightRequest="600"
+             MinimumWidthRequest="1200">
     <ScrollView>
     <VerticalStackLayout
         BackgroundColor="#7664a9">
@@ -14,6 +16,7 @@
             FontSize="Header"
             FontAttributes="Bold"
             Margin="10"/>
+        
             <!-- Name Entry -->
             <Grid Margin="0,10,0,0" ColumnDefinitions=".2*,.4*, .2*, .4*">
                 <RoundRectangle BackgroundColor="#1a1c3d" 

@@ -4,7 +4,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace EmployeeManagementSystem.AdminSettings
+namespace EmployeeManagementSystem.Views
 {
     public partial class AdminSettings : ContentPage
     {
@@ -42,36 +42,33 @@ namespace EmployeeManagementSystem.AdminSettings
             }
         }
 
-        // Logout Button
-        private async void OnLogOutButtonClicked(object sender, EventArgs e)
-        {
-            await Shell.Current.GoToAsync("//LoginView");
-        }
 
         // Navigation Buttons
-        private async void OnDashboardButtonClicked(object sender, EventArgs e)
-        {
-            await Shell.Current.GoToAsync("//Dashboard");
-        }
-
         private async void OnEmployeeManagementButtonClicked(object sender, EventArgs e)
         {
-            await Shell.Current.GoToAsync("//EmployeeManagement");
+            await App.NavigateToPage(new EmployeeManagement());
         }
 
         private async void OnLeaveRequestsButtonClicked(object sender, EventArgs e)
         {
-            await Shell.Current.GoToAsync("//LeaveRequests");
+            await App.NavigateToPage(new LeaveRequests());
         }
 
-        private async void OnAdminSettingsButtonClicked(object sender, EventArgs e)
-        {
-            await Shell.Current.GoToAsync("//AdminSettings");
-        }
 
         private async void OnUserSettingsButtonClicked(object sender, EventArgs e)
         {
-            await Shell.Current.GoToAsync("//UserSettings");
+            await App.NavigateToPage(new UserSettings());
+        }
+
+        private async void OnLogOutButtonClicked(object sender, EventArgs e)
+        {
+            // Navigate back to the LoginView
+            await App.NavigateToPage(new LoginView());
+        }
+
+        private async void OnDashboardButtonClicked(object sender, EventArgs e)
+        {
+            await App.NavigateToPage(new Dashboard());
         }
 
         // Add Employee

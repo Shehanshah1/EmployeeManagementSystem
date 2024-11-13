@@ -1,9 +1,11 @@
 ﻿
 using EmployeeManagementSystem.Models;
 using Microsoft.Data.Sqlite;
+using Microsoft.Maui.Controls;
 using SQLite;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+
 
 namespace EmployeeManagementSystem.Services
 {
@@ -14,7 +16,7 @@ namespace EmployeeManagementSystem.Services
 
         public DatabaseService()
         {
-            string dbPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "employees.db3");
+          string dbPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "employees.db3");
             _database = new SQLiteAsyncConnection(dbPath);
             _database.CreateTableAsync<Employee>().Wait();
         }

@@ -1,38 +1,41 @@
-namespace EmployeeManagementSystem.UserSettings;
-using EmployeeManagementSystem.EmployeeManagement;
-using EmployeeManagementSystem.LeaveRequests;
-using EmployeeManagementSystem.AdminSettings;
-using EmployeeManagementSystem.Dashboard;
-
-public partial class UserSettings : ContentPage
+namespace EmployeeManagementSystem.Views
 {
-	public UserSettings()
-	{
-		InitializeComponent();
-	}
-    private async void OnEmployeeManagementButtonClicked(object sender, EventArgs e)
+    public partial class UserSettings : ContentPage
     {
-        await Shell.Current.GoToAsync("//EmployeeManagement");
-    }
+        public UserSettings()
+        {
+            InitializeComponent();
+        }
 
-    private async void OnLeaveRequestsButtonClicked(object sender, EventArgs e)
-    {
-        await Shell.Current.GoToAsync("//LeaveRequests");
+        private async void OnEmployeeManagementButtonClicked(object sender, EventArgs e)
+        {
+            await App.NavigateToPage(new EmployeeManagement());
+        }
+
+        private async void OnLeaveRequestsButtonClicked(object sender, EventArgs e)
+        {
+            await App.NavigateToPage(new LeaveRequests());
+        }
+
+        private async void OnAdminSettingsButtonClicked(object sender, EventArgs e)
+        {
+            await App.NavigateToPage(new AdminSettings());
+        }
+
+        private async void OnUserSettingsButtonClicked(object sender, EventArgs e)
+        {
+            await App.NavigateToPage(new UserSettings());
+        }
+
+        private async void OnLogOutButtonClicked(object sender, EventArgs e)
+        {
+            // Navigate back to the LoginView
+            await App.NavigateToPage(new LoginView());
+        }
+
+        private async void OnDashboardButtonClicked(object sender, EventArgs e)
+        {
+            await App.NavigateToPage(new Dashboard());
+        }
     }
-    private async void OnAdminSettingsButtonClicked(object sender, EventArgs e)
-    {
-        await Shell.Current.GoToAsync("//AdminSettings");
-    }
-    private async void OnUserSettingsButtonClicked(object sender, EventArgs e)
-    {
-        await Shell.Current.GoToAsync("//UserSettings");
-    }
-    private async void OnLogOutButtonClicked(object sender, EventArgs e)
-    {
-        await Shell.Current.GoToAsync("//LoginView");
-    }
-    private async void OnDashboardButtonClicked(object sender, EventArgs e)
-    {
-        await Shell.Current.GoToAsync("//Dashboard");
-    }   
 }

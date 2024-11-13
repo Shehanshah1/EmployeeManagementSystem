@@ -1,9 +1,9 @@
 using System.ComponentModel;
 using System.Text.RegularExpressions;
 using EmployeeManagementSystem.Services; // Assuming your DB Service is here
-using EmployeeManagementSystem.LoginView;
 
-namespace EmployeeManagementSystem.ForgotPassword;
+
+namespace EmployeeManagementSystem.Views;
 
 public partial class ForgotPassword : ContentPage, INotifyPropertyChanged
 {
@@ -28,7 +28,7 @@ public partial class ForgotPassword : ContentPage, INotifyPropertyChanged
     // Navigate Back to Login Page
     private async void OnBackButtonClicked(object sender, EventArgs e)
     {
-        await Shell.Current.GoToAsync("//LoginView");
+        await App.GoBack();
     }
 
     // Handle Submit Button Click
@@ -52,7 +52,7 @@ public partial class ForgotPassword : ContentPage, INotifyPropertyChanged
 
         statusLabel.IsVisible = false;
         await DisplayAlert("Success", $"An email has been sent to {Email} for password reset.", "OK");
-        await Shell.Current.GoToAsync("//ResetPassword");
+        await App.NavigateToPage(new ResetPassword());
     }
 
     // Email Validation Method

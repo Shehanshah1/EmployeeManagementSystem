@@ -2,7 +2,7 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using EmployeeManagementSystem.Models;
 
-namespace EmployeeManagementSystem.Dashboard
+namespace EmployeeManagementSystem.Views
 {
     public partial class Dashboard : ContentPage
     {
@@ -49,25 +49,25 @@ namespace EmployeeManagementSystem.Dashboard
     
     private async void OnEmployeeManagementButtonClicked(object sender, EventArgs e)
         {
-            await Shell.Current.GoToAsync("//EmployeeManagement");
+            await App.NavigateToPage(new EmployeeManagement()); ;
         }
 
         private async void OnLeaveRequestsButtonClicked(object sender, EventArgs e)
         {
-            await Shell.Current.GoToAsync("//LeaveRequests");
+            await App.NavigateToPage(new LeaveRequests());
         }
         private async void OnAdminSettingsButtonClicked(object sender, EventArgs e)
         {
-            await Shell.Current.GoToAsync("//AdminSettings");
+            await App.NavigateToPage(new AdminSettings());
         }
         private async void OnUserSettingsButtonClicked(object sender, EventArgs e)
         {
-            await Shell.Current.GoToAsync("//UserSettings");
+            await App.NavigateToPage(new UserSettings());
         }
 
         private async void OnLogOutButtonClicked(object sender, EventArgs e)
         {
-            await Shell.Current.GoToAsync("//LoginView");
+            await App.NavigateToPage(new LoginView());
         }
     }
 }

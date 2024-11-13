@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="EmployeeManagementSystem.LoginView.LoginView"
+             x:Class="EmployeeManagementSystem.Views.LoginView"
              Title=""
-             Shell.NavBarIsVisible="False">
+             Shell.NavBarIsVisible="False"
+             MinimumHeightRequest="600"
+             MinimumWidthRequest="1200">
 
     <ScrollView>
         <VerticalStackLayout BackgroundColor="#7664a9">

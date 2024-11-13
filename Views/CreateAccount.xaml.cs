@@ -1,5 +1,5 @@
-namespace EmployeeManagementSystem.CreateAccount;
-using EmployeeManagementSystem.LoginView;
+namespace EmployeeManagementSystem.Views;
+
 public partial class CreateAccount : ContentPage
 {
 	public CreateAccount()
@@ -9,6 +9,6 @@ public partial class CreateAccount : ContentPage
     private async void OnBackButtonClicked(object sender, EventArgs e)
     {
         // Navigate to Dashboard after login
-        await Shell.Current.GoToAsync("//LoginView");
+        await App.NavigateToPage(new LoginView());
     }
 }

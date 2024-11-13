@@ -1,4 +1,4 @@
-namespace EmployeeManagementSystem.ResetPassword;
+namespace EmployeeManagementSystem.Views;
 
 public partial class ResetPassword : ContentPage
 {
@@ -10,13 +10,13 @@ public partial class ResetPassword : ContentPage
     private async void OnBackButtonClicked(object sender, EventArgs e)
     {
         // Navigate back to ForgotPassword page
-        await Shell.Current.GoToAsync("//ForgotPassword");
+        await App.GoBack();
     }
 
     private async void OnSubmitButtonClicked(object sender, EventArgs e)
     {
-        // Get the entered code from the Entry control
-        string resetCode = resetCodeEntry.Text; // Ensure you name the Entry control accordingly
+        
+        string resetCode = resetCodeEntry.Text; 
 
         // Validate if the code is entered
         if (string.IsNullOrEmpty(resetCode))
@@ -25,11 +25,11 @@ public partial class ResetPassword : ContentPage
             return;
         }
 
-        // Example: Validate the code (you can replace this with a backend validation)
+        
         if (resetCode == "123456") // Replace with actual validation logic
         {
             // Code is valid, navigate to the page where the user can reset their password
-            await Shell.Current.GoToAsync("//NewPassword");
+            await App.NavigateToPage(new NewPass()); ;
         }
         else
         {

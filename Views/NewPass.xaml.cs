@@ -1,9 +1,10 @@
 namespace EmployeeManagementSystem.Views;
 
-public partial class NewPassword : ContentPage
+public partial class NewPass : ContentPage
 {
-	public NewPassword()
+	public NewPass()
 	{
 		InitializeComponent();
 	}
+
 }

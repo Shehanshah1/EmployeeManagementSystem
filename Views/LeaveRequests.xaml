@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="EmployeeManagementSystem.LeaveRequests.LeaveRequests"
+             x:Class="EmployeeManagementSystem.Views.LeaveRequests"
              Title="LeaveRequests"
-             Shell.NavBarIsVisible="False">
+             Shell.NavBarIsVisible="False"
+             MinimumHeightRequest="600"
+             MinimumWidthRequest="1200">
     <ScrollView>
         <Grid ColumnDefinitions="253,*" RowDefinitions=".2*, .1*,.1*,.1*,.1*,.3*">
 
@@ -161,12 +163,12 @@
                         BackgroundColor="#4CAF50" 
                         TextColor="White" 
                         WidthRequest="200"
-                        Clicked="OnAddNewLeaveRequestButtonClicked"
+  
                         Margin="2"/>
                     
                     <Button 
                         Text="Edit Selected Request" 
-                        Clicked="OnEditSelectedRequestButtonClicked"
+
                         BackgroundColor="#FF9800" 
                         TextColor="White" 
                         WidthRequest="200"
@@ -175,7 +177,7 @@
                         Text="Delete Selected Request"
                         BackgroundColor="#F44336" 
                         TextColor="White" 
-                        Clicked="OnDeleteSelectedRequestClicked"
+    
                         WidthRequest="200"
                         Margin="2"/>
                 </VerticalStackLayout>
