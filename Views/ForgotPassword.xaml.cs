@@ -34,23 +34,7 @@ public partial class ForgotPassword : ContentPage, INotifyPropertyChanged
     // Handle Submit Button Click
     private async void OnSubmitButtonClicked(object sender, EventArgs e)
     {
-        if (string.IsNullOrEmpty(Email) || !IsValidEmail(Email))
-        {
-            statusLabel.Text = "Please enter a valid email address.";
-            statusLabel.IsVisible = true;
-            return;
-        }
-
-        // Check if email exists in the database
-        var emailExists = await CheckIfEmailExists(Email);
-        if (!emailExists)
-        {
-            statusLabel.Text = "Email not found. Please enter a registered email.";
-            statusLabel.IsVisible = true;
-            return;
-        }
-
-        statusLabel.IsVisible = false;
+        
         await DisplayAlert("Success", $"An email has been sent to {Email} for password reset.", "OK");
         await App.NavigateToPage(new ResetPassword());
     }
@@ -62,21 +46,7 @@ public partial class ForgotPassword : ContentPage, INotifyPropertyChanged
         return Regex.IsMatch(email, emailPattern);
     }
 
-    // Check if email exists in the database
-    private async Task<bool> CheckIfEmailExists(string email)
-    {
-        try
-        {
-            var user = await App.Database.GetAllEmployeesAsync();
-            return user != null;
-        }
-        catch (Exception ex)
-        {
-            Console.WriteLine($"Error checking email: {ex.Message}");
-            return false;
-        }
-    }
-
+   
     // Implement INotifyPropertyChanged
     public event PropertyChangedEventHandler PropertyChanged;
     protected virtual void OnPropertyChanged(string propertyName)

@@ -14,33 +14,11 @@ namespace EmployeeManagementSystem.Views
         public AdminSettings()
         {
             InitializeComponent();
-            LoadEmployees();
             BindingContext = this;
         }
 
-        private async void LoadEmployees()
-        {
-            var employeesFromDb = await App.Database.GetAllEmployeesAsync();
-            foreach (var emp in employeesFromDb)
-            {
-                Employees.Add(emp);
-
-                // Add employee to department list
-                var existingDepartment = Departments.FirstOrDefault(d => d.DepartmentName == emp.Department);
-                if (existingDepartment != null)
-                {
-                    existingDepartment.Employees.Add(emp);
-                }
-                else
-                {
-                    Departments.Add(new Department
-                    {
-                        DepartmentName = emp.Department,
-                        Employees = new ObservableCollection<Employee> { emp }
-                    });
-                }
-            }
-        }
+          
+        
 
 
         // Navigation Buttons
@@ -110,7 +88,7 @@ namespace EmployeeManagementSystem.Views
             }
 
             var newEmployee = new Employee { EmployeeID = id, Name = name, Department = department, Email = email, Position = position };
-            await App.Database.AddEmployeeAsync(newEmployee);
+            
             Employees.Add(newEmployee);
 
             // Update Department Collection
@@ -140,7 +118,7 @@ namespace EmployeeManagementSystem.Views
             string department = await DisplayPromptAsync("Edit Employee", "Enter the employee's department:", initialValue: employee.Department);
             if (!string.IsNullOrWhiteSpace(department)) employee.Department = department;
 
-            await App.Database.UpdateEmployeeAsync(employee);
+            
             await DisplayAlert("Success", "Employee updated successfully!", "OK");
         }
 
@@ -154,7 +132,6 @@ namespace EmployeeManagementSystem.Views
             bool confirm = await DisplayAlert("Delete Employee", $"Are you sure you want to delete {employee.Name}?", "Yes", "No");
             if (!confirm) return;
 
-            await App.Database.DeleteEmployeeAsync(employee.EmployeeID);
             Employees.Remove(employee);
 
             // Remove from Department Collection

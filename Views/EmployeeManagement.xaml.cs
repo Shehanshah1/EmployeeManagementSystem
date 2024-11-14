@@ -13,34 +13,9 @@ public partial class EmployeeManagement : ContentPage
     {
         InitializeComponent();
         BindingContext = this;
-        LoadEmployeeManagementData();
     }
 
-    private async void LoadEmployeeManagementData()
-    {
-        var employeesFromDb = await App.Database.GetAllEmployeesAsync();
-        foreach (var emp in employeesFromDb)
-        {
-            Employees.Add(emp);
-            FilteredEmployees.Add(emp); // Initialize with all employees
-
-            // Ensure department consistency
-            var existingDepartment = Departments.FirstOrDefault(d => d.DepartmentName == emp.Department);
-            if (existingDepartment != null)
-            {
-                existingDepartment.Employees.Add(emp);
-            }
-            else
-            {
-                Departments.Add(new Department
-                {
-                    DepartmentName = emp.Department,
-                    Employees = new ObservableCollection<Employee> { emp }
-                });
-            }
-        }
-    }
-
+ 
     // Search method to update the filtered list based on the search text
     private void OnSearchTextChanged(object sender, TextChangedEventArgs e)
     {

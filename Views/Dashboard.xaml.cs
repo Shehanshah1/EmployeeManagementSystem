@@ -12,33 +12,11 @@ namespace EmployeeManagementSystem.Views
         public Dashboard()
         {
             InitializeComponent();
-            LoadDashboardData();
+           
             BindingContext = this;
         }
 
-        private async void LoadDashboardData()
-        {
-            var employeesFromDb = await App.Database.GetAllEmployeesAsync();
-            foreach (var emp in employeesFromDb)
-            {
-                Employees.Add(emp);
-
-                // Ensure department consistency
-                var existingDepartment = Departments.FirstOrDefault(d => d.DepartmentName == emp.Department);
-                if (existingDepartment != null)
-                {
-                    existingDepartment.Employees.Add(emp);
-                }
-                else
-                {
-                    Departments.Add(new Department
-                    {
-                        DepartmentName = emp.Department,
-                        Employees = new ObservableCollection<Employee> { emp }
-                    });
-                }
-            }
-        }
+    
 
         public event PropertyChangedEventHandler PropertyChanged;
 
