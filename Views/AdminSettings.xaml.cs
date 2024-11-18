@@ -15,43 +15,48 @@ namespace EmployeeManagementSystem.Views
         {
             InitializeComponent();
             BindingContext = this;
+
+            // Initialize with a sample employee and department for testing
+            Employees.Add(new Employee { EmployeeID = 1, Name = "Ron Dickson Jr.", Department = "IT", Email = "ron.dickson@usm.edu", Position = "Manager" });
+            Departments.Add(new Department
+            {
+                DepartmentName = "IT Support",
+                Employees = new ObservableCollection<Employee> { Employees[0] }
+            });
         }
 
-          
-        
-
-
-        // Navigation Buttons
-        private async void OnEmployeeManagementButtonClicked(object sender, EventArgs e)
+        // New Department Button Functionality
+        private async void OnAddDepartmentButtonClicked(object sender, EventArgs e)
         {
-            await App.NavigateToPage(new EmployeeManagement());
+            // Prompt for the new department name
+            string departmentName = await Application.Current.MainPage.DisplayPromptAsync("New Department", "Enter the name of the department:");
+            if (string.IsNullOrWhiteSpace(departmentName))
+            {
+                await DisplayAlert("Error", "Department name cannot be empty.", "OK");
+                return;
+            }
+
+            // Check if the department already exists
+            if (Departments.Any(d => d.DepartmentName.Equals(departmentName, StringComparison.OrdinalIgnoreCase)))
+            {
+                await DisplayAlert("Error", "A department with this name already exists.", "OK");
+                return;
+            }
+
+            // Add the new department
+            Departments.Add(new Department
+            {
+                DepartmentName = departmentName,
+                Employees = new ObservableCollection<Employee>()
+            });
+
+            await DisplayAlert("Success", $"Department '{departmentName}' added successfully!", "OK");
         }
 
-        private async void OnLeaveRequestsButtonClicked(object sender, EventArgs e)
-        {
-            await App.NavigateToPage(new LeaveRequests());
-        }
-
-
-        private async void OnUserSettingsButtonClicked(object sender, EventArgs e)
-        {
-            await App.NavigateToPage(new UserSettings());
-        }
-
-        private async void OnLogOutButtonClicked(object sender, EventArgs e)
-        {
-            // Navigate back to the LoginView
-            await App.NavigateToPage(new LoginView());
-        }
-
-        private async void OnDashboardButtonClicked(object sender, EventArgs e)
-        {
-            await App.NavigateToPage(new Dashboard());
-        }
-
-        // Add Employee
+        // Add Employee Button Functionality
         private async void OnAddEmployeeButtonClicked(object sender, EventArgs e)
         {
+            // Prompt for employee details
             string idInput = await DisplayPromptAsync("New Employee", "Enter the employee's ID:");
             if (string.IsNullOrWhiteSpace(idInput) || !int.TryParse(idInput, out int id))
             {
@@ -87,8 +92,8 @@ namespace EmployeeManagementSystem.Views
                 return;
             }
 
+            // Create and add the new employee
             var newEmployee = new Employee { EmployeeID = id, Name = name, Department = department, Email = email, Position = position };
-            
             Employees.Add(newEmployee);
 
             // Update Department Collection
@@ -105,7 +110,7 @@ namespace EmployeeManagementSystem.Views
             await DisplayAlert("Success", "Employee added successfully!", "OK");
         }
 
-        // Edit Employee
+        // Edit Employee Button Functionality
         private async void OnEditEmployeeButtonClicked(object sender, EventArgs e)
         {
             var button = sender as Button;
@@ -118,11 +123,10 @@ namespace EmployeeManagementSystem.Views
             string department = await DisplayPromptAsync("Edit Employee", "Enter the employee's department:", initialValue: employee.Department);
             if (!string.IsNullOrWhiteSpace(department)) employee.Department = department;
 
-            
             await DisplayAlert("Success", "Employee updated successfully!", "OK");
         }
 
-        // Delete Employee
+        // Delete Employee Button Functionality
         private async void OnDeleteEmployeeButtonClicked(object sender, EventArgs e)
         {
             var button = sender as Button;
@@ -145,6 +149,30 @@ namespace EmployeeManagementSystem.Views
             }
 
             await DisplayAlert("Success", "Employee deleted successfully!", "OK");
+        }
+
+        // Log Out Button Functionality
+        private async void OnLogOutButtonClicked(object sender, EventArgs e)
+        {
+            await App.NavigateToPage(new LoginView());
+        }
+
+        // Navigate to the Dashboard
+        private async void OnDashboardButtonClicked(object sender, EventArgs e)
+        {
+            await App.NavigateToPage(new Dashboard());
+        }
+
+        // Navigate to Employee Management Page
+        private async void OnEmployeeManagementButtonClicked(object sender, EventArgs e)
+        {
+            await App.NavigateToPage(new EmployeeManagement());
+        }
+
+        // Navigate to User Settings
+        private async void OnUserSettingsButtonClicked(object sender, EventArgs e)
+        {
+            await App.NavigateToPage(new UserSettings());
         }
     }
 }
