@@ -1,5 +1,7 @@
 using EmployeeManagementSystem.Models;
 using Microsoft.Maui.Controls;
+using Microsoft.Maui.Storage;
+using System;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
@@ -16,13 +18,48 @@ namespace EmployeeManagementSystem.Views
             InitializeComponent();
             BindingContext = this;
 
-            // Initialize with a sample employee and department for testing
-            Employees.Add(new Employee { EmployeeID = 1, Name = "Ron Dickson Jr.", Department = "IT", Email = "ron.dickson@usm.edu", Position = "Manager" });
-            Departments.Add(new Department
+            // Load saved employee data from Preferences
+            LoadEmployeesFromPreferences();
+        }
+
+        // Load Employees from Preferences
+        private void LoadEmployeesFromPreferences()
+        {
+            // Retrieve the number of employees stored in Preferences
+            int employeeCount = Preferences.Get("EmployeeCount", 0);
+
+            // Load employees and their data from Preferences
+            for (int i = 1; i <= employeeCount; i++)
             {
-                DepartmentName = "IT Support",
-                Employees = new ObservableCollection<Employee> { Employees[0] }
-            });
+                string name = Preferences.Get($"Employee_{i}_Name", string.Empty);
+                string department = Preferences.Get($"Employee_{i}_Department", string.Empty);
+                string email = Preferences.Get($"Employee_{i}_Email", string.Empty);
+                string position = Preferences.Get($"Employee_{i}_Position", string.Empty);
+
+                if (!string.IsNullOrWhiteSpace(name) && !string.IsNullOrWhiteSpace(department))
+                {
+                    var employee = new Employee
+                    {
+                        EmployeeID = i,
+                        Name = name,
+                        Department = department,
+                        Email = email,
+                        Position = position
+                    };
+
+                    Employees.Add(employee);
+
+                    var departmentEntry = Departments.FirstOrDefault(d => d.DepartmentName == department);
+                    if (departmentEntry != null)
+                    {
+                        departmentEntry.Employees.Add(employee);
+                    }
+                    else
+                    {
+                        Departments.Add(new Department { DepartmentName = department, Employees = new ObservableCollection<Employee> { employee } });
+                    }
+                }
+            }
         }
 
         // New Department Button Functionality
@@ -107,7 +144,29 @@ namespace EmployeeManagementSystem.Views
                 Departments.Add(new Department { DepartmentName = department, Employees = new ObservableCollection<Employee> { newEmployee } });
             }
 
+            // Save the new employee data to Preferences
+            SaveEmployeeToPreferences(newEmployee);
+
             await DisplayAlert("Success", "Employee added successfully!", "OK");
+        }
+
+        // Save Employee Data to Preferences
+        private void SaveEmployeeToPreferences(Employee employee)
+        {
+            // Get the current number of employees in Preferences
+            int employeeCount = Preferences.Get("EmployeeCount", 0);
+
+            // Increment employee count
+            employeeCount++;
+
+            // Save employee data to Preferences
+            Preferences.Set($"Employee_{employeeCount}_Name", employee.Name);
+            Preferences.Set($"Employee_{employeeCount}_Department", employee.Department);
+            Preferences.Set($"Employee_{employeeCount}_Email", employee.Email);
+            Preferences.Set($"Employee_{employeeCount}_Position", employee.Position);
+
+            // Update the employee count in Preferences
+            Preferences.Set("EmployeeCount", employeeCount);
         }
 
         // Edit Employee Button Functionality
@@ -123,7 +182,19 @@ namespace EmployeeManagementSystem.Views
             string department = await DisplayPromptAsync("Edit Employee", "Enter the employee's department:", initialValue: employee.Department);
             if (!string.IsNullOrWhiteSpace(department)) employee.Department = department;
 
+            // Update Preferences with new data
+            UpdateEmployeeInPreferences(employee);
+
             await DisplayAlert("Success", "Employee updated successfully!", "OK");
+        }
+
+        // Update Employee Data in Preferences
+        private void UpdateEmployeeInPreferences(Employee employee)
+        {
+            Preferences.Set($"Employee_{employee.EmployeeID}_Name", employee.Name);
+            Preferences.Set($"Employee_{employee.EmployeeID}_Department", employee.Department);
+            Preferences.Set($"Employee_{employee.EmployeeID}_Email", employee.Email);
+            Preferences.Set($"Employee_{employee.EmployeeID}_Position", employee.Position);
         }
 
         // Delete Employee Button Functionality
@@ -148,7 +219,20 @@ namespace EmployeeManagementSystem.Views
                 Departments.Remove(department);
             }
 
+            // Delete from Preferences
+            DeleteEmployeeFromPreferences(employee.EmployeeID);
+
             await DisplayAlert("Success", "Employee deleted successfully!", "OK");
+        }
+
+        // Delete Employee Data from Preferences
+        private void DeleteEmployeeFromPreferences(int employeeId)
+        {
+            // Remove employee data from Preferences
+            Preferences.Remove($"Employee_{employeeId}_Name");
+            Preferences.Remove($"Employee_{employeeId}_Department");
+            Preferences.Remove($"Employee_{employeeId}_Email");
+            Preferences.Remove($"Employee_{employeeId}_Position");
         }
 
         // Log Out Button Functionality
