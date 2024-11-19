@@ -36,16 +36,15 @@ namespace EmployeeManagementSystem.Views
             }
         }
 
-        // Handle the "Add New Leave Request" button
         private async void OnAddNewLeaveRequestClicked(object sender, EventArgs e)
         {
             var newRequest = new LeaveRequest
             {
                 EmployeeName = "New Employee",
-                LeaveType = "Annual",
+                LeaveRequestID = 1234,
                 StartDate = DateTime.Now,
                 EndDate = DateTime.Now.AddDays(5),
-                Status = "Pending"
+                ApprovalStatus = "Pending"
             };
 
             await _databaseService.AddLeaveRequestAsync(newRequest);
@@ -61,7 +60,7 @@ namespace EmployeeManagementSystem.Views
                 return;
             }
 
-            _selectedLeaveRequest.Status = "Approved";  // Example modification
+            _selectedLeaveRequest.ApprovalStatus = "Approved";  // Example modification
             await _databaseService.UpdateLeaveRequestAsync(_selectedLeaveRequest);
             LoadLeaveRequests();
         }
@@ -75,7 +74,7 @@ namespace EmployeeManagementSystem.Views
                 return;
             }
 
-            await _databaseService.DeleteLeaveRequestAsync(_selectedLeaveRequest.Id);
+            await _databaseService.DeleteLeaveRequestAsync(_selectedLeaveRequest.LeaveRequestID);
             LeaveRequestsList.Remove(_selectedLeaveRequest);
         }
 
