@@ -1,6 +1,7 @@
 using System;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Text.Json;
 using System.Windows.Input;
 using EmployeeManagementSystem.Models;
 using EmployeeManagementSystem.Services;
@@ -11,7 +12,14 @@ namespace EmployeeManagementSystem.Views
     public partial class LeaveRequests : ContentPage
     {
         private readonly DatabaseService _databaseService;
-        public ObservableCollection<LeaveRequest> LeaveRequestsList { get; set; }
+
+        private ObservableCollection<LeaveRequest> _leaveRequests;
+
+        public ObservableCollection<LeaveRequest> LeaveRequestsList
+        {
+            get { return _leaveRequests; }
+            set { _leaveRequests = value; OnPropertyChanged(); }
+        }
         private LeaveRequest _selectedLeaveRequest;
 
         public LeaveRequests()
@@ -38,6 +46,66 @@ namespace EmployeeManagementSystem.Views
 
         private async void OnAddNewLeaveRequestClicked(object sender, EventArgs e)
         {
+            // Show the popup
+
+            string idInput = await DisplayPromptAsync("Leave Request", "Enter the employee's ID:");
+            if (string.IsNullOrWhiteSpace(idInput) || !int.TryParse(idInput, out int id))
+            {
+                await DisplayAlert("Error", "Please enter a valid numeric ID.", "OK");
+                return;
+            }
+
+            string name = await DisplayPromptAsync("Leave Request", "Enter the employee's name:");
+            if (string.IsNullOrWhiteSpace(name))
+            {
+                await DisplayAlert("Error", "Employee name cannot be empty.", "OK");
+                return;
+            }
+
+            string department = await DisplayPromptAsync("Leave Request", "Enter the employee's department:");
+            if (string.IsNullOrWhiteSpace(department))
+            {
+                await DisplayAlert("Error", "Department cannot be empty.", "OK");
+                return;
+            }
+
+            string startDate = await DisplayPromptAsync("Leave Request", "Enter start date:");
+            if (string.IsNullOrWhiteSpace(startDate))
+            {
+                await DisplayAlert("Error", "StartDate cannot be empty.", "OK");
+                return;
+            }
+
+            string days = await DisplayPromptAsync("Leave Request", "Enter number of days:");
+            if (string.IsNullOrWhiteSpace(days))
+            {
+                await DisplayAlert("Error", "days cannot be empty.", "OK");
+                return;
+            }
+
+            string reason_ = await DisplayPromptAsync("Leave Request", "Enter the reason for leave:");
+            if (string.IsNullOrWhiteSpace(reason_))
+            {
+                await DisplayAlert("Error", "Reason cannot be empty.", "OK");
+                return;
+            }
+
+            var newRequest = new LeaveRequest
+            {
+                EmployeeName = name,
+                EmployeeID = int.Parse(idInput),
+                StartDate = DateTime.Now,
+                EndDate = DateTime.Now.AddDays(int.Parse(days)),
+                days = (int.Parse(days)),
+                Reason = reason_,
+                ApprovalStatus = "Pending"
+            };
+
+            await _databaseService.AddLeaveRequestAsync(newRequest);
+            LeaveRequestsList.Add(newRequest);
+        }
+        private async void OnAddRequestSubmitted(object sender, EventArgs e)
+        {
             var newRequest = new LeaveRequest
             {
                 EmployeeName = "New Employee",
@@ -49,6 +117,7 @@ namespace EmployeeManagementSystem.Views
 
             await _databaseService.AddLeaveRequestAsync(newRequest);
             LeaveRequestsList.Add(newRequest);
+            LoadLeaveRequests();
         }
 
         // Handle the "Edit Selected Request" button
