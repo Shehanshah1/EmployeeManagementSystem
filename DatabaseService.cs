@@ -1,4 +1,4 @@
-﻿
+
 using EmployeeManagementSystem.Models;
 using Microsoft.Data.Sqlite;
 using Microsoft.Maui.Controls;
@@ -19,6 +19,8 @@ namespace EmployeeManagementSystem.Services
             string dbPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "employees.db3");
             _database = new SQLiteAsyncConnection(dbPath);
             _database.CreateTableAsync<Employee>().Wait();
+
+            _database.CreateTableAsync<LeaveRequest>().Wait();
         }
 
 
@@ -58,6 +60,42 @@ namespace EmployeeManagementSystem.Services
                 );
             ";
             command.ExecuteNonQuery();
+        }
+
+        public async Task AddLeaveRequestAsync(LeaveRequest leaveRequest)
+        {
+            await _database.InsertAsync(leaveRequest);
+        }
+
+        public async Task<List<LeaveRequest>> GetLeaveRequestsAsync()
+        {
+            return await _database.Table<LeaveRequest>().ToListAsync();
+        }
+
+        public async Task UpdateLeaveRequestAsync(LeaveRequest leaveRequest)
+        {
+            await _database.UpdateAsync(leaveRequest);
+        }
+
+        public async Task DeleteLeaveRequestAsync(int leaveRequestId)
+        {
+            var leaveRequest = await _database.Table<LeaveRequest>()
+                                              .FirstOrDefaultAsync(r => r.LeaveRequestID == leaveRequestId);
+            if (leaveRequest != null)
+            {
+                await _database.DeleteAsync(leaveRequest);
+            }
+        }
+
+        public async Task AddEmployeeAsync(Employee employee)
+        {
+            await _database.InsertAsync(employee);
+        }
+
+        // Get all employees
+        public async Task<List<Employee>> GetEmployeesAsync()
+        {
+            return await _database.Table<Employee>().ToListAsync();
         }
     }
 }
