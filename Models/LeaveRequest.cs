@@ -1,4 +1,4 @@
-﻿using SQLite;
+using SQLite;
 using System;
 
 namespace EmployeeManagementSystem.Models
@@ -17,6 +17,10 @@ namespace EmployeeManagementSystem.Models
 
         [NotNull]
         public DateTime EndDate { get; set; }
+
+        public int days { get; set; }
+
+        public string EmployeeName { get; set; }
 
         public string Reason { get; set; }
         public string ApprovalStatus { get; set; } = "Pending";
