@@ -5,8 +5,7 @@
              Shell.NavBarIsVisible="False"
              MinimumHeightRequest="600"
              MinimumWidthRequest="1200">
-    <ScrollView>
-        <Grid ColumnDefinitions="253,*" RowDefinitions=".2*, .1*,.1*,.1*,.1*,.3*">
+    <Grid ColumnDefinitions="253,*" RowDefinitions=".2*, .1*,.1*,.1*,.1*,.3*">
             <!-- Left Sidebar Background -->
             <BoxView Grid.Column="0"
                      Grid.RowSpan="6"
@@ -82,7 +81,7 @@
             <!-- Right Content Area -->
             <Grid Grid.Column="1" Grid.RowSpan="6" ColumnDefinitions="*,*,*" RowDefinitions=".2*,.1*, .1*, .2*, .6*">
                 <Label Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" Text="Leave Requests"
-                       Margin="20,0,0,20" HorizontalOptions="Start" VerticalOptions="End"
+                       Margin="20,0,0,40" HorizontalOptions="Start" VerticalOptions="End"
                        FontSize="Large" FontAttributes="Bold" TextColor="White" />
                 <Line Grid.ColumnSpan="3"
                       Stroke="White"
@@ -95,13 +94,15 @@
                            BackgroundColor="#FFFFFF"
                            TextColor="Black"
                            WidthRequest="400"
-                           HeightRequest="60"/>
-                    <Entry Placeholder="Search by Status"
+                           HeightRequest="60"
+                           Text="{Binding SearchText}" />
+                <Entry Placeholder="Search by Status"
                            BackgroundColor="#FFFFFF"
                            TextColor="Black"
                            Margin="70,0,0,0"
                            WidthRequest="200"
-                           HeightRequest="60"/>
+                           HeightRequest="60"
+                           Text="{Binding SearchStatus}" />
                 </HorizontalStackLayout>
 
                 <Label Text="Leave Requests"
@@ -146,14 +147,15 @@
                             BackgroundColor="#FF9800"
                             TextColor="White"
                             WidthRequest="200"
+                            Clicked="OnEditSelectedRequestClicked"
                             Margin="2"/>
                     <Button Text="Delete Selected Request"
                             BackgroundColor="#F44336"
                             TextColor="White"
                             WidthRequest="200"
+                            Clicked="OnDeleteSelectedRequestClicked"
                             Margin="2"/>
                 </VerticalStackLayout>
             </Grid>
         </Grid>
-    </ScrollView>
 </ContentPage>
