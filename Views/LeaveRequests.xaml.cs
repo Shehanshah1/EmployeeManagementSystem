@@ -36,12 +36,14 @@ namespace EmployeeManagementSystem.Views
         private async void LoadLeaveRequests()
         {
             var leaveRequests = await _databaseService.GetLeaveRequestsAsync();
-            LeaveRequestsList.Clear();
+            _allLeaveRequests = new ObservableCollection<LeaveRequest>(leaveRequests); // Full list
+            LeaveRequestsList = new ObservableCollection<LeaveRequest>(_allLeaveRequests); // Filtered list
+            //LeaveRequestsList.Clear();
 
-            foreach (var request in leaveRequests)
+            /*foreach (var request in leaveRequests)
             {
                 LeaveRequestsList.Add(request);
-            }
+            }*/
         }
 
         private async void OnAddNewLeaveRequestClicked(object sender, EventArgs e)
@@ -59,13 +61,6 @@ namespace EmployeeManagementSystem.Views
             if (string.IsNullOrWhiteSpace(name))
             {
                 await DisplayAlert("Error", "Employee name cannot be empty.", "OK");
-                return;
-            }
-
-            string department = await DisplayPromptAsync("Leave Request", "Enter the employee's department:");
-            if (string.IsNullOrWhiteSpace(department))
-            {
-                await DisplayAlert("Error", "Department cannot be empty.", "OK");
                 return;
             }
 
@@ -94,8 +89,8 @@ namespace EmployeeManagementSystem.Views
             {
                 EmployeeName = name,
                 EmployeeID = int.Parse(idInput),
-                StartDate = DateTime.Now,
-                EndDate = DateTime.Now.AddDays(int.Parse(days)),
+                StartDate = DateTime.Parse(startDate),
+                EndDate = DateTime.Parse(startDate).AddDays(int.Parse(days)),
                 days = (int.Parse(days)),
                 Reason = reason_,
                 ApprovalStatus = "Pending"
@@ -103,57 +98,185 @@ namespace EmployeeManagementSystem.Views
 
             await _databaseService.AddLeaveRequestAsync(newRequest);
             LeaveRequestsList.Add(newRequest);
-        }
-        private async void OnAddRequestSubmitted(object sender, EventArgs e)
-        {
-            var newRequest = new LeaveRequest
-            {
-                EmployeeName = "New Employee",
-                LeaveRequestID = 1234,
-                StartDate = DateTime.Now,
-                EndDate = DateTime.Now.AddDays(5),
-                ApprovalStatus = "Pending"
-            };
-
-            await _databaseService.AddLeaveRequestAsync(newRequest);
-            LeaveRequestsList.Add(newRequest);
             LoadLeaveRequests();
         }
 
-        // Handle the "Edit Selected Request" button
         private async void OnEditSelectedRequestClicked(object sender, EventArgs e)
         {
-            if (_selectedLeaveRequest == null)
+            // Step 1: Ask for the LeaveRequest ID
+            string idInput = await DisplayPromptAsync("Edit Leave Request", "Enter the Leave Request ID to edit:");
+            if (string.IsNullOrWhiteSpace(idInput) || !int.TryParse(idInput, out int leaveRequestId))
             {
-                await DisplayAlert("Error", "Please select a leave request to edit.", "OK");
+                await DisplayAlert("Error", "Please enter a valid numeric Leave Request ID.", "OK");
                 return;
             }
 
-            _selectedLeaveRequest.ApprovalStatus = "Approved";  // Example modification
-            await _databaseService.UpdateLeaveRequestAsync(_selectedLeaveRequest);
-            LoadLeaveRequests();
+            var requestToEdit = LeaveRequestsList.FirstOrDefault(lr => lr.LeaveRequestID == leaveRequestId);
+            if (requestToEdit == null)
+            {
+                await DisplayAlert("Error", "Leave Request not found.", "OK");
+                return;
+            }
+
+            string parameterName = await DisplayPromptAsync("Edit Leave Request", "Enter the parameter to update (e.g., EmployeeName, EmployeeID, StartDate, EndDate, Reason, ApprovalStatus):");
+            if (string.IsNullOrWhiteSpace(parameterName))
+            {
+                await DisplayAlert("Error", "Parameter name cannot be empty.", "OK");
+                return;
+            }
+
+            string newValue = await DisplayPromptAsync("Edit Leave Request", $"Enter the new value for {parameterName}:");
+            if (string.IsNullOrWhiteSpace(newValue))
+            {
+                await DisplayAlert("Error", "New value cannot be empty.", "OK");
+                return;
+            }
+            try
+            {
+                switch (parameterName)
+                {
+                    case "EmployeeName":
+                        requestToEdit.EmployeeName = newValue;
+                        break;
+
+                    case "EmployeeID":
+                        requestToEdit.EmployeeID = int.Parse(newValue);
+                        break;
+
+                    case "StartDate":
+                        if (DateTime.TryParse(newValue, out DateTime startDate))
+                        {
+                            requestToEdit.StartDate = startDate;
+                        }
+                        else
+                        {
+                            await DisplayAlert("Error", "Invalid date format.", "OK");
+                            return;
+                        }
+                        break;
+
+                    case "EndDate":
+                        if (DateTime.TryParse(newValue, out DateTime endDate))
+                        {
+                            requestToEdit.EndDate = endDate;
+                        }
+                        else
+                        {
+                            await DisplayAlert("Error", "Invalid date format.", "OK");
+                            return;
+                        }
+                        break;
+
+                    case "Reason":
+                        requestToEdit.Reason = newValue;
+                        break;
+
+                    case "ApprovalStatus":
+                        requestToEdit.ApprovalStatus = newValue;
+                        break;
+
+                    case "days":
+                        if (int.TryParse(newValue, out int days))
+                        {
+                            requestToEdit.days = days;
+                        }
+                        else
+                        {
+                            await DisplayAlert("Error", "Invalid number format for days.", "OK");
+                            return;
+                        }
+                        break;
+
+                    default:
+                        await DisplayAlert("Error", "Invalid parameter name. Please try again.", "OK");
+                        return;
+                }
+
+                await _databaseService.UpdateLeaveRequestAsync(requestToEdit);
+                LoadLeaveRequests();
+
+                await DisplayAlert("Success", "Leave Request updated successfully.", "OK");
+            }
+            catch (Exception ex)
+            {
+                await DisplayAlert("Error", $"An error occurred while updating: {ex.Message}", "OK");
+            }
         }
 
-        // Handle the "Delete Selected Request" button
         private async void OnDeleteSelectedRequestClicked(object sender, EventArgs e)
         {
-            if (_selectedLeaveRequest == null)
+            string idInput = await DisplayPromptAsync("Delete Leave Request", "Enter the Leave Request ID to delete:");
+            if (string.IsNullOrWhiteSpace(idInput) || !int.TryParse(idInput, out int leaveRequestId))
             {
-                await DisplayAlert("Error", "Please select a leave request to delete.", "OK");
+                await DisplayAlert("Error", "Please enter a valid numeric Leave Request ID.", "OK");
                 return;
             }
 
-            await _databaseService.DeleteLeaveRequestAsync(_selectedLeaveRequest.LeaveRequestID);
-            LeaveRequestsList.Remove(_selectedLeaveRequest);
+            var requestToDelete = LeaveRequestsList.FirstOrDefault(lr => lr.LeaveRequestID == leaveRequestId);
+            if (requestToDelete == null)
+            {
+                await DisplayAlert("Error", "Leave Request not found.", "OK");
+                return;
+            }
+
+            // Confirm deletion
+            bool confirm = await DisplayAlert("Confirm Delete", $"Are you sure you want to delete the Leave Request for Employee '{requestToDelete.EmployeeName}'?", "Yes", "No");
+            if (!confirm)
+                return;
+
+            await _databaseService.DeleteLeaveRequestAsync(requestToDelete.LeaveRequestID);
+            LeaveRequestsList.Remove(requestToDelete);
+            LoadLeaveRequests();
+            await DisplayAlert("Success", "Leave Request deleted successfully.", "OK");
         }
 
-        // Set the selected leave request when an item is tapped
-        private void OnLeaveRequestSelected(object sender, SelectionChangedEventArgs e)
+        private string _searchText;
+        public string SearchText
         {
-            _selectedLeaveRequest = e.CurrentSelection.FirstOrDefault() as LeaveRequest;
+            get => _searchText;
+            set
+            {
+                _searchText = value;
+                OnPropertyChanged();
+                FilterLeaveRequests();
+            }
         }
 
-        // Navigation button click events
+        private string _searchStatus;
+        public string SearchStatus
+        {
+            get => _searchStatus;
+            set
+            {
+                _searchStatus = value;
+                OnPropertyChanged();
+                FilterLeaveRequests();
+            }
+        }
+
+        private ObservableCollection<LeaveRequest> _allLeaveRequests;
+
+        private void FilterLeaveRequests()
+        {
+            if (_allLeaveRequests == null) return;
+
+            var filtered = _allLeaveRequests
+                .Where(r =>
+                    (string.IsNullOrWhiteSpace(SearchText) ||
+                     r.EmployeeID.ToString().Contains(SearchText, StringComparison.OrdinalIgnoreCase) ||
+                     r.EmployeeName.Contains(SearchText, StringComparison.OrdinalIgnoreCase)) &&
+                    (string.IsNullOrWhiteSpace(SearchStatus) ||
+                     r.ApprovalStatus.Contains(SearchStatus, StringComparison.OrdinalIgnoreCase)))
+                .ToList();
+
+            LeaveRequestsList.Clear();
+            foreach (var request in filtered)
+            {
+                LeaveRequestsList.Add(request);
+            }
+        }
+
+
         private async void OnDashboardButtonClicked(object sender, EventArgs e) { await App.NavigateToPage(new Dashboard()); }
         private async void OnEmployeeManagementButtonClicked(object sender, EventArgs e) { await App.NavigateToPage(new EmployeeManagement()); }
         private async void OnAdminSettingsButtonClicked(object sender, EventArgs e) { await App.NavigateToPage(new AdminSettings()); }
