@@ -57,8 +57,22 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Compile Remove="Resources\Images\NewFolder\**" />
+	  <EmbeddedResource Remove="Resources\Images\NewFolder\**" />
+	  <MauiCss Remove="Resources\Images\NewFolder\**" />
+	  <MauiImage Remove="Resources\Images\NewFolder\**" />
+	  <MauiXaml Remove="Resources\Images\NewFolder\**" />
+	  <None Remove="Resources\Images\NewFolder\**" />
+	</ItemGroup>
+
+	<ItemGroup>
 	  <None Remove="Resources\Fonts\Lato-Bold.ttf" />
 	  <None Remove="Resources\Fonts\Lato-Light.ttf" />
+	  <None Remove="Resources\Images\App Logo.png" />
+	  <None Remove="Resources\Images\applogo" />
+	  <None Remove="Resources\Images\AppLogo.png" />
+	  <None Remove="Resources\Images\app_logo.png" />
+	  <None Remove="Resources\Images\logo_app.png" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -106,6 +120,16 @@
 	  <MauiXaml Update="Views\UserSettings.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <PRIResource Remove="Resources\Images\NewFolder\**" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <MauiImage Remove="Resources\Images\App Logo.png" />
+	  <MauiImage Remove="Resources\Images\applogo" />
+	  <MauiImage Remove="Resources\Images\AppLogo.png" />
 	</ItemGroup>
 
 </Project>
