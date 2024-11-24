@@ -98,15 +98,25 @@ Clicked="OnLogOutButtonClicked"/>
             <Grid Grid.Column="2" Grid.RowSpan="6"
 ColumnDefinitions="*,*,*" RowDefinitions=".2*,.2*, .2*, .2*, .2*, .2*">
                 <!-- User Requests Greeting -->
-                <Label Grid.Column="0" Grid.Row="0" Text="User Settings" Margin="20,0,0,180" HorizontalOptions="Start" VerticalOptions="End" FontSize="17" FontAttributes="Bold" TextColor="White" />
+                <Label Grid.Column="0"
+                   Grid.Row="0"
+                   Text="User Settings"
+                   FontFamily="LatoBold"
+                   Margin="20,15,0,20"
+                   HorizontalOptions="Start"
+                   VerticalOptions="Start"
+                   FontSize="17"
+                   FontAttributes="Bold"
+                   TextColor="White" />
+
                 <!-- Divider Line -->
                 <Line 
-  Grid.ColumnSpan="3"
-  Stroke="White"
-  X1="0"
-  Y1="55"
-  X2="2000" 
-  Y2="55"/>
+                  Grid.ColumnSpan="3"
+                  Stroke="White"
+                  X1="0"
+                  Y1="55"
+                  X2="4000" 
+                  Y2="55"/> 
 
                 <Label
                     Text="Change Username?"

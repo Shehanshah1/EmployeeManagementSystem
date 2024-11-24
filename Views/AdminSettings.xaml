@@ -84,16 +84,17 @@
                   ColumnDefinitions="*,*,*" 
                   RowDefinitions=".2*,.5*, .5*">
                 <!-- Admin Settings Greeting -->
-                <Label 
-                    Grid.Column="0" 
-                    Grid.Row="0" 
-                    Text="Admin Settings" 
-                    Margin="20,0,0,180" 
-                    HorizontalOptions="Start" 
-                    VerticalOptions="End" 
-                    FontSize="17" 
-                    FontAttributes="Bold" 
-                    TextColor="White" />
+                <Label Grid.Column="0"
+                   Grid.Row="0"
+                   Text="Admin Settings"
+                   FontFamily="LatoBold"
+                   Margin="20,15,0,20"
+                   HorizontalOptions="Start"
+                   VerticalOptions="Start"
+                   FontSize="17"
+                   FontAttributes="Bold"
+                   TextColor="White" />
+
 
                 <!-- Divider Line -->
                 <Line 
@@ -101,7 +102,7 @@
                 Stroke="White"
                 X1="0"
                 Y1="55"
-                X2="2000" 
+                X2="4000" 
                 Y2="55"/>
 
                 <!-- Employee Overview Card -->
