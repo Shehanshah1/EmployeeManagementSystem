@@ -81,14 +81,14 @@
             <!-- Right Content Area -->
             <Grid Grid.Column="1" Grid.RowSpan="6" ColumnDefinitions="*,*,*" RowDefinitions=".2*,.1*, .1*, .2*, .6*">
                 <Label Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" Text="Leave Requests"
-                       Margin="20,0,0,40" HorizontalOptions="Start" VerticalOptions="End"
-                       FontSize="Large" FontAttributes="Bold" TextColor="White" />
+                       Margin="20,0,0,180" HorizontalOptions="Start" VerticalOptions="End"
+                       FontSize="17" FontAttributes="Bold" TextColor="White" />
                 <Line Grid.ColumnSpan="3"
                       Stroke="White"
                       X1="0"
-                      Y1="90"
+                      Y1="55"
                       X2="2000"
-                      Y2="90" />
+                      Y2="55" />
                 <HorizontalStackLayout Spacing="10" Grid.Row="1" Grid.ColumnSpan="3" HorizontalOptions="CenterAndExpand">
                     <Entry Placeholder="Search by Employee ID or Name"
                            BackgroundColor="#FFFFFF"

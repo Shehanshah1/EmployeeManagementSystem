@@ -101,16 +101,16 @@
                
                     <!-- Dashboard Greeting -->
 
-                    <Label Grid.Column="0" Grid.Row="0" Text="Dashboard" Margin="20,0,0,20" HorizontalOptions="Start" VerticalOptions="End" FontSize="Large" FontAttributes="Bold" TextColor="White" />
+                    <Label Grid.Column="0" Grid.Row="0" Text="Dashboard" Margin="20,0,0,180" HorizontalOptions="Start" VerticalOptions="End" FontSize="17" FontAttributes="Bold" TextColor="White" />
 
                     <!-- Divider Line -->
                     <Line 
                 Grid.ColumnSpan="3"
                 Stroke="White"
                 X1="0"
-                Y1="90"
+                Y1="55"
                 X2="2000" 
-                Y2="90"/>
+                Y2="55"/>
 
                     <Label
                 Grid.Column="0"

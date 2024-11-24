@@ -88,10 +88,10 @@
                     Grid.Column="0" 
                     Grid.Row="0" 
                     Text="Admin Settings" 
-                    Margin="20,0,0,20" 
+                    Margin="20,0,0,180" 
                     HorizontalOptions="Start" 
                     VerticalOptions="End" 
-                    FontSize="Large" 
+                    FontSize="17" 
                     FontAttributes="Bold" 
                     TextColor="White" />
 
@@ -100,9 +100,9 @@
                 Grid.ColumnSpan="3"
                 Stroke="White"
                 X1="0"
-                Y1="90"
+                Y1="55"
                 X2="2000" 
-                Y2="90"/>
+                Y2="55"/>
 
                 <!-- Employee Overview Card -->
                 <Frame 
