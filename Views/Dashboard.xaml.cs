@@ -8,6 +8,7 @@ namespace EmployeeManagementSystem.Views
     {
         private ObservableCollection<Employee> _employees;
         private ObservableCollection<Department> _departments;
+        private string _userName;
 
         public ObservableCollection<Employee> Employees
         {
@@ -35,12 +36,34 @@ namespace EmployeeManagementSystem.Views
             }
         }
 
+        public string UserName // Aelin: Added username
+        {
+            get => _userName;
+            set
+            {
+                if (_userName != value)
+                {
+                    _userName = value;
+                    OnPropertyChanged(nameof(UserName));
+                }
+            }
+        }
+
         public Dashboard()
         {
             InitializeComponent();
             Employees = new ObservableCollection<Employee>();
             Departments = new ObservableCollection<Department>();
-            BindingContext = this; // Set the page's BindingContext
+
+            // Aelin: Temporary default name (needs to be personalized to user)
+            UserName = "Aelin";
+
+            // Aelin: Binding
+            var greetingLabel = this.FindByName<Label>("GreetingLabel");
+            if (greetingLabel != null)
+            {
+                greetingLabel.BindingContext = this;
+            }
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

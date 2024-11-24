@@ -96,12 +96,23 @@
                 </StackLayout>
             </StackLayout>
 
-            <Grid Grid.Column="2" Grid.RowSpan="7"
-              ColumnDefinitions="*,*" RowDefinitions=".2*,.2*, .8*">
+            <Grid Grid.Column="2" 
+                  Grid.RowSpan="7"
+                  ColumnDefinitions="Auto,*"
+                  RowDefinitions="Auto,50, *">
                
-                    <!-- Dashboard Greeting -->
+                    <!-- Dashboard Header -->
 
-                    <Label Grid.Column="0" Grid.Row="0" Text="Dashboard" Margin="20,0,0,180" HorizontalOptions="Start" VerticalOptions="End" FontSize="17" FontAttributes="Bold" TextColor="White" />
+                    <Label Grid.Column="0"
+                           Grid.Row="0"
+                           Text="Dashboard"
+                           FontFamily="LatoBold"
+                           Margin="20,15,0,20"
+                           HorizontalOptions="Start"
+                           VerticalOptions="Start"
+                           FontSize="17"
+                           FontAttributes="Bold"
+                           TextColor="White" />
 
                     <!-- Divider Line -->
                     <Line 
@@ -109,18 +120,21 @@
                 Stroke="White"
                 X1="0"
                 Y1="55"
-                X2="2000" 
+                X2="4000" 
                 Y2="55"/>
 
                     <Label
+                x:Name="GreetingLabel"
                 Grid.Column="0"
                 Grid.Row="1"
-                Text="Hello, Aelin! 👋"
-                Margin="70,10,0,0"
+                Text="{Binding UserName, StringFormat='Hello, {0}! 👋'}"
+                FontFamily="LatoLight"
+                Margin="20,20,0,0"
                 HorizontalOptions="Start"
                 VerticalOptions="Start"
                 FontSize="Medium"
-                TextColor="White" />
+                TextColor="White" 
+                />
 
                     <!-- Employee Overview Section -->
                     <StackLayout Grid.Row="2" Grid.ColumnSpan="3">

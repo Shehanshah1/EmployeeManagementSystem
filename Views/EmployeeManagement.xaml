@@ -93,10 +93,22 @@
                 </StackLayout>
             </StackLayout>
 
-            <Grid Grid.Column="2" Grid.RowSpan="6"
-          ColumnDefinitions="*,*,*" RowDefinitions=".2*,.2*, .2*, .2*, .2*, .2*">
-                <!-- Employee Management Greeting -->
-                <Label Grid.Column="0" Grid.ColumnSpan="2" Text="Employee Management" Margin="20,0,0,180" HorizontalOptions="Start" VerticalOptions="End" FontSize="17" FontAttributes="Bold" TextColor="White" />
+            <Grid Grid.Column="2" 
+                  Grid.RowSpan="7" 
+                  ColumnDefinitions="Auto,*" 
+                  RowDefinitions="Auto,50, *">
+                
+                <!-- Employee Management Header-->
+                <Label Grid.Column="0"
+                   Grid.Row="0"
+                   Text="Employee Management"
+                   FontFamily="LatoBold"
+                   Margin="20,15,0,20"
+                   HorizontalOptions="Start"
+                   VerticalOptions="Start"
+                   FontSize="17"
+                   FontAttributes="Bold"
+                   TextColor="White" />
 
                 <!-- Divider Line -->
                 <Line 
@@ -104,12 +116,12 @@
             Stroke="White"
             X1="0"
             Y1="55"
-            X2="2000" 
+            X2="4000" 
             Y2="55"/>
             <!-- Entry Box for search -->
                 <Entry
             Grid.ColumnSpan="3"
-            Grid.Row="1"
+            Grid.Row="3"
             Placeholder="Search by Employee ID, Name, or Department"
             PlaceholderColor="Gray"
             BackgroundColor="White"
