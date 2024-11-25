@@ -59,11 +59,7 @@ namespace EmployeeManagementSystem.Views
             UserName = "Aelin";
 
             // Aelin: Binding
-            var greetingLabel = this.FindByName<Label>("GreetingLabel");
-            if (greetingLabel != null)
-            {
-                greetingLabel.BindingContext = this;
-            }
+            BindingContext = this;
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
