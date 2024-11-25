@@ -8,7 +8,7 @@
              MinimumHeightRequest="600"
              MinimumWidthRequest="1200">
 
-    <Grid ColumnDefinitions="253,*" RowDefinitions=".2*, .1*,.1*,.1*,.1*,.1*,1*">
+    <Grid ColumnDefinitions="260,*" RowDefinitions=".2*, .1*,.1*,.1*,.1*,.1*,1*">
 
         <!-- Left Sidebar Background -->
         <BoxView 
@@ -24,7 +24,8 @@
 
         <!-- Sidebar Buttons and Logo -->
         <StackLayout Grid.Column="0" Padding="10" Spacing="20" Grid.RowSpan="7">
-            <!-- Profile Picture or Logo Placeholder -->
+            
+            <!-- App Picture -->
             <Image 
                 Source="logo_app.png"
                 Grid.Column="0"
@@ -38,14 +39,20 @@
             <!-- Sidebar Buttons -->
             <Button 
                 Text="Dashboard"
+                ImageSource="dash.png"
+                ContentLayout="Left,10"
+                Padding="0,0,90,0"
                 FontFamily="LatoLight"
                 FontSize="17" 
                 BackgroundColor="#2d2653" 
                 TextColor="White" 
-                HorizontalOptions="FillAndExpand" 
-                Grid.Row="1" />
+                HorizontalOptions="FillAndExpand"
+                Grid.Row="1"/>
             <Button 
                 Text="Employee Management"
+                ImageSource="emp_manag.png"
+                ContentLayout="Left,10"
+                Padding="0,0,0,0"
                 FontFamily="LatoLight"
                 FontSize="17" 
                 BackgroundColor="#756a99" 
@@ -54,7 +61,10 @@
                 Grid.Row="2"
                 Clicked="OnEmployeeManagementButtonClicked" />
             <Button 
-                Text="Leave Requests" 
+                Text="Leave Requests"
+                ImageSource="leave.png"
+                ContentLayout="Left,10"
+                Padding="0,0,60,0"
                 FontFamily="LatoLight"
                 FontSize="17" 
                 BackgroundColor="#756a99" 
@@ -63,7 +73,10 @@
                 Grid.Row="3"
                 Clicked="OnLeaveRequestsButtonClicked" />
             <Button 
-                Text="Admin Settings" 
+                Text="Admin Settings"
+                ImageSource="admin.png"
+                ContentLayout="Left,10"
+                Padding="0,0,60,0"
                 FontFamily="LatoLight"
                 FontSize="17" 
                 BackgroundColor="#756a99" 
@@ -72,7 +85,10 @@
                 Grid.Row="4"
                 Clicked="OnAdminSettingsButtonClicked" />
             <Button 
-                Text="Settings" 
+                Text="Settings"
+                ImageSource="settings.png"
+                ContentLayout="Left,10"
+                Padding="0,0,110,0"
                 FontFamily="LatoLight"
                 FontSize="17" 
                 BackgroundColor="#756a99" 
@@ -81,7 +97,10 @@
                 Grid.Row="5"
                 Clicked="OnUserSettingsButtonClicked" />
             <Button 
-                Text="Log Out" 
+                Text="Log Out"
+                ImageSource="logout.png"
+                ContentLayout="Left,10"
+                Padding="0,0,110,0"
                 FontFamily="LatoLight"
                 FontSize="17" 
                 BackgroundColor="#756a99" 

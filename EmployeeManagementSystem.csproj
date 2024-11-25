@@ -68,11 +68,24 @@
 	<ItemGroup>
 	  <None Remove="Resources\Fonts\Lato-Bold.ttf" />
 	  <None Remove="Resources\Fonts\Lato-Light.ttf" />
+	  <None Remove="Resources\Images\admin.png" />
+	  <None Remove="Resources\Images\admin_settings.png" />
 	  <None Remove="Resources\Images\App Logo.png" />
 	  <None Remove="Resources\Images\applogo" />
 	  <None Remove="Resources\Images\AppLogo.png" />
 	  <None Remove="Resources\Images\app_logo.png" />
+	  <None Remove="Resources\Images\dash.png" />
+	  <None Remove="Resources\Images\dashboard.png" />
+	  <None Remove="Resources\Images\dashboard_2.png" />
+	  <None Remove="Resources\Images\dashboard_3.png" />
+	  <None Remove="Resources\Images\dashboard_4.png" />
+	  <None Remove="Resources\Images\employee_management.png" />
+	  <None Remove="Resources\Images\emp_manag.png" />
+	  <None Remove="Resources\Images\leave.png" />
+	  <None Remove="Resources\Images\leave_requests.png" />
+	  <None Remove="Resources\Images\logout.png" />
 	  <None Remove="Resources\Images\logo_app.png" />
+	  <None Remove="Resources\Images\settings.png" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -127,9 +140,17 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <MauiImage Remove="Resources\Images\admin_settings.png" />
 	  <MauiImage Remove="Resources\Images\App Logo.png" />
 	  <MauiImage Remove="Resources\Images\applogo" />
 	  <MauiImage Remove="Resources\Images\AppLogo.png" />
+	  <MauiImage Remove="Resources\Images\app_logo.png" />
+	  <MauiImage Remove="Resources\Images\dashboard.png" />
+	  <MauiImage Remove="Resources\Images\dashboard_2.png" />
+	  <MauiImage Remove="Resources\Images\dashboard_3.png" />
+	  <MauiImage Remove="Resources\Images\dashboard_4.png" />
+	  <MauiImage Remove="Resources\Images\employee_management.png" />
+	  <MauiImage Remove="Resources\Images\leave_requests.png" />
 	</ItemGroup>
 
 </Project>
