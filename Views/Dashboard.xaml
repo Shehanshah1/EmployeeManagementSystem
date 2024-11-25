@@ -36,6 +36,7 @@
                 VerticalOptions="Center"
                 HorizontalOptions="Center"
                 Aspect="AspectFill"/>
+            
             <!-- Sidebar Buttons -->
             <Button 
                 Text="Dashboard"
