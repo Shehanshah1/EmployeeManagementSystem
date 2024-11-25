@@ -258,5 +258,12 @@ namespace EmployeeManagementSystem.Views
         {
             await App.NavigateToPage(new UserSettings());
         }
+
+        private async void OnLeaveRequestsButtonClicked(object sender, EventArgs e)
+        {
+            await App.NavigateToPage(new LeaveRequests());
+        }
     }
+
+
 }

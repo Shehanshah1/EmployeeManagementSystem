@@ -4,7 +4,7 @@
              x:Class="EmployeeManagementSystem.Views.LoginView"
              Title=""
              Shell.NavBarIsVisible="False"
-             MinimumHeightRequest="600"
+                          MinimumHeightRequest="600"
              MinimumWidthRequest="1200">
 
     <ScrollView>

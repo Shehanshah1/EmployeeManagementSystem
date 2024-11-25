@@ -2,11 +2,12 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="EmployeeManagementSystem.Views.AdminSettings"
-             Title="AdminSettings"
+             Title=""
              Shell.NavBarIsVisible="False"
              MinimumHeightRequest="600"
              MinimumWidthRequest="1200">
 
+    <ScrollView> 
     <Grid ColumnDefinitions="260,*" RowDefinitions=".2*, .1*,.1*,.1*,.1*,.1*,1*">
 
         <!-- Left Sidebar Background -->
@@ -25,88 +26,116 @@
         <StackLayout Grid.Column="0" Padding="10" Spacing="20" Grid.RowSpan="7">
 
             <!-- App Picture -->
-            <Image
-                Source="logo_app.png"
-                Grid.Column="0"
-                Grid.Row="0"
-                Margin="0,20,0,0"
-                WidthRequest="80"
-                HeightRequest="80"
-                VerticalOptions="Center"
-                HorizontalOptions="Center"
-                Aspect="AspectFill"/>
-
+            <Image 
+               Source="logo_app.png"
+               Grid.Column="0"
+               Grid.Row="0"
+               Margin="0,20,0,0"
+               WidthRequest="80"
+               HeightRequest="80"
+               VerticalOptions="Center"
+               HorizontalOptions="Center"
+               Aspect="AspectFill"/>
             <!-- Sidebar Buttons -->
             <Button 
-                    Text="Dashboard" 
-                    FontSize="Small" 
-                    BackgroundColor="SlateGray" 
-                    TextColor="White" 
-                    HorizontalOptions="FillAndExpand" 
-                    Clicked="OnDashboardButtonClicked"/>
+               Text="Dashboard"
+               ImageSource="dash.png"
+               ContentLayout="Left,10"
+               Padding="0,0,90,0"
+               FontFamily="LatoLight"
+               FontSize="17" 
+               BackgroundColor="#756a99" 
+               TextColor="White" 
+               HorizontalOptions="FillAndExpand"
+                Clicked="OnDashboardButtonClicked"
+               Grid.Row="1"/>
             <Button 
-                    Text="Employee Management"
-                    FontSize="Small" 
-                    BackgroundColor="SlateGray" 
-                    TextColor="White" 
-                    HorizontalOptions="FillAndExpand" 
-                    Clicked="OnEmployeeManagementButtonClicked"/>
+               Text="Employee Management"
+               ImageSource="emp_manag.png"
+               ContentLayout="Left,10"
+               Padding="0,0,0,0"
+               FontFamily="LatoLight"
+               FontSize="17" 
+               BackgroundColor="#756a99" 
+               TextColor="White" 
+               HorizontalOptions="FillAndExpand" 
+               Grid.Row="2"
+               Clicked="OnEmployeeManagementButtonClicked" />
             <Button 
-                    Text="Leave Requests" 
-                    FontSize="Small" 
-                    BackgroundColor="SlateGray" 
-                    TextColor="White" 
-                    HorizontalOptions="FillAndExpand"/>
+               Text="Leave Requests"
+               ImageSource="leave.png"
+               ContentLayout="Left,10"
+               Padding="0,0,60,0"
+               FontFamily="LatoLight"
+               FontSize="17" 
+               BackgroundColor="#756a99" 
+               TextColor="White" 
+               HorizontalOptions="FillAndExpand"
+               Grid.Row="3"
+               Clicked="OnLeaveRequestsButtonClicked" />
             <Button 
-                    Text="Admin Settings" 
-                    FontSize="Small" 
-                    BackgroundColor="#322f5c" 
-                    TextColor="White" 
-                    HorizontalOptions="FillAndExpand"/>
+               Text="Admin Settings"
+               ImageSource="admin.png"
+               ContentLayout="Left,10"
+               Padding="0,0,60,0"
+               FontFamily="LatoLight"
+               FontSize="17" 
+               BackgroundColor="#2d2653" 
+               TextColor="White" 
+               HorizontalOptions="FillAndExpand" 
+               Grid.Row="4"
+               />
             <Button 
-                    Text="Log Out" 
-                    FontSize="Small" 
-                    BackgroundColor="SlateGray" 
-                    TextColor="White" 
-                    HorizontalOptions="FillAndExpand" 
-                    Clicked="OnLogOutButtonClicked"/>
-
-            <!-- Admin Label -->
-            <StackLayout Orientation="Horizontal" VerticalOptions="End" HorizontalOptions="FillAndExpand">
-                <Button 
-                        Text="admin_aelin" 
-                        TextColor="White" 
-                        FontSize="Small" 
-                        BackgroundColor="#1a1c3d"
-                        HorizontalOptions="FillAndExpand"
-                        Clicked="OnUserSettingsButtonClicked"/>
-            </StackLayout>
+               Text="Settings"
+               ImageSource="settings.png"
+               ContentLayout="Left,10"
+               Padding="0,0,110,0"
+               FontFamily="LatoLight"
+               FontSize="17" 
+               BackgroundColor="#756a99" 
+               TextColor="White" 
+               HorizontalOptions="FillAndExpand" 
+               Grid.Row="5"
+               Clicked="OnUserSettingsButtonClicked" />
+            <Button 
+               Text="Log Out"
+               ImageSource="logout.png"
+               ContentLayout="Left,10"
+               Padding="0,0,110,0"
+               FontFamily="LatoLight"
+               FontSize="17" 
+               BackgroundColor="#756a99" 
+               TextColor="White" 
+               HorizontalOptions="FillAndExpand" 
+               Grid.Row="6"
+               Clicked="OnLogOutButtonClicked" />
         </StackLayout>
-
-        <Grid Grid.Column="1" Grid.RowSpan="6"
+        
+        <Grid Grid.Column="1" Grid.RowSpan="7"
                   ColumnDefinitions="*,*,*" 
                   RowDefinitions=".2*,.5*, .5*">
-            <!-- Admin Settings Greeting -->
+
+            <!-- Adming Settings Header -->
             <Label Grid.Column="0"
                    Grid.Row="0"
                    Text="Admin Settings"
                    FontFamily="LatoBold"
-                   Margin="20,15,0,20"
+                   Margin="20,15,0,0"
                    HorizontalOptions="Start"
                    VerticalOptions="Start"
                    FontSize="17"
                    FontAttributes="Bold"
                    TextColor="White" />
 
-
             <!-- Divider Line -->
-            <Line 
-                Grid.ColumnSpan="3"
-                Stroke="White"
-                X1="0"
-                Y1="55"
-                X2="4000" 
-                Y2="55"/>
+            <BoxView 
+          Grid.ColumnSpan="3"
+          Grid.Row="0"
+          HeightRequest="1"
+              BackgroundColor="White"
+          HorizontalOptions="FillAndExpand"
+          VerticalOptions="Center"
+          Margin="0,50,0,10" />
 
             <!-- Employee Overview Card -->
             <Frame 
@@ -116,15 +145,13 @@
                     Padding="10" 
                     Margin="50"
                     WidthRequest="900"
+                
                     VerticalOptions="CenterAndExpand"
                     HorizontalOptions="CenterAndExpand"
                     BackgroundColor="#6e5f9e" 
-                    CornerRadius="20" 
-                    HasShadow="False"
-                    
-                    >
-
-                <StackLayout>
+                    CornerRadius="20">
+                    <!--ADD HEIGHT REQUEST ABOVE-->
+                    <StackLayout>
                     <Grid ColumnDefinitions="500,180,180">
                         <Label Text="Employee Management" 
                                    FontSize="Medium" 
@@ -235,4 +262,5 @@ Clicked="OnAddDepartmentButtonClicked" />
             </Frame>
         </Grid>
     </Grid>
+    </ScrollView>
 </ContentPage>
