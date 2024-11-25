@@ -282,5 +282,10 @@ namespace EmployeeManagementSystem.Views
         private async void OnAdminSettingsButtonClicked(object sender, EventArgs e) { await App.NavigateToPage(new AdminSettings()); }
         private async void OnLogOutButtonClicked(object sender, EventArgs e) { await App.NavigateToPage(new LoginView()); }
         private async void OnUserSettingsButtonClicked(object sender, EventArgs e) { await App.NavigateToPage(new UserSettings()); }
+
+        private void OnLeaveRequestsButtonClicked(object sender, EventArgs e)
+        {
+
+        }
     }
 }

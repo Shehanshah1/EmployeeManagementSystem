@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="EmployeeManagementSystem.Views.LeaveRequests"
@@ -5,170 +6,228 @@
              Shell.NavBarIsVisible="False"
              MinimumHeightRequest="600"
              MinimumWidthRequest="1200">
-    <Grid ColumnDefinitions="253,*" RowDefinitions=".2*, .1*,.1*,.1*,.1*,.3*">
-            <!-- Left Sidebar Background -->
-            <BoxView Grid.Column="0"
-                     Grid.RowSpan="6"
-                     Color="#7664a9" />
 
-            <!-- Right Column Background -->
-            <BoxView Grid.Column="1"
-                     Grid.RowSpan="6"
-                     Color="#1a1c3d" />
+    <Grid ColumnDefinitions="260,*" RowDefinitions=".2*, .1*,.1*,.1*,.1*,.1*,1*">
 
-            <!-- Sidebar Buttons and Logo -->
-            <StackLayout Grid.Column="0" Padding="10" Spacing="20" Grid.RowSpan="7">
-                <RoundRectangle Grid.Column="0"
-                                Grid.Row="0"
-                                Margin="0,20,0,0"
-                                CornerRadius="360"
-                                WidthRequest="80"
-                                HeightRequest="80"
-                                BackgroundColor="Gray"
-                                VerticalOptions="Center"
-                                HorizontalOptions="Center" />
-                <!-- Sidebar Buttons -->
-                <Button Text="Dashboard"
-                        FontSize="Small"
-                        BackgroundColor="SlateGray"
-                        TextColor="White"
-                        HorizontalOptions="FillAndExpand"
-                        Grid.Row="1"
-                        Clicked="OnDashboardButtonClicked"/>
-                <Button Text="Employee Management"
-                        FontSize="Small"
-                        BackgroundColor="SlateGray"
-                        TextColor="White"
-                        HorizontalOptions="FillAndExpand"
-                        Grid.Row="2"
-                        Clicked="OnEmployeeManagementButtonClicked"/>
-                <Button Text="Leave Requests"
-                        FontSize="Small"
-                        BackgroundColor="#322f5c"
-                        TextColor="White"
-                        HorizontalOptions="FillAndExpand"
-                        Grid.Row="3"/>
-                <Button Text="Admin Settings"
-                        FontSize="Small"
-                        BackgroundColor="SlateGray"
-                        TextColor="White"
-                        HorizontalOptions="FillAndExpand"
-                        Grid.Row="4"
-                        Clicked="OnAdminSettingsButtonClicked"/>
-                <Button Text="Log Out"
-                        FontSize="Small"
-                        BackgroundColor="SlateGray"
-                        TextColor="White"
-                        HorizontalOptions="FillAndExpand"
-                        Grid.Row="5"
-                        Clicked="OnLogOutButtonClicked"/>
-                <StackLayout Orientation="Horizontal"
-                             VerticalOptions="End"
-                             HorizontalOptions="FillAndExpand"
-                             Grid.Column="0"
-                             Grid.Row="6">
-                    <Button Text="admin_aelin"
-                            TextColor="White"
-                            Margin="0,0"
-                            FontSize="Small"
-                            VerticalOptions="CenterAndExpand"
-                            BackgroundColor="#1a1c3d"
-                            HorizontalOptions="FillAndExpand"
-                            Clicked="OnUserSettingsButtonClicked"/>
-                </StackLayout>
-            </StackLayout>
+        <!-- Left Sidebar Background -->
+        <BoxView 
+            Grid.Column="0"
+            Grid.RowSpan="7"
+            Color="#756a99" />
 
-            <!-- Right Content Area -->
-        <Grid Grid.Column="2" 
-                  Grid.RowSpan="7" 
-                  ColumnDefinitions="Auto,*" 
-                  RowDefinitions="Auto,50, *">
+        <!-- Right Column Background -->
+        <BoxView 
+            Grid.Column="1"
+            Grid.RowSpan="7"
+            Color="#1a1c3d" />
 
-            <Label Grid.Column="0"
-               Grid.Row="0"
-               Text="Leave Requests"
-               FontFamily="LatoBold"
-               Margin="20,15,0,20"
-               HorizontalOptions="Start"
-               VerticalOptions="Start"
-               FontSize="17"
-               FontAttributes="Bold"
-               TextColor="White" />
+        <!-- Sidebar Buttons and Logo -->
+        <StackLayout Grid.Column="0" Padding="10" Spacing="20" Grid.RowSpan="7">
 
+            <!-- App Picture -->
+            <Image 
+                Source="logo_app.png"
+                Grid.Column="0"
+                Grid.Row="0"
+                Margin="0,20,0,0"
+                WidthRequest="80"
+                HeightRequest="80"
+                VerticalOptions="Center"
+                HorizontalOptions="Center"
+                Aspect="AspectFill" />
 
-            <Line Grid.ColumnSpan="3"
-                      Stroke="White"
-                      X1="0"
-                      Y1="55"
-                      X2="4000"
-                      Y2="55" />
-                <HorizontalStackLayout Spacing="10" Grid.Row="1" Grid.ColumnSpan="3" HorizontalOptions="CenterAndExpand">
-                    <Entry Placeholder="Search by Employee ID or Name"
-                           BackgroundColor="#FFFFFF"
-                           TextColor="Black"
-                           WidthRequest="400"
-                           HeightRequest="60"
-                           Text="{Binding SearchText}" />
-                <Entry Placeholder="Search by Status"
-                           BackgroundColor="#FFFFFF"
-                           TextColor="Black"
-                           Margin="70,0,0,0"
-                           WidthRequest="200"
-                           HeightRequest="60"
-                           Text="{Binding SearchStatus}" />
-                </HorizontalStackLayout>
+            <!-- Sidebar Buttons -->
+            <Button 
+                Text="Dashboard"
+                ImageSource="dash.png"
+                ContentLayout="Left,10"
+                Padding="0,0,90,0"
+                FontFamily="LatoLight"
+                FontSize="17" 
+                BackgroundColor="#756a99" 
+                TextColor="White" 
+                HorizontalOptions="FillAndExpand"
+                Grid.Row="1"
+                Clicked="OnDashboardButtonClicked" />
+            <Button 
+                Text="Employee Management"
+                ImageSource="emp_manag.png"
+                ContentLayout="Left,10"
+                Padding="0,0,0,0"
+                FontFamily="LatoLight"
+                FontSize="17" 
+                BackgroundColor="#756a99" 
+                TextColor="White" 
+                HorizontalOptions="FillAndExpand" 
+                Grid.Row="2"
+                Clicked="OnEmployeeManagementButtonClicked" />
+            <Button 
+                Text="Leave Requests"
+                ImageSource="leave.png"
+                ContentLayout="Left,10"
+                Padding="0,0,60,0"
+                FontFamily="LatoLight"
+                FontSize="17" 
+                BackgroundColor="#2d2653" 
+                TextColor="White" 
+                HorizontalOptions="FillAndExpand"
+                Grid.Row="3"
+                Clicked="OnLeaveRequestsButtonClicked" />
+            <Button 
+                Text="Admin Settings"
+                ImageSource="admin.png"
+                ContentLayout="Left,10"
+                Padding="0,0,60,0"
+                FontFamily="LatoLight"
+                FontSize="17" 
+                BackgroundColor="#756a99" 
+                TextColor="White" 
+                HorizontalOptions="FillAndExpand" 
+                Grid.Row="4"
+                Clicked="OnAdminSettingsButtonClicked" />
+            <Button 
+                Text="Settings"
+                ImageSource="settings.png"
+                ContentLayout="Left,10"
+                Padding="0,0,110,0"
+                FontFamily="LatoLight"
+                FontSize="17" 
+                BackgroundColor="#756a99" 
+                TextColor="White" 
+                HorizontalOptions="FillAndExpand" 
+                Grid.Row="5"
+                Clicked="OnUserSettingsButtonClicked" />
+            <Button 
+                Text="Log Out"
+                ImageSource="logout.png"
+                ContentLayout="Left,10"
+                Padding="0,0,110,0"
+                FontFamily="LatoLight"
+                FontSize="17" 
+                BackgroundColor="#756a99" 
+                TextColor="White" 
+                HorizontalOptions="FillAndExpand" 
+                Grid.Row="6"
+                Clicked="OnLogOutButtonClicked" />
+        </StackLayout>
 
-                <Label Text="Leave Requests"
-                       FontSize="Medium"
-                       FontAttributes="Bold"
-                       TextColor="White"
-                       Margin="10,20,10,5"
-                       Grid.ColumnSpan="3"
-                       Grid.Row="2"/>
-                <Border Stroke="Gray" StrokeThickness="2" Grid.Row="3" Grid.ColumnSpan="3" Margin="20,0,20,0">
-                    <CollectionView ItemsSource="{Binding LeaveRequestsList}" Margin="10">
-                        <CollectionView.ItemTemplate>
-                            <DataTemplate>
-                                <Grid Padding="5" ColumnDefinitions="*, *, *, *, *, *, *">
-                                    <Label Text="{Binding LeaveRequestID}" Grid.Column="0" TextColor="White" />
-                                    <Label Text="{Binding EmployeeID}" Grid.Column="1" TextColor="White" />
-                                    <Label Text="{Binding EmployeeName}" Grid.Column="2" TextColor="White" />
-                                    <Label Text="{Binding StartDate, StringFormat='{0:MM/dd/yyyy}'}" Grid.Column="3" TextColor="White" />
-                                    <Label Text="{Binding EndDate, StringFormat='{0:MM/dd/yyyy}'}" Grid.Column="4" TextColor="White" />
-                                    <Label Text="{Binding Reason}" Grid.Column="5" TextColor="White" />
-                                    <Label Text="{Binding ApprovalStatus}" Grid.Column="6" TextColor="White" />
-                                </Grid>
-                            </DataTemplate>
-                        </CollectionView.ItemTemplate>
-                    </CollectionView>
-                </Border>
+        <Grid Grid.Column="10" 
+              Grid.RowSpan="7"
+              ColumnDefinitions="*"
+              RowDefinitions="Auto,130,100">
 
-                <VerticalStackLayout Margin="10" Grid.ColumnSpan="3" Grid.Row="4" Grid.RowSpan="6">
-                    <Label Text="Manage Leave Requests"
-                           FontSize="Medium"
-                           FontAttributes="Bold"
-                           TextColor="White"
-                           HorizontalOptions="CenterAndExpand"
-                           Margin="5"/>
-                    <Button Text="Add New Leave Request"
-                            BackgroundColor="#4CAF50"
-                            TextColor="White"
-                            WidthRequest="200"
-                            Clicked="OnAddNewLeaveRequestClicked"
-                            Margin="2"/>
-                    <Button Text="Edit Selected Request"
-                            BackgroundColor="#FF9800"
-                            TextColor="White"
-                            WidthRequest="200"
-                            Clicked="OnEditSelectedRequestClicked"
-                            Margin="2"/>
-                    <Button Text="Delete Selected Request"
-                            BackgroundColor="#F44336"
-                            TextColor="White"
-                            WidthRequest="200"
-                            Clicked="OnDeleteSelectedRequestClicked"
-                            Margin="2"/>
-                </VerticalStackLayout>
-            </Grid>
+            <Label 
+                Grid.Column="0"
+                Grid.Row="0"
+                Text="Leave Requests"
+                FontFamily="LatoBold"
+                Margin="20,15,0,20"
+                HorizontalOptions="Start"
+                VerticalOptions="Start"
+                FontSize="17"
+                FontAttributes="Bold"
+                TextColor="White" />
+
+            <Line 
+                Grid.ColumnSpan="3"
+                Stroke="White"
+                X1="0"
+                Y1="55"
+                X2="4000"
+                Y2="55" />
+
+            <HorizontalStackLayout 
+                Spacing="10" 
+                Grid.Row="1" 
+                Grid.ColumnSpan="3" 
+                HorizontalOptions="CenterAndExpand">
+                <Entry 
+                    Placeholder="Search by Employee ID or Name"
+                    BackgroundColor="#FFFFFF"
+                    TextColor="Black"
+                    WidthRequest="400"
+                    HeightRequest="60"
+                    Text="{Binding SearchText}" />
+                <Entry 
+                    Placeholder="Search by Status"
+                    BackgroundColor="#FFFFFF"
+                    TextColor="Black"
+                    Margin="70,0,0,0"
+                    WidthRequest="200"
+                    HeightRequest="60"
+                    Text="{Binding SearchStatus}" />
+            </HorizontalStackLayout>
+
+            <Label 
+                Text="Leave Requests"
+                FontSize="Medium"
+                FontAttributes="Bold"
+                TextColor="White"
+                Margin="10,20,10,5"
+                Grid.ColumnSpan="3"
+                Grid.Row="2" />
+
+            <Border 
+                Stroke="Gray" 
+                StrokeThickness="2" 
+                Grid.Row="3" 
+                Grid.ColumnSpan="3" 
+                Margin="20,0,20,0">
+                <CollectionView 
+                    ItemsSource="{Binding LeaveRequestsList}" 
+                    Margin="10">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Grid 
+                                Padding="5" 
+                                ColumnDefinitions="*, *, *, *, *, *, *">
+                                <Label Text="{Binding LeaveRequestID}" Grid.Column="0" TextColor="White" />
+                                <Label Text="{Binding EmployeeID}" Grid.Column="1" TextColor="White" />
+                                <Label Text="{Binding EmployeeName}" Grid.Column="2" TextColor="White" />
+                                <Label Text="{Binding StartDate, StringFormat='{0:MM/dd/yyyy}'}" Grid.Column="3" TextColor="White" />
+                                <Label Text="{Binding EndDate, StringFormat='{0:MM/dd/yyyy}'}" Grid.Column="4" TextColor="White" />
+                                <Label Text="{Binding Reason}" Grid.Column="5" TextColor="White" />
+                                <Label Text="{Binding ApprovalStatus}" Grid.Column="6" TextColor="White" />
+                            </Grid>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </Border>
+
+            <VerticalStackLayout 
+                Margin="10" 
+                Grid.ColumnSpan="3" 
+                Grid.Row="4" 
+                Grid.RowSpan="6">
+                <Label 
+                    Text="Manage Leave Requests"
+                    FontSize="Small"
+                    FontAttributes="Bold"
+                    TextColor="White"
+                    HorizontalOptions="CenterAndExpand"
+                    Margin="5" />
+                <Button 
+                    Text="Add New Leave Request"
+                    BackgroundColor="#4CAF50"
+                    TextColor="White"
+                    WidthRequest="200"
+                    Clicked="OnAddNewLeaveRequestClicked"
+                    Margin="2" />
+                <Button 
+                    Text="Edit Selected Request"
+                    BackgroundColor="#FF9800"
+                    TextColor="White"
+                    WidthRequest="200"
+                    Clicked="OnEditSelectedRequestClicked"
+                    Margin="2" />
+                <Button 
+                    Text="Delete Selected Request"
+                    BackgroundColor="#F44336"
+                    TextColor="White"
+                    WidthRequest="200"
+                    Clicked="OnDeleteSelectedRequestClicked"
+                    Margin="2" />
+            </VerticalStackLayout>
         </Grid>
+    </Grid>
 </ContentPage>
