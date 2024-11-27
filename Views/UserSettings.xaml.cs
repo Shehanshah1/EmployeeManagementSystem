@@ -29,13 +29,35 @@ namespace EmployeeManagementSystem.Views
 
         private async void OnLogOutButtonClicked(object sender, EventArgs e)
         {
-            // Navigate back to the LoginView
             await App.NavigateToPage(new LoginView());
         }
 
         private async void OnDashboardButtonClicked(object sender, EventArgs e)
         {
             await App.NavigateToPage(new Dashboard());
+        }
+
+        private async void OnSelectPictureButtonClicked(object sender, EventArgs e)
+        {
+            // Implement picture selection logic here
+        }
+
+        private async void OnChangeSettingsButtonClicked(object sender, EventArgs e)
+        {
+            // Assuming there's a method to save user settings
+            bool changesSaved = await SaveUserSettingsAsync();
+
+            if (changesSaved)
+            {
+                await App.NavigateToPage(new EmployeeManagementSystem.Views.UserSettings());
+            }
+        }
+
+        private async Task<bool> SaveUserSettingsAsync()
+        {
+            // Implementation for saving user settings goes here
+            // Return true if successful, false otherwise
+            return true;
         }
     }
 }
