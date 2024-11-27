@@ -20,9 +20,8 @@
         Color="#1a1c3d" />
 
             <StackLayout Grid.Column="0" Padding="10" Spacing="20" Grid.RowSpan="7">
-
                 <Image 
-          Source="logo_app.png"
+          Source="{Binding ProfileImageSource}"
           Grid.Column="0"
           Grid.Row="0"
           Margin="0,20,0,0"
@@ -128,7 +127,7 @@ ColumnDefinitions="*,*,*" RowDefinitions=".2*,.2*, .2*, .2*, .2*, .2*">
                   Y2="55"/>
 
                 <Label
-                    Text="Change Username?"
+                    Text="Change Email?"
                     Grid.Row="2"
                     FontSize="Medium"
                     HorizontalOptions="CenterAndExpand"
@@ -142,7 +141,7 @@ ColumnDefinitions="*,*,*" RowDefinitions=".2*,.2*, .2*, .2*, .2*, .2*">
                     Margin="10"
                     Grid.Column="1"
                     MaximumHeightRequest="20"
-                    Placeholder="Enter your new Username..."
+                    Placeholder="Enter your new Email..."
                     WidthRequest="300"
                     VerticalOptions="CenterAndExpand"
                     HorizontalOptions="CenterAndExpand"

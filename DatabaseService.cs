@@ -19,8 +19,10 @@ namespace EmployeeManagementSystem.Services
             string dbPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "employees.db3");
             _database = new SQLiteAsyncConnection(dbPath);
             _database.CreateTableAsync<Employee>().Wait();
-
+            _database.CreateTableAsync<UserAccount>().Wait();
             _database.CreateTableAsync<LeaveRequest>().Wait();
+            // Add default user
+            //AddDefaultUserAsync().Wait();
         }
 
 
@@ -96,6 +98,31 @@ namespace EmployeeManagementSystem.Services
         public async Task<List<Employee>> GetEmployeesAsync()
         {
             return await _database.Table<Employee>().ToListAsync();
+        }
+        public async Task<List<UserAccount>> GetUserAccountsAsync()
+        {
+            return await _database.Table<UserAccount>().ToListAsync();
+        }
+        public async Task AddUserAccountAsync(UserAccount userAccount)
+        {
+            await _database.InsertAsync(userAccount);
+        }
+        public async Task<UserAccount> AuthenticateUserAsync(string email)
+        {
+            return await _database.Table<UserAccount>()
+                                      .FirstOrDefaultAsync(u => u.Email == email);
+        }
+        public async Task<bool> UpdateUserEmailAndPasswordAsync(int userId, string newEmail, string newPassword)
+        {
+            var user = await _database.Table<UserAccount>().FirstOrDefaultAsync(u => u.UserID == userId);
+            if (user != null)
+            {
+                user.Email = newEmail;
+                user.PasswordHash = newPassword; 
+                await _database.UpdateAsync(user);
+                return true;
+            }
+            return false;
         }
     }
 }

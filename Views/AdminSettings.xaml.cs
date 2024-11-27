@@ -12,12 +12,22 @@ namespace EmployeeManagementSystem.Views
     {
         public ObservableCollection<Employee> Employees { get; set; } = new ObservableCollection<Employee>();
         public ObservableCollection<Department> Departments { get; set; } = new ObservableCollection<Department>();
+        private string _profileImageSource;
+        public string ProfileImageSource
+        {
+            get => _profileImageSource;
+            set
+            {
+                _profileImageSource = value;
+                OnPropertyChanged();
+            }
+        }
 
         public AdminSettings()
         {
             InitializeComponent();
             BindingContext = this;
-
+            ProfileImageSource = Preferences.Get("ProfileImagePath", "logo_app.png");
             // Load saved employee data from Preferences
             LoadEmployeesFromPreferences();
         }
@@ -57,6 +67,8 @@ namespace EmployeeManagementSystem.Views
                     else
                     {
                         Departments.Add(new Department { DepartmentName = department, Employees = new ObservableCollection<Employee> { employee } });
+                        // Update the employee count in Preferences
+                        Preferences.Set("DepartmentCount", Departments.Count);
                     }
                 }
             }

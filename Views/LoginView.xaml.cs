@@ -1,19 +1,22 @@
 
+using EmployeeManagementSystem.Models;
+using EmployeeManagementSystem.Services;
+using Microsoft.Maui.ApplicationModel.Communication;
 using System.Text.RegularExpressions;
-using Microsoft.Maui.Controls;
-using System;
-using System.Threading.Tasks;
 
 namespace EmployeeManagementSystem.Views
 {
     public partial class LoginView : ContentPage
     {
         private bool _isPasswordVisible = false;
+        private readonly DatabaseService _databaseService;
 
         public LoginView()
         {
+            _databaseService = new DatabaseService();
             InitializeComponent();
             LoadRememberedCredentials();
+            AddDefaultLoginCredentialsAsync();
         }
 
         private async void OnLoginButtonClicked(object sender, EventArgs e)
@@ -45,11 +48,9 @@ namespace EmployeeManagementSystem.Views
             await Task.Delay(1000);
 
             // Check credentials (for demonstration purposes; replace with actual authentication)
-            string correctEmail = "user@example.com";
-            string correctPassword = "password123";
+            var userAccount = await _databaseService.AuthenticateUserAsync(enteredEmail);
 
-
-            if (enteredEmail == correctEmail && enteredPassword == correctPassword)
+            if (userAccount!=null && userAccount.PasswordHash==enteredPassword)
             {
                 if (rememberMeCheckBox.IsChecked)
                 {
@@ -59,7 +60,8 @@ namespace EmployeeManagementSystem.Views
                 {
                     ClearSavedEmail();
                 }
-
+                Preferences.Set("CurrentUserSessionId", userAccount.UserID);
+                Preferences.Set("CurrentUserEmail", userAccount.Email);
                 await App.NavigateToPage(new Dashboard());
             }
             else
@@ -104,7 +106,20 @@ namespace EmployeeManagementSystem.Views
                 rememberMeCheckBox.IsChecked = true;
             }
         }
-
+        private async void AddDefaultLoginCredentialsAsync()
+        {
+            var existingUsers = await _databaseService.GetUserAccountsAsync();
+            if (existingUsers.Count == 0)
+            {
+                var defaultUser = new UserAccount
+                {
+                    Email = "user@example.com",
+                    PasswordHash = "password123",
+                    Role = "User"
+                };
+                await _databaseService.AddUserAccountAsync(defaultUser);
+            }
+        }
         private void SaveEmail(string email)
         {
             Preferences.Set("RememberedEmail", email);

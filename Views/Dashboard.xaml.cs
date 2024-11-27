@@ -1,16 +1,23 @@
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using EmployeeManagementSystem.Models;
+using EmployeeManagementSystem.Services;
 
 namespace EmployeeManagementSystem.Views
 {
     public partial class Dashboard : ContentPage, INotifyPropertyChanged
     {
-        private ObservableCollection<Employee> _employees;
-        private ObservableCollection<Department> _departments;
+        private readonly DatabaseService _databaseService;
+        private int _employees;
+        private int _departments;
         private string _userName;
-
-        public ObservableCollection<Employee> Employees
+        private ObservableCollection<LeaveRequest> _leaveRequests;
+        public ObservableCollection<LeaveRequest> LeaveRequestsList
+        {
+            get { return _leaveRequests; }
+            set { _leaveRequests = value; OnPropertyChanged(); }
+        }
+        public int Employees
         {
             get => _employees;
             set
@@ -23,7 +30,7 @@ namespace EmployeeManagementSystem.Views
             }
         }
 
-        public ObservableCollection<Department> Departments
+        public int Departments
         {
             get => _departments;
             set
@@ -48,20 +55,46 @@ namespace EmployeeManagementSystem.Views
                 }
             }
         }
-
-        public Dashboard()
+        private string _profileImageSource;
+        public string ProfileImageSource
+        {
+            get => _profileImageSource;
+            set
+            {
+                _profileImageSource = value;
+                OnPropertyChanged();
+            }
+        }
+        public  Dashboard()
         {
             InitializeComponent();
-            Employees = new ObservableCollection<Employee>();
-            Departments = new ObservableCollection<Department>();
-
+            _databaseService = new DatabaseService();
+            Employees = Preferences.Get("EmployeeCount", 0); 
+            Departments = Preferences.Get("DepartmentCount", 0);
+            LeaveRequestsList = new ObservableCollection<LeaveRequest>();
+            ProfileImageSource = Preferences.Get("ProfileImagePath", "logo_app.png");
             // Aelin: Temporary default name (needs to be personalized to user)
-            UserName = "Aelin";
-
+            UserName = Preferences.Get("CurrentUserEmail", "Aelin");
             // Aelin: Binding
             BindingContext = this;
-        }
+            LoadLeaveRequests();
 
+        }
+        private async void LoadLeaveRequests()
+        {
+            try
+            {
+                var leaveRequests = await _databaseService.GetLeaveRequestsAsync();
+                foreach (var request in leaveRequests)
+                {
+                    LeaveRequestsList.Add(request);
+                }
+            }
+            catch (Exception ex)
+            {
+                await DisplayAlert("Error", $"Failed to load leave requests: {ex.Message}", "OK");
+            }
+        }
         public event PropertyChangedEventHandler PropertyChanged;
 
         protected void OnPropertyChanged(string propertyName)

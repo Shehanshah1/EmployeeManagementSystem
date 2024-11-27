@@ -21,13 +21,22 @@ namespace EmployeeManagementSystem.Views
             set { _leaveRequests = value; OnPropertyChanged(); }
         }
         private LeaveRequest _selectedLeaveRequest;
-
+        private string _profileImageSource;
+        public string ProfileImageSource
+        {
+            get => _profileImageSource;
+            set
+            {
+                _profileImageSource = value;
+                OnPropertyChanged();
+            }
+        }
         public LeaveRequests()
         {
             InitializeComponent();
             _databaseService = new DatabaseService();
             LeaveRequestsList = new ObservableCollection<LeaveRequest>();
-
+            ProfileImageSource = Preferences.Get("ProfileImagePath", "logo_app.png");
             BindingContext = this;
             LoadLeaveRequests();
         }

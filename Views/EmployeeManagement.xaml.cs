@@ -8,10 +8,20 @@ public partial class EmployeeManagement : ContentPage
     public ObservableCollection<Employee> Employees { get; set; } = new ObservableCollection<Employee>();
     public ObservableCollection<Employee> FilteredEmployees { get; set; } = new ObservableCollection<Employee>();
     public ObservableCollection<Department> Departments { get; set; } = new ObservableCollection<Department>();
-
+    private string _profileImageSource;
+    public string ProfileImageSource
+    {
+        get => _profileImageSource;
+        set
+        {
+            _profileImageSource = value;
+            OnPropertyChanged();
+        }
+    }
     public EmployeeManagement()
     {
         InitializeComponent();
+        ProfileImageSource = Preferences.Get("ProfileImagePath", "logo_app.png");
         BindingContext = this;
     }
 
@@ -60,7 +70,7 @@ public partial class EmployeeManagement : ContentPage
     }
     private async void OnUserSettingsButtonClicked(object sender, EventArgs e)
     {
-        await App.NavigateToPage(new EmployeeManagement());
+        await App.NavigateToPage(new UserSettings());
     }
 
 }
