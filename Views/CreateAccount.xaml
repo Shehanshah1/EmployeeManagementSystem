@@ -158,18 +158,19 @@ WidthRequest="130"
         Opacity=".9"/>
         </Grid>
 
-        <!-- Create Account Button -->
-        <Button               
-    BackgroundColor="#1a1c3d"
-    Text="Create Account"
-    TextColor="White"
-    HeightRequest="60"
-    Margin="0,60,0,0"
-    MaximumWidthRequest="150"
-    />
+            <!-- Create Account Button -->
+            <Button               
+BackgroundColor="#1a1c3d"
+Text="Create Account"
+TextColor="White"
+HeightRequest="60"
+Margin="0,60,0,0"
+MaximumWidthRequest="150"
+Clicked="OnCreateAccountButtonClicked"
+/>
 
 
-        <!-- Back Button -->
+            <!-- Back Button -->
         <Button    
     BackgroundColor="#1a1c3d"
     HeightRequest="60"
