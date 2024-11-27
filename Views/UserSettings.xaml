@@ -9,24 +9,18 @@
     <ScrollView>
         <Grid ColumnDefinitions="253,*" RowDefinitions=".2*, .1*,.1*,.1*,.1*,.3*">
 
-            <!-- Left Sidebar Background -->
             <BoxView 
         Grid.Column="0"
         Grid.RowSpan="6"
         Color="#7664a9" />
 
-
-
-            <!-- Right Column Background -->
             <BoxView 
         Grid.Column="1"
         Grid.RowSpan="6"
         Color="#1a1c3d" />
 
-            <!-- Sidebar Buttons and Logo -->
             <StackLayout Grid.Column="0" Padding="10" Spacing="20" Grid.RowSpan="7">
 
-                <!-- App Picture -->
                 <Image 
           Source="logo_app.png"
           Grid.Column="0"
@@ -38,7 +32,6 @@
           HorizontalOptions="Center"
           Aspect="AspectFill" />
 
-                <!-- Sidebar Buttons -->
                 <Button 
           Text="Dashboard"
           ImageSource="dash.png"
@@ -113,10 +106,8 @@
           Clicked="OnLogOutButtonClicked" />
             </StackLayout>
 
-
-            <Grid Grid.Column="2" Grid.RowSpan="6"
+            <Grid Grid.Column="1" Grid.RowSpan="6"
 ColumnDefinitions="*,*,*" RowDefinitions=".2*,.2*, .2*, .2*, .2*, .2*">
-                <!-- User Requests Greeting -->
                 <Label Grid.Column="0"
                    Grid.Row="0"
                    Text="User Settings"
@@ -128,14 +119,13 @@ ColumnDefinitions="*,*,*" RowDefinitions=".2*,.2*, .2*, .2*, .2*, .2*">
                    FontAttributes="Bold"
                    TextColor="White" />
 
-                <!-- Divider Line -->
                 <Line 
                   Grid.ColumnSpan="3"
                   Stroke="White"
                   X1="0"
                   Y1="55"
                   X2="4000" 
-                  Y2="55"/> 
+                  Y2="55"/>
 
                 <Label
                     Text="Change Username?"
@@ -144,8 +134,10 @@ ColumnDefinitions="*,*,*" RowDefinitions=".2*,.2*, .2*, .2*, .2*, .2*">
                     HorizontalOptions="CenterAndExpand"
                     VerticalOptions="CenterAndExpand"
                     Margin="10"
+                    TextColor="White"
                     />
                 <Entry
+                    x:Name="userNameEntry"
                     Grid.Row="2"
                     Margin="10"
                     Grid.Column="1"
@@ -153,7 +145,8 @@ ColumnDefinitions="*,*,*" RowDefinitions=".2*,.2*, .2*, .2*, .2*, .2*">
                     Placeholder="Enter your new Username..."
                     WidthRequest="300"
                     VerticalOptions="CenterAndExpand"
-                    HorizontalOptions="CenterAndExpand"/>
+                    HorizontalOptions="CenterAndExpand"
+                    TextColor="White"/>
 
                 <Label
     Text="Change Password?"
@@ -162,39 +155,48 @@ ColumnDefinitions="*,*,*" RowDefinitions=".2*,.2*, .2*, .2*, .2*, .2*">
     HorizontalOptions="CenterAndExpand"
     VerticalOptions="CenterAndExpand"
     Margin="10"
+    TextColor="White"
     />
                 <Entry
-    Grid.Row="3"
-    Margin="10"
-    Grid.Column="1"
-    MaximumHeightRequest="20"
-    Placeholder="Enter your new Password..."
-    WidthRequest="300"
-    VerticalOptions="CenterAndExpand"
+                    x:Name="passwordEntry"
+                    Grid.Row="3"
+                    Margin="10"
+                    Grid.Column="1"
+                    MaximumHeightRequest="20"
+                    Placeholder="Enter your new Password..."
+                    WidthRequest="300"
+                    VerticalOptions="CenterAndExpand"
                     IsPassword="True"
-    HorizontalOptions="CenterAndExpand"/>
-
+                    HorizontalOptions="CenterAndExpand"
+                    TextColor="White"/>
+                <Button
+                    Text="Change Settings"
+                    Grid.Row="4"
+                    Margin="10"
+                    Grid.Column="1"
+                    WidthRequest="300"
+                    VerticalOptions="CenterAndExpand"
+                    HorizontalOptions="CenterAndExpand"
+                    Clicked="OnChangeSettingsButtonClicked"/>
                 <Label
     Text="Change Profile Picture?"
-    Grid.Row="4"
+    Grid.Row="5"
     FontSize="Medium"
     HorizontalOptions="CenterAndExpand"
     VerticalOptions="CenterAndExpand"
     Margin="10"
+    TextColor="White"
     />
                 <Button
-    Grid.Row="4"
-    Margin="10"
-    Grid.Column="1"
-    MaximumHeightRequest="20"
-    Text="Select a new picture"
-    WidthRequest="300"
-    VerticalOptions="CenterAndExpand"
-    HorizontalOptions="CenterAndExpand"/>
+                    Text="Select a new picture"
+                    Grid.Row="5"
+                    Margin="10"
+                    Grid.Column="1"
+                    WidthRequest="300"
+                    VerticalOptions="CenterAndExpand"
+                    HorizontalOptions="CenterAndExpand"
+                    Clicked="OnSelectPictureButtonClicked"/>
             </Grid>
-            
-
-
         </Grid>
     </ScrollView>
 </ContentPage>
