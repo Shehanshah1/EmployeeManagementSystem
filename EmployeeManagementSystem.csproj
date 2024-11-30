@@ -57,11 +57,29 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Compile Remove="Resources\Images\NewFolder1\**" />
+	  <Compile Remove="Resources\Images\NewFolder2\**" />
+	  <Compile Remove="Resources\Images\NewFolder3\**" />
 	  <Compile Remove="Resources\Images\NewFolder\**" />
+	  <EmbeddedResource Remove="Resources\Images\NewFolder1\**" />
+	  <EmbeddedResource Remove="Resources\Images\NewFolder2\**" />
+	  <EmbeddedResource Remove="Resources\Images\NewFolder3\**" />
 	  <EmbeddedResource Remove="Resources\Images\NewFolder\**" />
+	  <MauiCss Remove="Resources\Images\NewFolder1\**" />
+	  <MauiCss Remove="Resources\Images\NewFolder2\**" />
+	  <MauiCss Remove="Resources\Images\NewFolder3\**" />
 	  <MauiCss Remove="Resources\Images\NewFolder\**" />
+	  <MauiImage Remove="Resources\Images\NewFolder1\**" />
+	  <MauiImage Remove="Resources\Images\NewFolder2\**" />
+	  <MauiImage Remove="Resources\Images\NewFolder3\**" />
 	  <MauiImage Remove="Resources\Images\NewFolder\**" />
+	  <MauiXaml Remove="Resources\Images\NewFolder1\**" />
+	  <MauiXaml Remove="Resources\Images\NewFolder2\**" />
+	  <MauiXaml Remove="Resources\Images\NewFolder3\**" />
 	  <MauiXaml Remove="Resources\Images\NewFolder\**" />
+	  <None Remove="Resources\Images\NewFolder1\**" />
+	  <None Remove="Resources\Images\NewFolder2\**" />
+	  <None Remove="Resources\Images\NewFolder3\**" />
 	  <None Remove="Resources\Images\NewFolder\**" />
 	</ItemGroup>
 
@@ -79,13 +97,29 @@
 	  <None Remove="Resources\Images\dashboard_2.png" />
 	  <None Remove="Resources\Images\dashboard_3.png" />
 	  <None Remove="Resources\Images\dashboard_4.png" />
+	  <None Remove="Resources\Images\dpt.manag.png" />
+	  <None Remove="Resources\Images\dpt.manag1.png" />
+	  <None Remove="Resources\Images\email.png" />
+	  <None Remove="Resources\Images\email1.png" />
+	  <None Remove="Resources\Images\emp.overview.png" />
+	  <None Remove="Resources\Images\emp.overview1.png" />
 	  <None Remove="Resources\Images\employee_management.png" />
 	  <None Remove="Resources\Images\emp_manag.png" />
 	  <None Remove="Resources\Images\leave.png" />
+	  <None Remove="Resources\Images\leave.req.png" />
+	  <None Remove="Resources\Images\leave.req1.png" />
+	  <None Remove="Resources\Images\leave1.png" />
 	  <None Remove="Resources\Images\leave_requests.png" />
 	  <None Remove="Resources\Images\logout.png" />
 	  <None Remove="Resources\Images\logo_app.png" />
+	  <None Remove="Resources\Images\password.png" />
+	  <None Remove="Resources\Images\password1.png" />
 	  <None Remove="Resources\Images\settings.png" />
+	  <None Remove="Resources\Images\small.leave.png" />
+	  <None Remove="Resources\Images\tot.dpt.png" />
+	  <None Remove="Resources\Images\tot.emp.png" />
+	  <None Remove="Resources\Images\username.png" />
+	  <None Remove="Resources\Images\username1.png" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -149,8 +183,27 @@
 	  <MauiImage Remove="Resources\Images\dashboard_2.png" />
 	  <MauiImage Remove="Resources\Images\dashboard_3.png" />
 	  <MauiImage Remove="Resources\Images\dashboard_4.png" />
+	  <MauiImage Remove="Resources\Images\dpt.manag.png" />
+	  <MauiImage Remove="Resources\Images\email.png" />
+	  <MauiImage Remove="Resources\Images\emp.overview.png" />
 	  <MauiImage Remove="Resources\Images\employee_management.png" />
+	  <MauiImage Remove="Resources\Images\leave.png" />
+	  <MauiImage Remove="Resources\Images\leave.req.png" />
 	  <MauiImage Remove="Resources\Images\leave_requests.png" />
+	  <MauiImage Remove="Resources\Images\password.png" />
+	  <MauiImage Remove="Resources\Images\username.png" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <PRIResource Remove="Resources\Images\NewFolder1\**" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <PRIResource Remove="Resources\Images\NewFolder3\**" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <PRIResource Remove="Resources\Images\NewFolder2\**" />
 	</ItemGroup>
 
 </Project>

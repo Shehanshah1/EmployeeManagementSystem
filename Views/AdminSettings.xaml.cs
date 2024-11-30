@@ -28,6 +28,7 @@ namespace EmployeeManagementSystem.Views
             InitializeComponent();
             BindingContext = this;
             ProfileImageSource = Preferences.Get("ProfileImagePath", "logo_app.png");
+
             // Load saved employee data from Preferences
             LoadEmployeesFromPreferences();
         }

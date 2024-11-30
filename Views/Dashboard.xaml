@@ -24,7 +24,7 @@
 
         <!-- Sidebar Buttons and Logo -->
         <StackLayout Grid.Column="0" Padding="10" Spacing="20" Grid.RowSpan="7">
-            
+
             <!-- App Picture -->
             <Image 
                 Source="{Binding ProfileImageSource}"
@@ -35,7 +35,8 @@
                 HeightRequest="80"
                 VerticalOptions="Center"
                 HorizontalOptions="Center"
-                Aspect="AspectFill"/>
+                Aspect="AspectFill" />
+
             <!-- Sidebar Buttons -->
             <Button 
                 Text="Dashboard"
@@ -47,7 +48,7 @@
                 BackgroundColor="#2d2653" 
                 TextColor="White" 
                 HorizontalOptions="FillAndExpand"
-                Grid.Row="1"/>
+                Grid.Row="1" />
             <Button 
                 Text="Employee Management"
                 ImageSource="emp_manag.png"
@@ -62,7 +63,7 @@
                 Clicked="OnEmployeeManagementButtonClicked" />
             <Button 
                 Text="Leave Requests"
-                ImageSource="leave.png"
+                ImageSource="leave1.png"
                 ContentLayout="Left,10"
                 Padding="0,0,60,0"
                 FontFamily="LatoLight"
@@ -116,16 +117,17 @@
               RowDefinitions="Auto,130,100">
 
             <!-- Dashboard Header -->
-            <Label Grid.Column="0"
-                   Grid.Row="0"
-                   Text="Dashboard"
-                   FontFamily="LatoBold"
-                   Margin="20,15,0,0"
-                   HorizontalOptions="Start"
-                   VerticalOptions="Start"
-                   FontSize="17"
-                   FontAttributes="Bold"
-                   TextColor="White" />
+            <Label 
+                Grid.Column="0"
+                Grid.Row="0"
+                Text="Dashboard"
+                FontFamily="LatoBold"
+                Margin="20,15,0,0"
+                HorizontalOptions="Start"
+                VerticalOptions="Start"
+                FontSize="17"
+                FontAttributes="Bold"
+                TextColor="White" />
 
             <!-- Divider Line -->
             <BoxView 
@@ -144,98 +146,112 @@
                 Grid.Row="1"
                 Text="{Binding UserName, StringFormat='Hello, {0}! 👋'}"
                 FontFamily="LatoLight"
-                Margin="20,10,0,0"
+                Margin="20,15,0,0"
                 HorizontalOptions="Start"
                 VerticalOptions="Start"
                 FontSize="Medium"
                 TextColor="White" />
 
             <!-- Content Grid -->
-            <Grid Grid.Column="2" Grid.Row="2" ColumnDefinitions="400,400,400" RowDefinitions="70">
+            <Grid Grid.Column="2" Grid.Row="2" ColumnDefinitions="400,250,370" RowDefinitions="40">
 
                 <!-- Employee Overview Section -->
-                <Frame Grid.Row="0" Grid.Column="0"
-                       BackgroundColor="#756a99"
-                       CornerRadius="10"
-                       HeightRequest="100"
-                       WidthRequest="300"
-                       Padding="10"
-                       Margin="0,0,10,0"
-                       HasShadow="True">
+                <Frame 
+                    Grid.Row="0" 
+                    Grid.Column="0"
+                    BackgroundColor="#756a99"
+                    CornerRadius="20"
+                    HeightRequest="150"
+                    WidthRequest="300"
+                    Padding="10"
+                    Margin="0,0,10,0"
+                    HasShadow="True">
                     <StackLayout>
-                        <Label Text="Employee Overview"
-                               FontFamily="LatoBold"
-                               FontSize="18"
-                               TextColor="White" />
-                        <BoxView HeightRequest="1"
-                                 BackgroundColor="White"
-                                 Margin="0,10,0,10" />
-                        <StackLayout Spacing="5">
-                            <Label Text="{Binding Employees, StringFormat='Total employees: {0}'}"
-                                   FontSize="Small"
-                                   TextColor="White" />
+                        <HorizontalStackLayout Spacing="10">
+                            <Image 
+                                Source="emp.overview1.png"
+                                WidthRequest="45"
+                                HeightRequest="45"
+                                VerticalOptions="Center" />
+                            <Label 
+                                Text="Employee Overview"
+                                FontFamily="LatoBold"
+                                FontSize="18"
+                                TextColor="White"
+                                VerticalOptions="Center" />
+                        </HorizontalStackLayout>
+                        <BoxView 
+                            HeightRequest="1"
+                            BackgroundColor="White"
+                            Margin="0,10,0,10" />
+                        <StackLayout Spacing="10">
+                            <HorizontalStackLayout Spacing="10">
+                                <Image 
+                                    Source="tot.emp.png"
+                                    WidthRequest="23"
+                                    HeightRequest="23"
+                                    VerticalOptions="Center"/>
+                                <Label 
+                                    Text="{Binding Employees, StringFormat='Total employees: {0}'}"
+                                    FontSize="16"
+                                    TextColor="White" />
+                            </HorizontalStackLayout>
+                            <HorizontalStackLayout Spacing="10">
+                                <Image 
+                                    Source="tot.dpt.png"
+                                    WidthRequest="23"
+                                    HeightRequest="23"
+                                    VerticalOptions="Center" />
+                                <Label 
+                                    Text="{Binding Departments.Count, StringFormat='Total Departments: {0}'}"
+                                    FontSize="16"
+                                    TextColor="White" />
+                            </HorizontalStackLayout>
                         </StackLayout>
                     </StackLayout>
                 </Frame>
 
                 <!-- Leave Requests Section -->
-                <Frame Grid.Row="0" Grid.Column="1"
-                       BackgroundColor="#756a99"
-                       CornerRadius="10"
-                       HeightRequest="100"
-                       WidthRequest="300"
-                       Padding="15"
-                       Margin="10,0,10,0"
-                       HasShadow="True">
+                <Frame 
+                    Grid.Row="0" 
+                    Grid.Column="1"
+                    BackgroundColor="#756a99"
+                    CornerRadius="20"
+                    HeightRequest="150"
+                    WidthRequest="300"
+                    Padding="10"
+                    Margin="10,0,10,0"
+                    HasShadow="True">
                     <StackLayout>
-                        <Label Text="Leave Requests Overview"
-                               FontFamily="LatoBold"
-                               FontSize="18"
-                               TextColor="White" />
-                        <BoxView HeightRequest="1"
-                                 BackgroundColor="White"
-                                 Margin="0,10,0,10" />
-                        <StackLayout Spacing="5">
-                            <Label Text="{Binding LeaveRequestsList.Count, StringFormat='Total Leaves: {0}'}"
-           FontSize="Small"
-           TextColor="White" />
-                        </StackLayout>
-                        <!--<CollectionView ItemsSource="{Binding LeaveRequestsList}"
-                                        SelectionMode="None">
-                            <CollectionView.ItemTemplate>
-                                <DataTemplate>
-                                    <StackLayout Orientation="Horizontal" Spacing="10">
-                                        <Label Text="{Binding ApprovalStatus}"
-                                               FontSize="Small"
-                                               TextColor="White" />
-                                    </StackLayout>
-                                </DataTemplate>
-                            </CollectionView.ItemTemplate>
-                        </CollectionView>-->
-                    </StackLayout>
-                </Frame>
-
-                <!-- Department Overview Section -->
-                <Frame Grid.Row="0" Grid.Column="2"
-       BackgroundColor="#756a99"
-       CornerRadius="10"
-       HeightRequest="100"
-       WidthRequest="300"
-       Padding="15"
-       Margin="50,0,10,0"
-       HasShadow="True">
-                    <StackLayout>
-                        <Label Text="Department Overview"
-               FontFamily="LatoBold"
-               FontSize="18"
-               TextColor="White" />
-                        <BoxView HeightRequest="1"
-                 BackgroundColor="White"
-                 Margin="0,10,0,10" />
-                        <StackLayout Spacing="5">
-                            <Label Text="{Binding Departments, StringFormat='Total Department: {0}'}"
-           FontSize="Small"
-           TextColor="White" />
+                        <HorizontalStackLayout Spacing="10">
+                            <Image 
+                                Source="leave.req1.png"
+                                WidthRequest="45"
+                                HeightRequest="45"
+                                VerticalOptions="Center" />
+                            <Label 
+                                Text="Leave Requests Overview"
+                                FontFamily="LatoBold"
+                                FontSize="18"
+                                TextColor="White"
+                                VerticalOptions="Center" />
+                        </HorizontalStackLayout>
+                        <BoxView 
+                            HeightRequest="1"
+                            BackgroundColor="White"
+                            Margin="0,10,0,10" />
+                        <StackLayout Spacing="10">
+                            <HorizontalStackLayout Spacing="10">
+                                <Image 
+                                    Source="small.leave.png"
+                                    WidthRequest="23"
+                                    HeightRequest="23"
+                                    VerticalOptions="Center"/>
+                                <Label 
+                                    Text="{Binding LeaveRequestsList.Count, StringFormat='Total Leaves: {0}'}"
+                                    FontSize="16"
+                                    TextColor="White" />
+                            </HorizontalStackLayout>
                         </StackLayout>
                     </StackLayout>
                 </Frame>
