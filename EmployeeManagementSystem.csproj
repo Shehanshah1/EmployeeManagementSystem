@@ -99,6 +99,7 @@
 	  <None Remove="Resources\Images\dashboard_4.png" />
 	  <None Remove="Resources\Images\dpt.manag.png" />
 	  <None Remove="Resources\Images\dpt.manag1.png" />
+	  <None Remove="Resources\Images\dpt_mng.png" />
 	  <None Remove="Resources\Images\email.png" />
 	  <None Remove="Resources\Images\email1.png" />
 	  <None Remove="Resources\Images\emp.overview.png" />
@@ -184,6 +185,7 @@
 	  <MauiImage Remove="Resources\Images\dashboard_3.png" />
 	  <MauiImage Remove="Resources\Images\dashboard_4.png" />
 	  <MauiImage Remove="Resources\Images\dpt.manag.png" />
+	  <MauiImage Remove="Resources\Images\dpt.manag1.png" />
 	  <MauiImage Remove="Resources\Images\email.png" />
 	  <MauiImage Remove="Resources\Images\emp.overview.png" />
 	  <MauiImage Remove="Resources\Images\employee_management.png" />

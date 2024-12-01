@@ -82,15 +82,20 @@
             <ScrollView Grid.Row="2" Grid.Column="0" HorizontalScrollBarVisibility="Never">
                 <VerticalStackLayout Spacing="20" Padding="20" Margin="10,0,0,0">
                     <!-- Employee Management Card -->
-                    <Frame BackgroundColor="#6e5f9e" CornerRadius="20" Padding="10" WidthRequest="1200" HorizontalOptions="Start" Margin="10,0,0,0">
+                    <Frame BackgroundColor="#756a99" CornerRadius="20" Padding="10" WidthRequest="1200" HorizontalOptions="Start" Margin="10,0,0,0">
                         <VerticalStackLayout>
-                            <Grid ColumnDefinitions="*,180" Padding="5" Margin="0,0,0,10">
-                                <Label Text="Employee Management" FontSize="Medium" FontAttributes="Bold" TextColor="White" HorizontalOptions="Start" />
-                                <Button Text="New Employee" FontSize="Micro" TextColor="White" BackgroundColor="#756a99" Grid.Column="1" />
+                            <!-- Title and Button -->
+                            <Grid ColumnDefinitions="40,*,180" Padding="5" Margin="0,0,0,10">
+                                <Image Source="emp.overview1.png" WidthRequest="45" HeightRequest="45" Grid.Column="0" VerticalOptions="Center" HorizontalOptions="Center" />
+                                <Label Text="Employee Management" FontSize="18" FontFamily="LatoBold" TextColor="White" Grid.Column="1" VerticalOptions="Center" Margin="12,0,0,0"/>
+                                <Button Text="New Employee" FontSize="Micro" TextColor="White" BackgroundColor="#2e2754" Grid.Column="2" WidthRequest="150" Clicked="OnAddEmployeeButtonClicked" />
                             </Grid>
 
+                            <!-- Divider Line -->
+                            <BoxView HeightRequest="1" BackgroundColor="White" HorizontalOptions="FillAndExpand" Margin="0,0,0,10" />
+
                             <!-- Headers -->
-                            <Grid ColumnDefinitions="*,*,*,*,*,*" Padding="5" Margin="0,0,0,10">
+                            <Grid ColumnDefinitions="*,*,*,*,*,*" Padding="0" Margin="0,0,0,0">
                                 <Label Text="Employee ID" TextColor="White" FontAttributes="Bold" Grid.Column="0" HorizontalTextAlignment="Center" />
                                 <Label Text="Name" TextColor="White" FontAttributes="Bold" Grid.Column="1" HorizontalTextAlignment="Center" />
                                 <Label Text="Department" TextColor="White" FontAttributes="Bold" Grid.Column="2" HorizontalTextAlignment="Center" />
@@ -106,16 +111,16 @@
                                 </CollectionView.ItemsLayout>
                                 <CollectionView.ItemTemplate>
                                     <DataTemplate>
-                                        <Grid ColumnDefinitions="*,*,*,*,*,*" Padding="5" Margin="0,5,0,5">
-                                            <Label Text="{Binding EmployeeID}" TextColor="White" Grid.Column="0" HorizontalTextAlignment="Center" />
-                                            <Label Text="{Binding Name}" TextColor="White" Grid.Column="1" HorizontalTextAlignment="Center" />
-                                            <Label Text="{Binding Department}" TextColor="White" Grid.Column="2" HorizontalTextAlignment="Center" />
-                                            <Label Text="{Binding Email}" TextColor="White" Grid.Column="3" HorizontalTextAlignment="Center" />
-                                            <Label Text="{Binding Position}" TextColor="White" Grid.Column="4" HorizontalTextAlignment="Center" />
-                                            <StackLayout Orientation="Horizontal" Grid.Column="5" HorizontalOptions="Center">
-                                                <Button Text="Edit" BackgroundColor="Gray" TextColor="White" Clicked="OnEditEmployeeButtonClicked" />
-                                                <Button Text="Delete" BackgroundColor="Red" TextColor="White" Clicked="OnDeleteEmployeeButtonClicked" />
-                                            </StackLayout>
+                                        <Grid ColumnDefinitions="*,*,*,*,*,*" Padding="-3" Margin="0,0,0,0">
+                                            <Label Text="{Binding EmployeeID}" TextColor="White" Grid.Column="0" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"/>
+                                            <Label Text="{Binding Name}" TextColor="White" Grid.Column="1" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"/>
+                                            <Label Text="{Binding Department}" TextColor="White" Grid.Column="2" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
+                                            <Label Text="{Binding Email}" TextColor="White" Grid.Column="3" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"/>
+                                            <Label Text="{Binding Position}" TextColor="White" Grid.Column="4" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"/>
+                                            <HorizontalStackLayout Spacing="-10" Margin="0,0,0,0" Grid.Column="5" HorizontalOptions="Center" VerticalOptions="Center">
+                                                <Button Text="✏️" BackgroundColor="#756a99" TextColor="White" WidthRequest="40" HeightRequest="40" FontSize="16" CornerRadius="20" Padding="0" Clicked="OnEditEmployeeButtonClicked" />
+                                                <Button Text="❌" BackgroundColor="#756a99" TextColor="White" WidthRequest="40" HeightRequest="40" FontSize="16" CornerRadius="20" Padding="0" Clicked="OnDeleteEmployeeButtonClicked" />
+                                            </HorizontalStackLayout>
                                         </Grid>
                                     </DataTemplate>
                                 </CollectionView.ItemTemplate>
@@ -124,12 +129,17 @@
                     </Frame>
 
                     <!-- Department Management Card -->
-                    <Frame BackgroundColor="#6e5f9e" CornerRadius="20" Padding="10" WidthRequest="1200" HorizontalOptions="Start" Margin="10,0,0,0">
+                    <Frame BackgroundColor="#756a99" CornerRadius="20" Padding="10" WidthRequest="1200" HorizontalOptions="Start" Margin="10,0,0,0">
                         <VerticalStackLayout>
-                            <Grid ColumnDefinitions="*,180" Padding="5" Margin="0,0,0,10">
-                                <Label Text="Department Management" FontSize="Medium" FontAttributes="Bold" TextColor="White" HorizontalOptions="Start" />
-                                <Button Text="New Department" FontSize="Micro" TextColor="White" BackgroundColor="#756a99" Grid.Column="1" />
+                            <!-- Title and Button -->
+                            <Grid ColumnDefinitions="40,*,180" Padding="5" Margin="0,0,0,10">
+                                <Image Source="dpt_mng.png" WidthRequest="45" HeightRequest="45" Grid.Column="0" VerticalOptions="Center" HorizontalOptions="Center" />
+                                <Label Text="Department Management" FontSize="18" FontFamily="LatoBold" VerticalOptions="Center" Margin="12,0,0,0" TextColor="White" Grid.Column="1" />
+                                <Button Text="New Department" FontSize="Micro" TextColor="White" BackgroundColor="#2e2754" WidthRequest="160" Grid.Column="2" Clicked="OnAddDepartmentButtonClicked" />
                             </Grid>
+
+                            <!-- Divider Line -->
+                            <BoxView HeightRequest="1" BackgroundColor="White" HorizontalOptions="FillAndExpand" Margin="0,0,0,10" />
 
                             <!-- Headers -->
                             <Grid ColumnDefinitions="*,*" Padding="5" Margin="0,0,0,10">
