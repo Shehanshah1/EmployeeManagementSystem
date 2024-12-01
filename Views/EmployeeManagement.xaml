@@ -63,7 +63,7 @@
                 Clicked="OnEmployeeManagementButtonClicked" />
             <Button 
                 Text="Leave Requests"
-                ImageSource="leave.png"
+                ImageSource="leave1.png"
                 ContentLayout="Left,10"
                 Padding="0,0,60,0"
                 FontFamily="LatoLight"
