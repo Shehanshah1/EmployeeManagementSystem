@@ -2,7 +2,7 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="EmployeeManagementSystem.Views.EmployeeManagement"
-             Title="EmployeeManagement"
+             Title=""
              Shell.NavBarIsVisible="False"
              MinimumHeightRequest="600"
              MinimumWidthRequest="1200">
@@ -114,7 +114,8 @@
         <Grid Grid.Column="10" 
               Grid.RowSpan="7"
               ColumnDefinitions="*"
-              RowDefinitions="Auto,130,100">
+              RowDefinitions="Auto,130,*">
+            <!--Changed the row definitions to fix it-->
 
             <!-- Dashboard Header -->
             <Label Grid.Column="0"
@@ -153,7 +154,7 @@
                 Text="{Binding SearchQuery, Mode=TwoWay}"/>
 
             <!-- Employee Cards Area -->
-            <CollectionView Grid.Row="2" Grid.Column="1" Grid.RowSpan="5" ItemsSource="{Binding FilteredEmployees}" VerticalOptions="FillAndExpand">
+            <CollectionView Grid.Row="2" Grid.Column="1" Grid.RowSpan="3" ItemsSource="{Binding FilteredEmployees}" VerticalOptions="FillAndExpand">
                 <!-- Grid Layout for Items -->
                 <CollectionView.ItemsLayout>
                     <GridItemsLayout Orientation="Vertical" Span="3" />
