@@ -81,12 +81,12 @@
                 Margin="0,50,0,10" />
 
             <!-- Search Bars and Buttons -->
-            <Grid Grid.Row="1" Grid.Column="0" ColumnDefinitions="450,450,Auto" HorizontalOptions="FillAndExpand" Padding="10">
+            <Grid Grid.Row="1" Grid.Column="0" ColumnDefinitions="450,450,Auto" HorizontalOptions="Start" Padding="10">
                 <!-- Search by Employee ID or Name -->
                 <Entry 
                     Placeholder="Search by Employee ID or Name"
                     BackgroundColor="White"
-                    Margin="5,0,0,0"
+                    Margin="30,0,0,0"
                     TextColor="Black"
                     Text="{Binding SearchText}" 
                     Grid.Column="0"/>
@@ -122,7 +122,7 @@
 
             <!-- Leave Requests Container -->
             <ScrollView Grid.Row="2" Grid.Column="0" HorizontalScrollBarVisibility="Never">
-                <Frame BackgroundColor="#756a99" CornerRadius="20" Padding="10" Margin="10" WidthRequest="1200" HorizontalOptions="Center">
+                <Frame BackgroundColor="#756a99" CornerRadius="20" Padding="10" Margin="40,10,0,0" WidthRequest="1200" HorizontalOptions="Start">
                     <VerticalStackLayout>
                         <!-- Headers -->
                         <Grid ColumnDefinitions="*,*,*,*,*,*,*,Auto" Padding="5" Margin="0,0,15,10">
