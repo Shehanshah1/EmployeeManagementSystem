@@ -15,7 +15,7 @@
             Grid.RowSpan="7"
             Color="#756a99" />
 
-        <!-- Right Column Background -->
+        <!-- Right Columnn Background -->
         <BoxView 
             Grid.Column="1"
             Grid.RowSpan="7"
