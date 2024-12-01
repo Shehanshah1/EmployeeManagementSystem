@@ -84,4 +84,13 @@ public partial class EmployeeManagement : ContentPage
         await App.NavigateToPage(new UserSettings());
     }
 
+    private void OnApproveRequest(object sender, EventArgs e)
+    {
+
+    }
+
+    private void OnDenyRequest(object sender, EventArgs e)
+    {
+
+    }
 }
