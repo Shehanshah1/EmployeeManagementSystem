@@ -22,6 +22,17 @@ public partial class EmployeeManagement : ContentPage
     {
         InitializeComponent();
         ProfileImageSource = Preferences.Get("ProfileImagePath", "logo_app.png");
+
+        // Aelin: Added mock employee data but backend devs need to remove this and add the logic 
+        FilteredEmployees = new ObservableCollection<Employee>
+            {
+                new Employee { Name = "Reham Afzal", Position = "Backend Developer", Department = "Development", Email = "reham.afzal@gmail.com" },
+                new Employee { Name = "Ron Dickson", Position = "Backend Developer", Department = "Development", Email = "ron.dickson@gmail.com" },
+                new Employee { Name = "Sanskar Bhattarai", Position = "Backend Developer", Department = "Development", Email = "sanskar.bhattarai@gmail.com" },
+                new Employee { Name = "Muhammad Hashmi", Position = "Frontend Developer", Department = "UI/UX", Email = "muhammad.hashmi@gmail.com" },
+                new Employee { Name = "Aelin Med", Position = "Frontend Developer", Department = "UI/UX", Email = "aelin.med@gmail.com" }
+            };
+
         BindingContext = this;
     }
 
