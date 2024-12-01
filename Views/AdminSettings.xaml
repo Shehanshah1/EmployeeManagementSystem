@@ -142,7 +142,7 @@
                     Grid.Column="0"
                     Grid.ColumnSpan="3"
                     Grid.Row="1"
-                    Padding="10" 
+                    Padding="10"
                     Margin="50"
                     WidthRequest="900"
                 

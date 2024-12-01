@@ -294,7 +294,17 @@ namespace EmployeeManagementSystem.Views
 
         private void OnLeaveRequestsButtonClicked(object sender, EventArgs e)
         {
+            // add code
+        }
 
+        private void OnApproveRequest(object sender, EventArgs e)
+        {
+            // add code
+        }
+
+        private void OnDenyRequest(object sender, EventArgs e)
+        {
+            // add code
         }
     }
 }
