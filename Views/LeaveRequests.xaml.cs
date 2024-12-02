@@ -297,14 +297,34 @@ namespace EmployeeManagementSystem.Views
             // add code
         }
 
-        private void OnApproveRequest(object sender, EventArgs e)
+        private async void OnApproveRequest(object sender, EventArgs e)
         {
-            // add code
+            var button = sender as Button;
+            if (button?.BindingContext is LeaveRequest requestToApprove)
+            {
+                requestToApprove.ApprovalStatus = "Approved";
+
+                await _databaseService.UpdateLeaveRequestAsync(requestToApprove);
+
+                LoadLeaveRequests();
+
+                await DisplayAlert("Success", $"Leave Request for {requestToApprove.EmployeeName} has been approved.", "OK");
+            }
         }
 
-        private void OnDenyRequest(object sender, EventArgs e)
+        private async void OnDenyRequest(object sender, EventArgs e)
         {
-            // add code
+            var button = sender as Button;
+            if (button?.BindingContext is LeaveRequest requestToDeny)
+            {
+                requestToDeny.ApprovalStatus = "Denied";
+
+                await _databaseService.UpdateLeaveRequestAsync(requestToDeny);
+
+                LoadLeaveRequests();
+
+                await DisplayAlert("Success", $"Leave Request for {requestToDeny.EmployeeName} has been denied.", "OK");
+            }
         }
     }
 }
